@@ -65,12 +65,12 @@ Buka URL dengan query parameter `?mode=admin` untuk melihat koordinat kursor dan
 
 ```text
 http://localhost:5173/?mode=admin
-https://alun-alun-cianjur.web.id/?mode=admin
+https://alun-alun-cianjur.vercel.app/?mode=admin
 ```
 
 ### 5. File QR Code Fisik (`public/qr/`)
 
-- `public/qr/gate-suroso.svg` -> `https://alun-alun-cianjur.web.id/?gate=suroso`
-- `public/qr/gate-masjid-selatan.svg` -> `https://alun-alun-cianjur.web.id/?gate=masjid-selatan`
-- `public/qr/gate-masjid-utara.svg` -> `https://alun-alun-cianjur.web.id/?gate=masjid-utara`
-- `public/qr/default.svg` -> `https://alun-alun-cianjur.web.id/`
+- `public/qr/gate-suroso.svg` -> `https://alun-alun-cianjur.vercel.app/?gate=suroso`
+- `public/qr/gate-masjid-selatan.svg` -> `https://alun-alun-cianjur.vercel.app/?gate=masjid-selatan`
+- `public/qr/gate-masjid-utara.svg` -> `https://alun-alun-cianjur.vercel.app/?gate=masjid-utara`
+- `public/qr/default.svg` -> `https://alun-alun-cianjur.vercel.app/`
