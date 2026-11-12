@@ -1,0 +1,220 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3400 3600" width="3400" height="3600">
+  <defs>
+    <pattern id="grassPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="40" height="40" fill="#dff0d8" fill-opacity="0.88"/>
+      <circle cx="10" cy="10" r="1.8" fill="#1E5631" fill-opacity="0.22"/>
+      <circle cx="30" cy="30" r="1.8" fill="#1E5631" fill-opacity="0.22"/>
+    </pattern>
+    <pattern id="synthTurf" width="30" height="30" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
+      <rect width="30" height="30" fill="#b8e2c4" fill-opacity="0.92"/>
+      <line x1="0" y1="0" x2="0" y2="30" stroke="#1E5631" stroke-width="4" stroke-opacity="0.12"/>
+    </pattern>
+    <pattern id="pavingPattern" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect width="24" height="24" fill="#f5ede2" fill-opacity="0.92"/>
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#8B5A2B" stroke-width="0.9" stroke-opacity="0.22"/>
+    </pattern>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#2A1B12" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <!-- 1. JARINGAN JALAN PERIMETER (OSM EXACT WAYS) -->
+  <g stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Jalan Suroso (Utara Taman Alun-Alun) -->
+    <polyline points="3873.7,564.4 3191.8,388.5 2967.9,333.9 2868.0,311.7 2402.8,191.7 2290.7,162.8 2205.1,141.6 2169.6,134.3" stroke="#78685a" stroke-width="58" stroke-opacity="0.45"/>
+    <polyline points="3873.7,564.4 3191.8,388.5 2967.9,333.9 2868.0,311.7 2402.8,191.7 2290.7,162.8 2205.1,141.6 2169.6,134.3" stroke="#fffdf9" stroke-width="44" stroke-opacity="0.85"/>
+    <!-- Jalan Siti Jenab (Selatan Alun-Alun & Depan Pendopo) -->
+    <polyline points="3873.7,564.4 3694.6,1052.1 3579.3,1365.8 3532.4,1493.5 3389.6,1825.8 3099.8,2553.7 2748.6,3488.3 2446.1,4307.5 2186.4,4992.5 2112.8,5178.3 2062.4,5320.5 2059.1,5327.0 1908.9,5723.7 1789.6,6035.7 1726.7,6184.4 1691.9,6243.6 1576.5,6384.8 1477.9,6462.0" stroke="#78685a" stroke-width="64" stroke-opacity="0.45"/>
+    <polyline points="3873.7,564.4 3694.6,1052.1 3579.3,1365.8 3532.4,1493.5 3389.6,1825.8 3099.8,2553.7 2748.6,3488.3 2446.1,4307.5 2186.4,4992.5 2112.8,5178.3 2062.4,5320.5 2059.1,5327.0 1908.9,5723.7 1789.6,6035.7 1726.7,6184.4 1691.9,6243.6 1576.5,6384.8 1477.9,6462.0" stroke="#fffdf9" stroke-width="50" stroke-opacity="0.85"/>
+    <!-- Jalan Mangunsarkoro & Bomero City Walk (Timur/Tenggara) -->
+    <polyline points="1165.2,1885.7 781.8,2817.8" stroke="#78685a" stroke-width="56" stroke-opacity="0.45"/>
+    <polyline points="1165.2,1885.7 781.8,2817.8" stroke="#f7efe4" stroke-width="42" stroke-opacity="0.88"/>
+    <!-- Jalan Nyi R. Siti Bodedar & Akses Utara Masjid Agung -->
+    <polyline points="1957.5,2179.7 1608.0,2052.7 1313.1,1941.5 1278.1,1928.3 1214.4,1904.3 1165.2,1885.7 805.1,1762.1" stroke="#78685a" stroke-width="46" stroke-opacity="0.40"/>
+    <polyline points="1957.5,2179.7 1608.0,2052.7 1313.1,1941.5 1278.1,1928.3 1214.4,1904.3 1165.2,1885.7 805.1,1762.1" stroke="#fffdf9" stroke-width="34" stroke-opacity="0.85"/>
+    <!-- Jalan Acep Hanafi -->
+    <polyline points="1957.5,2179.7 2523.1,2365.3" stroke="#78685a" stroke-width="38" stroke-opacity="0.38"/>
+    <polyline points="1957.5,2179.7 2523.1,2365.3" stroke="#fffdf9" stroke-width="26" stroke-opacity="0.82"/>
+    <polyline points="2523.1,2365.3 2569.7,2380.4 3003.3,2521.5" stroke="#78685a" stroke-width="38" stroke-opacity="0.38"/>
+    <polyline points="2523.1,2365.3 2569.7,2380.4 3003.3,2521.5" stroke="#fffdf9" stroke-width="26" stroke-opacity="0.82"/>
+  </g>
+
+  <!-- 2. POLIGON UTAMA TAMAN ALUN-ALUN & ALUN-ALUN CIANJUR (OSM WAY 692591214 + PELATARAN MASJID) -->
+  <g filter="url(#softShadow)">
+    <!-- Pelataran Penghubung Masjid Agung & Alun-Alun -->
+    <polygon points="581.7,1900.6 1191.1,1929.0 835.2,2787.6 393.3,2344.9"
+             fill="url(#pavingPattern)" stroke="#8B5A2B" stroke-width="6" stroke-opacity="0.65"/>
+
+    <!-- Poligon Resmi OSM WAY 692591214: Taman Alun-Alun Cianjur (Meliputi Alun-Alun Selatan, Sayap Timur, & Taman Utara s/d Jl. Suroso) -->
+    <polygon points="835.2,2787.6 1595.8,3065.7 1925.6,2156.2 2556.8,2380.6 2905.8,1683.3 2507.5,1479.3 2897.0,370.7 2206.7,205.6 1923.6,1294.8 1647.0,2099.8 1191.1,1929.0 835.2,2787.6"
+             fill="url(#grassPattern)" stroke="#1E5631" stroke-width="10" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 3. SUB-ZONA ARSITEKTURAL DI DALAM ALUN-ALUN & TAMAN ALUN-ALUN -->
+  <!-- 3A. Zona Selatan: Hamparan Rumput Sintetis & Taman Bermain Anak (ICN-07) -->
+  <polygon points="915,2740 1555,2975 1825,2235 1185,2005"
+           fill="url(#synthTurf)" stroke="#1E5631" stroke-width="5" stroke-dasharray="16 8"/>
+  <!-- Lapangan Inti Rumput Sintetis -->
+  <polygon points="1030,2680 1490,2850 1690,2310 1230,2140"
+           fill="#99d5aa" fill-opacity="0.65" stroke="#1E5631" stroke-width="3"/>
+  <!-- Area Playground Anak & Jalur Refleksi Kerikil -->
+  <rect x="1330" y="2660" width="210" height="110" rx="22" transform="rotate(20 1435 2715)"
+        fill="#f6e3ba" stroke="#8B5A2B" stroke-width="3"/>
+
+  <!-- 3B. Lorong 99 Tiang Asmaul Husna (ICN-02) -->
+  <g>
+    <polygon points="1165,1965 1865,2220 1915,2090 1215,1835"
+             fill="#fdfaf5" stroke="#8B5A2B" stroke-width="4"/>
+    <!-- Deretan Pilar Simbolis 99 Tiang Asmaul Husna -->
+    <line x1="1200" y1="1950" x2="1850" y2="2190" stroke="#C59B27" stroke-width="8" stroke-dasharray="10 18" stroke-linecap="round"/>
+    <line x1="1230" y1="1870" x2="1880" y2="2110" stroke="#C59B27" stroke-width="8" stroke-dasharray="10 18" stroke-linecap="round"/>
+  </g>
+
+  <!-- 3C. Monumen Al-Qur'an Raksasa & Kolam Perahu (ICN-01) -->
+  <g transform="translate(1080, 2370) rotate(21)">
+    <!-- Kolam Perahu -->
+    <path d="M -95,0 Q 0,-58 95,0 Q 0,58 -95,0 Z" fill="#8ecae6" stroke="#1E5631" stroke-width="4"/>
+    <!-- Pedestal & Monumen Al-Qur'an Emas -->
+    <rect x="-26" y="-20" width="52" height="40" rx="8" fill="#5C3A21" stroke="#fff" stroke-width="2"/>
+    <rect x="-18" y="-13" width="36" height="26" rx="4" fill="#C59B27"/>
+  </g>
+
+  <!-- 3D. Zona Tengah & Sayap Timur Taman Alun-Alun: Panggung Suling & Kecapi (ICN-03) + Leuit & Ayam Pelung (ICN-04) -->
+  <polygon points="1895,2130 2535,2350 2865,1695 2475,1500 1675,2050"
+           fill="url(#pavingPattern)" fill-opacity="0.78" stroke="#8B5A2B" stroke-width="3.5"/>
+  <!-- Plaza Panggung Suling & Kursi Kecapi -->
+  <circle cx="2180" cy="1830" r="125" fill="#e9f5ec" stroke="#1E5631" stroke-width="4"/>
+  <circle cx="2180" cy="1830" r="78" fill="#fdfaf5" stroke="#C59B27" stroke-width="3" stroke-dasharray="8 6"/>
+  <!-- Leuit (Lumbung Padi) & Patung Ayam Pelung -->
+  <g transform="translate(2580, 1970) rotate(22)">
+    <rect x="-70" y="-55" width="140" height="110" rx="14" fill="#f3e1c7" stroke="#5C3A21" stroke-width="4"/>
+    <polygon points="-55,-35 55,-35 40,35 -40,35" fill="#8B5A2B" fill-opacity="0.85" stroke="#fff" stroke-width="2"/>
+  </g>
+
+  <!-- 3E. Koridor Tengah-Utara Taman Alun-Alun: Tribun Koloseum & Patung Pesilat Maenpo (ICN-05) -->
+  <g transform="translate(2250, 1200)">
+    <circle cx="0" cy="0" r="155" fill="#f5ebe0" stroke="#5C3A21" stroke-width="5"/>
+    <circle cx="0" cy="0" r="115" fill="none" stroke="#8B5A2B" stroke-width="8" stroke-dasharray="28 12"/>
+    <circle cx="0" cy="0" r="68" fill="#dff0d8" stroke="#1E5631" stroke-width="3.5"/>
+    <circle cx="0" cy="0" r="22" fill="#C59B27" stroke="#fff" stroke-width="2.5"/>
+  </g>
+
+  <!-- 3F. Koridor Utara Taman Alun-Alun: Menara Pandang (ICN-06) & Plaza Gerbang Utama Jl. Suroso -->
+  <g transform="translate(2450, 670)">
+    <rect x="-62" y="-62" width="124" height="124" rx="18" fill="#f3e1c7" stroke="#5C3A21" stroke-width="4"/>
+    <circle cx="0" cy="0" r="36" fill="#8B5A2B" stroke="#fff" stroke-width="3"/>
+    <circle cx="0" cy="0" r="14" fill="#C59B27"/>
+  </g>
+  <!-- Plaza Gerbang Utama Jalan Suroso -->
+  <polygon points="2206.7,205.6 2897.0,370.7 2835,510 2165,350"
+           fill="#efe2d0" stroke="#1E5631" stroke-width="4"/>
+
+  <!-- 4. JALUR PEDESTRIAN INTERNAL TAMAN ALUN-ALUN (EXACT OSM WAYS 1083459370 & 905672623 + PENGHUBUNG) -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Jalur Pedestrian Barat Taman (OSM WAY 1083459370) -->
+    <polyline points="1608.0,2052.7 1889.7,1259.4 2133.7,408.5 2205.1,141.6" stroke="#5C3A21" stroke-width="26" stroke-opacity="0.35"/>
+    <polyline points="1608.0,2052.7 1889.7,1259.4 2133.7,408.5 2205.1,141.6" stroke="#fffaf3" stroke-width="18" stroke-dasharray="18 8"/>
+    <!-- Jalur Pedestrian Timur Taman (OSM WAY 905672623) -->
+    <polyline points="2868.0,311.7 2784.2,542.3 2694.3,749.4 2554.8,1135.6 2498.5,1343.3 2490.5,1465.8 2514.6,1549.7 2621.9,1729.5 2675.5,1921.2 2624.6,2147.6 2523.1,2365.3" stroke="#5C3A21" stroke-width="26" stroke-opacity="0.35"/>
+    <polyline points="2868.0,311.7 2784.2,542.3 2694.3,749.4 2554.8,1135.6 2498.5,1343.3 2490.5,1465.8 2514.6,1549.7 2621.9,1729.5 2675.5,1921.2 2624.6,2147.6 2523.1,2365.3" stroke="#fffaf3" stroke-width="18" stroke-dasharray="18 8"/>
+    <!-- Jalur Sirkulasi Internal Penghubung Alun-Alun Selatan ke Taman Alun-Alun -->
+    <polyline points="950,2830 1380,2570 1450,2100 2180,1830 2580,1970"
+              stroke="#8B5A2B" stroke-width="14" stroke-dasharray="12 10" stroke-opacity="0.55"/>
+    <polyline points="1080,2370 1450,2100 2250,1200 2450,670 2540,290"
+              stroke="#1E5631" stroke-width="14" stroke-dasharray="12 10" stroke-opacity="0.55"/>
+  </g>
+
+  <!-- 5. BANGUNAN CAGAR BUDAYA & IKON UTAMA SEKITAR (EXACT OSM POLYGONS) -->
+  <!-- 5A. Masjid Agung Cianjur (1810) - OSM WAY 497038979 -->
+  <g filter="url(#softShadow)">
+    <polygon points="393.3,2344.9 581.7,1900.6 959.2,2058.4 770.8,2502.7 393.3,2344.9" fill="#e6f4ea" stroke="#1E5631" stroke-width="8" stroke-linejoin="round"/>
+    <!-- Kubah Utama Masjid Agung -->
+    <circle cx="676" cy="2202" r="95" fill="#1E5631" fill-opacity="0.88" stroke="#C59B27" stroke-width="5"/>
+    <circle cx="676" cy="2202" r="42" fill="#C59B27" fill-opacity="0.9"/>
+    <!-- Menara Kembar Masjid Agung -->
+    <circle cx="885" cy="2085" r="26" fill="#1E5631" stroke="#C59B27" stroke-width="4"/>
+    <circle cx="735" cy="2435" r="26" fill="#1E5631" stroke="#C59B27" stroke-width="4"/>
+  </g>
+
+  <!-- 5B. Pendopo Kabupaten Cianjur (1780) & Lonceng Batavia (1774) - OSM WAY 1131909298 -->
+  <g filter="url(#softShadow)">
+    <polygon points="750.2,2975.7 621.4,3327.3 983.5,3471.1 1101.6,3106.2 750.2,2975.7" fill="#f3e3ce" stroke="#5C3A21" stroke-width="7" stroke-linejoin="round"/>
+    <!-- Linggih Lonceng Batavia 1774 -->
+    <circle cx="920" cy="2970" r="28" fill="#C59B27" stroke="#5C3A21" stroke-width="4"/>
+  </g>
+
+  <!-- 5C. Kantor Pos Cianjur (1880) - OSM WAY 476833765 -->
+  <polygon points="257.4,2739.7 586.3,2897.2 405.3,3270.0 76.3,3112.5 257.4,2739.7" fill="#f5e6d3" stroke="#8B5A2B" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- 5D. Vihara Bhumi Pharsjia / Hok Tek Bio (1880) - OSM WAY 476212879 -->
+  <polygon points="2887.6,2687.4 2954.7,2714.1 2925.8,2785.4 2858.7,2758.6 2887.6,2687.4" fill="#fbe4d8" stroke="#9E2A2B" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- 6. VEGETASI & POHON PENEDUH TAMAN ALUN-ALUN -->
+  <g fill="#2d7a46" fill-opacity="0.55" stroke="#1E5631" stroke-width="2">
+    <circle cx="2060" cy="960" r="32"/>
+    <circle cx="2120" cy="760" r="28"/>
+    <circle cx="2220" cy="520" r="34"/>
+    <circle cx="2680" cy="580" r="32"/>
+    <circle cx="2610" cy="840" r="30"/>
+    <circle cx="2530" cy="1080" r="34"/>
+    <circle cx="1950" cy="1550" r="36"/>
+    <circle cx="1790" cy="1850" r="32"/>
+    <circle cx="2720" cy="1760" r="34"/>
+    <circle cx="2420" cy="2210" r="34"/>
+    <circle cx="1710" cy="2560" r="32"/>
+    <circle cx="1560" cy="2880" r="30"/>
+    <circle cx="960" cy="2620" r="28"/>
+  </g>
+
+  <!-- 7. LABEL ARSITEKTURAL & NAMA JALAN ( KONTRAS TINGGI & MUDAH DIBACA ) -->
+  <g font-family="system-ui, -apple-system, sans-serif" font-weight="800" text-anchor="middle">
+    <!-- Label Jalan Utama -->
+    <g transform="translate(2480, 175) rotate(13)">
+      <rect x="-250" y="-26" width="500" height="44" rx="22" fill="#2A1B12" fill-opacity="0.88"/>
+      <text x="0" y="4" fill="#FAF6F0" font-size="24" letter-spacing="2">JL. SUROSO (GERBANG UTAMA)</text>
+    </g>
+    <g transform="translate(1280, 3045) rotate(20)">
+      <rect x="-210" y="-24" width="420" height="42" rx="21" fill="#2A1B12" fill-opacity="0.88"/>
+      <text x="0" y="4" fill="#FAF6F0" font-size="23" letter-spacing="2">JL. SITI JENAB</text>
+    </g>
+    <g transform="translate(790, 1810) rotate(21)">
+      <rect x="-210" y="-22" width="420" height="38" rx="19" fill="#2A1B12" fill-opacity="0.82"/>
+      <text x="0" y="4" fill="#FAF6F0" font-size="20" letter-spacing="1.5">JL. NYI R. SITI BODEDAR</text>
+    </g>
+    <g transform="translate(2970, 2320) rotate(-63)">
+      <rect x="-260" y="-22" width="520" height="40" rx="20" fill="#2A1B12" fill-opacity="0.85"/>
+      <text x="0" y="4" fill="#FAF6F0" font-size="20" letter-spacing="1.5">JL. MANGUNSARKORO (BOMERO)</text>
+    </g>
+
+    <!-- Label Zona Utama Taman Alun-Alun & Alun-Alun -->
+    <g transform="translate(2320, 950)">
+      <rect x="-270" y="-36" width="540" height="66" rx="14" fill="#1E5631" fill-opacity="0.92" stroke="#FAF6F0" stroke-width="3"/>
+      <text x="0" y="-6" fill="#FAF6F0" font-size="25" letter-spacing="1.5">TAMAN ALUN-ALUN CIANJUR</text>
+      <text x="0" y="20" fill="#e2f0cb" font-size="17" font-weight="600">ZONA UTARA • MENARA PANDANG &amp; KOLOSEUM MAENPO</text>
+    </g>
+
+    <g transform="translate(2310, 1690)">
+      <rect x="-250" y="-34" width="500" height="62" rx="14" fill="#5C3A21" fill-opacity="0.90" stroke="#FAF6F0" stroke-width="2.5"/>
+      <text x="0" y="-5" fill="#FAF6F0" font-size="23" letter-spacing="1">ZONA MAMAOS &amp; SAYAP TIMUR</text>
+      <text x="0" y="19" fill="#F3EDE2" font-size="16" font-weight="600">PANGGUNG SULING KECAPI • LEUIT &amp; AYAM PELUNG</text>
+    </g>
+
+    <g transform="translate(1380, 2470)">
+      <rect x="-245" y="-34" width="490" height="62" rx="14" fill="#1E5631" fill-opacity="0.90" stroke="#FAF6F0" stroke-width="2.5"/>
+      <text x="0" y="-5" fill="#FAF6F0" font-size="23" letter-spacing="1">LAPANGAN ALUN-ALUN CIANJUR</text>
+      <text x="0" y="19" fill="#e2f0cb" font-size="16" font-weight="600">RUMPUT SINTETIS • TAMAN ANAK • LORONG 99 TIANG</text>
+    </g>
+
+    <g transform="translate(650, 2200)">
+      <rect x="-175" y="-30" width="350" height="56" rx="12" fill="#1E5631" fill-opacity="0.94" stroke="#C59B27" stroke-width="3"/>
+      <text x="0" y="-4" fill="#FAF6F0" font-size="21" letter-spacing="1">MASJID AGUNG CIANJUR</text>
+      <text x="0" y="18" fill="#f6e3ba" font-size="15" font-weight="600">BERDIRI 1810 • WAKAF NYI R. SITI BODEDAR</text>
+    </g>
+
+    <g transform="translate(865, 3260)">
+      <rect x="-195" y="-28" width="390" height="52" rx="12" fill="#5C3A21" fill-opacity="0.92" stroke="#FAF6F0" stroke-width="2"/>
+      <text x="0" y="-3" fill="#FAF6F0" font-size="20" letter-spacing="1">PENDOPO KABUPATEN (1780)</text>
+      <text x="0" y="17" fill="#F3EDE2" font-size="14" font-weight="600">LONCENG BATAVIA 1774 &amp; SITUS BADAK PUTIH</text>
+    </g>
+  </g>
+</svg>
