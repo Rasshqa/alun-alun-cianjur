@@ -10,8 +10,7 @@ const QuestView = lazy(() => import('./components/QuestView'));
 const AdminMapper = lazy(() => import('./components/AdminMapper'));
 
 function TopHeader() {
-  const { parkStatus, questState, setActiveTab } = useApp();
-  const isOpen = parkStatus.park_status === 'OPEN';
+  const { questState, setActiveTab } = useApp();
   const entryGateObj = data.gates.find((g) => g.id === questState.entry_gate);
 
   return (
@@ -21,13 +20,6 @@ function TopHeader() {
           <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
             <span className="text-xs sm:text-base font-bold tracking-tight text-white truncate">
               Portal Alun-Alun Cianjur
-            </span>
-            <span
-              className={`shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                isOpen ? 'bg-islam-600 text-white' : 'bg-amber-600 text-white'
-              }`}
-            >
-              {isOpen ? 'BUKA' : 'TERBATAS'}
             </span>
           </div>
           <p className="text-[11px] sm:text-xs text-earth-300 truncate mt-0.5">
@@ -49,14 +41,6 @@ function TopHeader() {
             {questState.completed_missions.length}/{data.missions.length} Misi
           </div>
         </button>
-      </div>
-
-      <div
-        className={`px-3 sm:px-6 py-1.5 text-center text-[11px] sm:text-xs font-medium text-white ${
-          isOpen ? 'bg-islam-700' : 'bg-amber-600'
-        }`}
-      >
-        {parkStatus.status_message}
       </div>
     </header>
   );
