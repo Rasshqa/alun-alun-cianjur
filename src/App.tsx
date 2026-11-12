@@ -30,18 +30,28 @@ function TopHeader() {
           </p>
         </div>
 
-        <button
-          onClick={() => setActiveTab('misi')}
-          className="shrink-0 min-h-10 px-2.5 sm:px-3.5 py-1.5 rounded-xl bg-earth-800 hover:bg-earth-700 active:scale-95 border border-gold-500/40 text-left transition-all duration-200 shadow-xs"
-          aria-label="Lihat progres misi dan XP"
-        >
-          <div className="text-xs sm:text-sm font-bold text-gold-400 leading-none">
-            {questState.total_xp} XP
-          </div>
-          <div className="text-[10px] text-earth-300 mt-0.5 whitespace-nowrap">
-            {questState.completed_missions.length}/{data.missions.length} Misi
-          </div>
-        </button>
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <button
+            onClick={() => setActiveTab('panduan')}
+            className="min-h-10 px-2.5 sm:px-3 py-1.5 rounded-xl bg-islam-700 hover:bg-islam-600 active:scale-95 text-white text-[11px] sm:text-xs font-semibold transition-all duration-200 shadow-xs"
+            aria-label="Isi kehadiran pengunjung opsional"
+          >
+            Isi Kehadiran
+          </button>
+
+          <button
+            onClick={() => setActiveTab('misi')}
+            className="min-h-10 px-2.5 sm:px-3.5 py-1.5 rounded-xl bg-earth-800 hover:bg-earth-700 active:scale-95 border border-gold-500/40 text-left transition-all duration-200 shadow-xs"
+            aria-label="Lihat progres misi dan XP"
+          >
+            <div className="text-xs sm:text-sm font-bold text-gold-400 leading-none">
+              {questState.total_xp} XP
+            </div>
+            <div className="text-[10px] text-earth-300 mt-0.5 whitespace-nowrap">
+              {questState.completed_missions.length}/{data.missions.length} Misi
+            </div>
+          </button>
+        </div>
       </div>
     </header>
   );

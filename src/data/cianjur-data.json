@@ -1115,9 +1115,23 @@
   "events": [
     {
       "id": "EVT-01",
+      "title": "Event Pameran & Bazar Malam Minggu (Bunderan Alun-Alun & Bomero)",
+      "location": "Area Bunderan Alun-Alun Cianjur & Koridor Bomero City Walk",
+      "schedule": "Setiap Malam Minggu (Sabtu Sore – Malam · 16:00 – 22:30 WIB)",
+      "badge": "Rutin Malam Minggu",
+      "category": "Pameran & Bazar Malam Minggu",
+      "coords": [
+        -6.821327,
+        107.141917
+      ],
+      "summary": "Agenda keramaian dan pameran rutin setiap Malam Minggu di sekitar Bunderan Alun-Alun Cianjur hingga pedestrian Bomero City Walk. Menampilkan pameran UMKM lokal, kriya kreatif, wisata kuliner malam, dan ruang berkumpul warga Cianjur.",
+      "photo_url": null
+    },
+    {
+      "id": "EVT-02",
       "title": "Bomero Culinary Night & Street Food Walk",
       "location": "Bomero City Walk (Jl. Pasar Bojong Meron & Jl. Mangunsarkoro)",
-      "schedule": "Setiap Sore – Malam (16:00 – 22:30 WIB · Puncak Malam Minggu)",
+      "schedule": "Setiap Sore – Malam (16:00 – 22:00 WIB)",
       "badge": "Berlangsung Tiap Sore/Malam",
       "category": "Kuliner & Nongkrong Malam",
       "coords": [
@@ -1128,23 +1142,9 @@
       "photo_url": null
     },
     {
-      "id": "EVT-02",
-      "title": "Pentas Seni Mamaos (Kecapi Suling) & Atraksi Pencak Silat Maenpo",
-      "location": "Tribun Koloseum Amfiteater (800 Kursi) & Panggung Suling Kecapi",
-      "schedule": "Sabtu & Minggu Sore (15:30 – 17:30 WIB) / Hari Besar Daerah",
-      "badge": "Agenda Akhir Pekan",
-      "category": "Seni & Budaya 3 Pilar",
-      "coords": [
-        -6.81995,
-        107.14095
-      ],
-      "summary": "Pementasan tembang Sunda Cianjuran (Mamaos) serta peragaan jurus silat Maenpo Cikalong dan Sabandar oleh sanggar-sanggar seni Kabupaten Cianjur di panggung terbuka Taman Alun-Alun.",
-      "photo_url": null
-    },
-    {
       "id": "EVT-03",
       "title": "Kajian Rutin & Syiar Islam Kota Santri (Pilar Ngaos)",
-      "location": "Masjid Agung Cianjur (1810) & Pelataran Monumen Al-Qur'an",
+      "location": "Masjid Agung Cianjur (1810) & Pelataran Tugu Al-Qur'an",
       "schedule": "Setiap Hari Ba'da Maghrib & Subuh / Jumat Berkah",
       "badge": "Rutin Harian",
       "category": "Wisata Religi",
@@ -1152,7 +1152,7 @@
         -6.82098,
         107.13932
       ],
-      "summary": "Kegiatan majelis taklim, tadarus Al-Qur'an, dan tausiyah keagamaan yang menghidupkan tradisi Ngaos di jantung Kota Santri Cianjur sejak abad ke-19.",
+      "summary": "Kegiatan majelis taklim, tadarus Al-Qur'an, dan tausiyah keagamaan yang menghidupkan tradisi Ngaos di jantung Kota Santri Cianjur di sekitar Masjid Agung dan Tugu Al-Qur'an Emas.",
       "photo_url": null
     },
     {
