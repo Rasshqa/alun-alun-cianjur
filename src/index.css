@@ -24,8 +24,180 @@
   --color-gold-300: #E0CA7A;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
 body {
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   background-color: var(--color-earth-50);
   color: var(--color-earth-900);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes viewEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.992);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cardCascade {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes barShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes xpFloatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.8);
+  }
+  25% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.08);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(-22px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-34px) scale(0.95);
+  }
+}
+
+@keyframes shakeInput {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+@keyframes markerRipple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(200, 169, 81, 0.7), 0 3px 8px rgba(0, 0, 0, 0.4);
+    transform: scale(1.12);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(200, 169, 81, 0), 0 3px 8px rgba(0, 0, 0, 0.4);
+    transform: scale(1.18);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(200, 169, 81, 0), 0 3px 8px rgba(0, 0, 0, 0.4);
+    transform: scale(1.12);
+  }
+}
+
+@keyframes confettiDrop {
+  0% {
+    opacity: 1;
+    transform: translate3d(var(--tx, 0px), 0, 0) rotate(0deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--tx-end, 20px), -70px, 0) rotate(260deg) scale(0.4);
+  }
+}
+
+.animate-view-enter {
+  animation: viewEnter 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-card-cascade {
+  animation: cardCascade 340ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-xp-shimmer {
+  background: linear-gradient(
+    90deg,
+    #C8A951 0%,
+    #F3E5AB 45%,
+    #2E7D32 75%,
+    #C8A951 100%
+  );
+  background-size: 200% 100%;
+  animation: barShimmer 3.2s linear infinite;
+}
+
+.animate-xp-float {
+  animation: xpFloatUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-shake {
+  animation: shakeInput 360ms ease-in-out;
+}
+
+.marker-pin-active {
+  animation: markerRipple 1.6s ease-out infinite;
+}
+
+.confetti-particle {
+  animation: confettiDrop 950ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Smooth accordion expand/collapse via CSS Grid */
+.accordion-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease;
+}
+
+.accordion-grid.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.accordion-inner {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-view-enter,
+  .animate-card-cascade,
+  .animate-xp-shimmer,
+  .animate-xp-float,
+  .animate-shake,
+  .marker-pin-active,
+  .confetti-particle {
+    animation: none !important;
+  }
+  .accordion-grid {
+    transition: none !important;
+  }
 }

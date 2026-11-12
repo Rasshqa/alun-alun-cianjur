@@ -63,21 +63,43 @@ const COLORS: Record<Exclude<Category, 'all'>, string> = {
   gate: '#3E2723',
 };
 
-function makeIcon(color: string, label: string, size = 28) {
+const LABELS: Record<Exclude<Category, 'all'>, string> = {
+  trash: 'TS',
+  heritage: 'SJ',
+  culinary: 'KL',
+  hotel: 'HT',
+  gate: 'GB',
+};
+
+function makeIcon(category: Exclude<Category, 'all'>, active = false) {
+  const color = COLORS[category];
+  const label = LABELS[category];
+  const size = category === 'gate' ? 30 : category === 'trash' ? 26 : 28;
+  const activeCls = active ? 'marker-pin-active' : '';
+  const border = active ? '3px solid #FEF08A' : '2.5px solid #ffffff';
+
   return L.divIcon({
     className: '',
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
-    html: `<div style="width:${size}px;height:${size}px;border-radius:9999px;background:${color};border:2.5px solid #ffffff;box-shadow:0 2px 6px rgba(0,0,0,0.38);display:flex;align-items:center;justify-content:center;color:#ffffff;font-weight:700;font-size:11px;font-family:system-ui,sans-serif;letter-spacing:-0.3px">${label}</div>`,
+    html: `<div class="${activeCls}" style="width:${size}px;height:${size}px;border-radius:9999px;background:${color};border:${border};box-shadow:0 2px 6px rgba(0,0,0,0.38);display:flex;align-items:center;justify-content:center;color:#ffffff;font-weight:700;font-size:11px;font-family:system-ui,sans-serif;letter-spacing:-0.3px;transition:transform 0.2s ease">${label}</div>`,
   });
 }
 
-const icons = {
-  trash: makeIcon(COLORS.trash, 'TS', 26),
-  heritage: makeIcon(COLORS.heritage, 'SJ', 28),
-  culinary: makeIcon(COLORS.culinary, 'KL', 28),
-  hotel: makeIcon(COLORS.hotel, 'HT', 28),
-  gate: makeIcon(COLORS.gate, 'GB', 30),
+const defaultIcons: Record<Exclude<Category, 'all'>, L.DivIcon> = {
+  trash: makeIcon('trash', false),
+  heritage: makeIcon('heritage', false),
+  culinary: makeIcon('culinary', false),
+  hotel: makeIcon('hotel', false),
+  gate: makeIcon('gate', false),
+};
+
+const activeIcons: Record<Exclude<Category, 'all'>, L.DivIcon> = {
+  trash: makeIcon('trash', true),
+  heritage: makeIcon('heritage', true),
+  culinary: makeIcon('culinary', true),
+  hotel: makeIcon('hotel', true),
+  gate: makeIcon('gate', true),
 };
 
 interface MarkerItem {
@@ -86,7 +108,6 @@ interface MarkerItem {
   category: Exclude<Category, 'all'>;
   isInternal: boolean;
   searchKeywords: string;
-  icon: L.DivIcon;
   sheet: SheetData;
 }
 
@@ -100,7 +121,6 @@ function buildMarkers(): MarkerItem[] {
       category: 'gate',
       isInternal: true,
       searchKeywords: `${g.name} gerbang ${g.welcome}`.toLowerCase(),
-      icon: icons.gate,
       sheet: {
         id: g.id,
         name: g.name,
@@ -123,7 +143,6 @@ function buildMarkers(): MarkerItem[] {
       category: 'heritage',
       isInternal: inDenah,
       searchKeywords: `${h.name} ${h.pilar_tag} ${h.address ?? ''} ${h.summary} sejarah`.toLowerCase(),
-      icon: icons.heritage,
       sheet: {
         id: h.id,
         name: h.name,
@@ -148,7 +167,6 @@ function buildMarkers(): MarkerItem[] {
       category: 'culinary',
       isInternal: false,
       searchKeywords: `${c.name} ${c.address} ${c.signature_menu.join(' ')} kuliner makanan`.toLowerCase(),
-      icon: icons.culinary,
       sheet: {
         id: c.id,
         name: c.name,
@@ -171,7 +189,6 @@ function buildMarkers(): MarkerItem[] {
       category: 'hotel',
       isInternal: false,
       searchKeywords: `${h.name} ${h.address} ${h.facilities.join(' ')} hotel penginapan`.toLowerCase(),
-      icon: icons.hotel,
       sheet: {
         id: h.id,
         name: h.name,
@@ -193,7 +210,6 @@ function buildMarkers(): MarkerItem[] {
       category: 'trash',
       isInternal: true,
       searchKeywords: `${b.cluster_name} ${b.landmark_hint} ${b.bin_type} tong sampah`.toLowerCase(),
-      icon: icons.trash,
       sheet: {
         id: b.id,
         name: b.cluster_name,
@@ -223,6 +239,9 @@ function MapController({
 
   useEffect(() => {
     mapRef.current = map;
+    const handleResize = () => map.invalidateSize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [map, mapRef]);
 
   useEffect(() => {
@@ -370,22 +389,25 @@ export default function MapView() {
     mapRef.current?.flyTo(item.coords, item.isInternal ? 19 : 17, { duration: 0.9 });
   }, []);
 
-  const toggleSheetAudio = useCallback((id: string, script?: string) => {
-    if (!script || !('speechSynthesis' in window)) return;
-    if (speakingId === id) {
+  const toggleSheetAudio = useCallback(
+    (id: string, script?: string) => {
+      if (!script || !('speechSynthesis' in window)) return;
+      if (speakingId === id) {
+        window.speechSynthesis.cancel();
+        setSpeakingId(null);
+        return;
+      }
       window.speechSynthesis.cancel();
-      setSpeakingId(null);
-      return;
-    }
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(script);
-    u.lang = 'id-ID';
-    u.rate = 0.95;
-    u.onend = () => setSpeakingId(null);
-    u.onerror = () => setSpeakingId(null);
-    setSpeakingId(id);
-    window.speechSynthesis.speak(u);
-  }, [speakingId]);
+      const u = new SpeechSynthesisUtterance(script);
+      u.lang = 'id-ID';
+      u.rate = 0.95;
+      u.onend = () => setSpeakingId(null);
+      u.onerror = () => setSpeakingId(null);
+      setSpeakingId(id);
+      window.speechSynthesis.speak(u);
+    },
+    [speakingId],
+  );
 
   const findNearestBin = useCallback(() => {
     setGpsLoading(true);
@@ -460,15 +482,15 @@ export default function MapView() {
   }, []);
 
   return (
-    <div className="relative h-[calc(100dvh-146px)] flex flex-col">
+    <div className="relative flex-1 flex flex-col min-h-[480px] h-[calc(100dvh-154px)] sm:h-[calc(100dvh-142px)] pb-[56px] md:pb-0">
       {/* Mode Switcher: Denah Internal vs Peta Sekitar Kota */}
-      <div className="bg-earth-900 text-white px-3 py-2 flex items-center justify-between gap-2 z-[1000]">
-        <div className="flex bg-earth-800 p-0.5 rounded-lg flex-1">
+      <div className="bg-earth-900 text-white px-2.5 sm:px-4 py-2 flex items-center justify-between gap-2 z-[1000] shrink-0">
+        <div className="flex bg-earth-800 p-0.5 rounded-xl flex-1 min-w-0">
           <button
             onClick={switchToAlunAlun}
-            className={`flex-1 py-1.5 px-2.5 rounded-md text-xs font-semibold transition-colors ${
+            className={`flex-1 min-w-0 py-1.5 px-2 sm:px-3 rounded-lg text-[11px] sm:text-xs font-semibold truncate transition-all ${
               scope === 'alun-alun'
-                ? 'bg-gold-500 text-earth-900'
+                ? 'bg-gold-500 text-earth-900 shadow-xs'
                 : 'text-earth-200 hover:text-white'
             }`}
           >
@@ -476,19 +498,20 @@ export default function MapView() {
           </button>
           <button
             onClick={switchToCity}
-            className={`flex-1 py-1.5 px-2.5 rounded-md text-xs font-semibold transition-colors ${
+            className={`flex-1 min-w-0 py-1.5 px-2 sm:px-3 rounded-lg text-[11px] sm:text-xs font-semibold truncate transition-all ${
               scope === 'city'
-                ? 'bg-gold-500 text-earth-900'
+                ? 'bg-gold-500 text-earth-900 shadow-xs'
                 : 'text-earth-200 hover:text-white'
             }`}
           >
-            Peta Sekitar (Kuliner & Hotel)
+            <span className="sm:hidden">Peta Sekitar Kota</span>
+            <span className="hidden sm:inline">Peta Sekitar (Kuliner & Hotel)</span>
           </button>
         </div>
 
         <button
           onClick={() => setShowOverlay((v) => !v)}
-          className={`shrink-0 px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+          className={`shrink-0 px-2.5 py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold border transition-all active:scale-95 ${
             showOverlay
               ? 'bg-islam-700 border-islam-500 text-white'
               : 'bg-earth-800 border-earth-600 text-earth-300'
@@ -499,14 +522,14 @@ export default function MapView() {
       </div>
 
       {/* Instant Search Bar & Category Filter Pills */}
-      <div className="bg-white/95 backdrop-blur-sm z-[1000] border-b border-earth-200 px-3 pt-2 pb-2 space-y-2 relative">
+      <div className="bg-white/95 backdrop-blur-sm z-[1000] border-b border-earth-200 px-3 sm:px-4 pt-2 pb-2 space-y-2 relative shrink-0">
         <div className="relative">
           <input
             type="search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Cari destinasi: Lonceng, Bumi Ageung, Geco, Tan Keng Cu, Tong Sampah..."
-            className="w-full bg-earth-50 border border-earth-200 rounded-xl pl-8 pr-8 py-2 text-xs text-earth-900 placeholder:text-earth-400 focus:outline-none focus:ring-2 focus:ring-islam-600"
+            className="w-full min-w-0 bg-earth-50 border border-earth-200 rounded-xl pl-8 pr-8 py-2 text-xs sm:text-sm text-earth-900 placeholder:text-earth-400 focus:outline-none focus:ring-2 focus:ring-islam-600 transition-shadow"
           />
           <svg
             viewBox="0 0 24 24"
@@ -530,14 +553,14 @@ export default function MapView() {
         </div>
 
         {searchResults.length > 0 && (
-          <div className="absolute left-3 right-3 top-11 bg-white rounded-xl shadow-xl border border-earth-200 divide-y divide-earth-100 max-h-60 overflow-y-auto z-[1200]">
+          <div className="absolute left-3 right-3 sm:left-4 sm:right-4 top-12 bg-white rounded-2xl shadow-xl border border-earth-200 divide-y divide-earth-100 max-h-60 overflow-y-auto z-[1200] animate-view-enter">
             {searchResults.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleSelectSearchResult(item)}
-                className="w-full px-3.5 py-2.5 text-left hover:bg-earth-50 flex items-center justify-between gap-2"
+                className="w-full px-3.5 py-2.5 text-left hover:bg-earth-50 flex items-center justify-between gap-2 transition-colors"
               >
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <div className="text-xs font-semibold text-earth-900 truncate">
                     {item.sheet.name}
                   </div>
@@ -547,7 +570,7 @@ export default function MapView() {
                   </div>
                 </div>
                 <span
-                  className="shrink-0 text-[10px] font-bold text-white px-2 py-0.5 rounded-full"
+                  className="shrink-0 text-[10px] font-bold text-white px-2.5 py-0.5 rounded-full"
                   style={{ background: item.sheet.categoryColor }}
                 >
                   Pilih
@@ -562,10 +585,10 @@ export default function MapView() {
             <button
               key={f.id}
               onClick={() => handleFilterChange(f.id)}
-              className={`shrink-0 min-h-9 px-3.5 rounded-full text-xs font-semibold transition-colors ${
+              className={`shrink-0 min-h-9 px-3.5 rounded-full text-xs font-semibold transition-all active:scale-95 ${
                 filter === f.id
-                  ? 'bg-earth-800 text-white shadow-sm'
-                  : 'bg-earth-100 text-earth-700 active:bg-earth-200'
+                  ? 'bg-earth-800 text-white shadow-xs'
+                  : 'bg-earth-100 text-earth-700 hover:bg-earth-200'
               }`}
             >
               {f.label} ({f.count})
@@ -575,7 +598,7 @@ export default function MapView() {
       </div>
 
       {/* Map Container */}
-      <div className="flex-1 relative z-0">
+      <div className="flex-1 relative z-0 min-h-[320px]">
         <MapContainer
           center={center}
           zoom={data.app_config.default_zoom}
@@ -602,23 +625,27 @@ export default function MapView() {
 
           <MapController mapRef={mapRef} />
 
-          {visible.map((m) => (
-            <Marker
-              key={m.id}
-              position={m.coords}
-              icon={m.icon}
-              eventHandlers={{
-                click: () => {
-                  setSheet(m.sheet);
-                  mapRef.current?.panTo(m.coords, { animate: true });
-                },
-              }}
-            >
-              <Tooltip direction="top" offset={[0, -14]} opacity={0.95}>
-                <span className="text-xs font-semibold">{m.sheet.name}</span>
-              </Tooltip>
-            </Marker>
-          ))}
+          {visible.map((m) => {
+            const isSelected = sheet?.id === m.id;
+            return (
+              <Marker
+                key={m.id}
+                position={m.coords}
+                icon={isSelected ? activeIcons[m.category] : defaultIcons[m.category]}
+                zIndexOffset={isSelected ? 500 : 0}
+                eventHandlers={{
+                  click: () => {
+                    setSheet(m.sheet);
+                    mapRef.current?.panTo(m.coords, { animate: true });
+                  },
+                }}
+              >
+                <Tooltip direction="top" offset={[0, -14]} opacity={0.95}>
+                  <span className="text-xs font-semibold">{m.sheet.name}</span>
+                </Tooltip>
+              </Marker>
+            );
+          })}
 
           {userPos && (
             <Circle
@@ -640,14 +667,14 @@ export default function MapView() {
         <div className="absolute top-3 right-3 z-[900] flex flex-col gap-1.5">
           <button
             onClick={() => mapRef.current?.zoomIn()}
-            className="w-10 h-10 rounded-xl bg-white/95 text-earth-900 font-bold text-lg shadow-md border border-earth-200 flex items-center justify-center active:bg-earth-100"
+            className="w-10 h-10 rounded-xl bg-white/95 hover:bg-white text-earth-900 font-bold text-lg shadow-md border border-earth-200 flex items-center justify-center active:scale-95 transition-transform"
             aria-label="Perbesar peta"
           >
             +
           </button>
           <button
             onClick={() => mapRef.current?.zoomOut()}
-            className="w-10 h-10 rounded-xl bg-white/95 text-earth-900 font-bold text-lg shadow-md border border-earth-200 flex items-center justify-center active:bg-earth-100"
+            className="w-10 h-10 rounded-xl bg-white/95 hover:bg-white text-earth-900 font-bold text-lg shadow-md border border-earth-200 flex items-center justify-center active:scale-95 transition-transform"
             aria-label="Perkecil peta"
           >
             −
@@ -686,22 +713,24 @@ export default function MapView() {
         <button
           onClick={findNearestBin}
           disabled={gpsLoading}
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[900] bg-islam-700 text-white px-5 py-3 rounded-full text-xs font-semibold shadow-lg border border-islam-500 active:bg-islam-800 disabled:opacity-60 whitespace-nowrap"
+          className="absolute bottom-4 md:bottom-20 left-1/2 -translate-x-1/2 z-[900] bg-islam-700 hover:bg-islam-800 text-white px-4 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs font-semibold shadow-lg border border-islam-500 active:scale-95 transition-all disabled:opacity-60 whitespace-nowrap max-w-[92vw] truncate"
         >
           {gpsLoading ? 'Mencari Lokasi GPS...' : 'Cari Tong Sampah Terdekat'}
         </button>
       </div>
 
-      {/* Detail Bottom Sheet (non-blocking map & bottom nav) */}
+      {/* Detail Bottom Sheet (Mobile bottom sheet + Desktop floating card) */}
       <div
-        className={`fixed bottom-[56px] inset-x-0 z-30 bg-white rounded-t-2xl shadow-[0_-8px_30px_rgba(0,0,0,0.18)] transition-transform duration-300 ease-out max-w-md mx-auto border-t border-earth-200 ${
-          sheet ? 'translate-y-0' : 'translate-y-[120%] pointer-events-none'
+        className={`fixed bottom-[56px] inset-x-0 md:inset-x-auto md:right-6 md:bottom-24 md:w-[400px] z-30 bg-white rounded-t-2xl md:rounded-2xl shadow-[0_-8px_30px_rgba(0,0,0,0.18)] md:shadow-2xl transition-all duration-300 ease-out border-t md:border border-earth-200 max-h-[54dvh] md:max-h-[68dvh] overflow-y-auto ${
+          sheet
+            ? 'translate-y-0 opacity-100'
+            : 'translate-y-[120%] opacity-0 pointer-events-none'
         }`}
       >
-        <div className="w-10 h-1 bg-earth-300 rounded-full mx-auto mt-2.5" />
-        <div className="p-4 pt-2.5">
+        <div className="w-10 h-1 bg-earth-300 rounded-full mx-auto mt-2.5 md:hidden" />
+        <div className="p-4 pt-2.5 md:pt-4">
           <div className="flex items-start justify-between gap-3 mb-2">
-            <div>
+            <div className="min-w-0 flex-1">
               {sheet && (
                 <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
                   <span
@@ -723,14 +752,16 @@ export default function MapView() {
                   )}
                 </div>
               )}
-              <h3 className="text-base font-bold text-earth-900 leading-snug">{sheet?.name}</h3>
+              <h3 className="text-base font-bold text-earth-900 leading-snug break-words">
+                {sheet?.name}
+              </h3>
               {sheet?.subLabel && (
-                <p className="text-xs text-earth-500 mt-0.5">{sheet.subLabel}</p>
+                <p className="text-xs text-earth-500 mt-0.5 break-words">{sheet.subLabel}</p>
               )}
             </div>
             <button
               onClick={dismissSheet}
-              className="shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-earth-100 text-earth-600"
+              className="shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-earth-100 hover:bg-earth-200 text-earth-600 active:scale-95 transition-all"
               aria-label="Tutup"
             >
               <svg viewBox="0 0 24 24" className="w-4 h-4" stroke="currentColor" strokeWidth={2.5} fill="none">
@@ -745,16 +776,16 @@ export default function MapView() {
             </span>
           )}
 
-          <p className="text-sm text-earth-700 leading-relaxed mb-3.5">{sheet?.detail}</p>
+          <p className="text-xs sm:text-sm text-earth-700 leading-relaxed mb-3.5">{sheet?.detail}</p>
 
           {sheet?.audioScript && (
-            <div className="flex gap-2 mb-2.5">
+            <div className="flex flex-wrap gap-2 mb-2.5">
               <button
                 onClick={() => toggleSheetAudio(sheet.id, sheet.audioScript)}
-                className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-semibold border transition-colors ${
+                className={`flex-1 min-w-[140px] py-2.5 px-3 rounded-xl text-xs font-semibold border transition-all active:scale-95 ${
                   speakingId === sheet.id
                     ? 'bg-amber-600 text-white border-amber-600'
-                    : 'bg-amber-50 text-amber-900 border-amber-300'
+                    : 'bg-amber-50 text-amber-900 border-amber-300 hover:bg-amber-100'
                 }`}
               >
                 {speakingId === sheet.id ? 'Hentikan Audio Sejarah' : 'Dengarkan Audio Sejarah'}
@@ -765,7 +796,7 @@ export default function MapView() {
                     dismissSheet();
                     setActiveTab('misi');
                   }}
-                  className="py-2.5 px-3 rounded-xl bg-gold-500 text-earth-900 text-xs font-bold"
+                  className="py-2.5 px-3 rounded-xl bg-gold-500 hover:bg-gold-400 text-earth-900 text-xs font-bold active:scale-95 transition-all"
                 >
                   Jawab Kuis (+XP)
                 </button>
@@ -779,20 +810,20 @@ export default function MapView() {
                 dismissSheet();
                 setActiveTab('misi');
               }}
-              className="w-full mb-2.5 py-2.5 px-3 rounded-xl bg-gold-500 text-earth-900 text-xs font-bold"
+              className="w-full mb-2.5 py-2.5 px-3 rounded-xl bg-gold-500 hover:bg-gold-400 text-earth-900 text-xs font-bold active:scale-95 transition-all"
             >
               Check-In Misi Ksatria K5 (+200 XP)
             </button>
           )}
 
           {sheet && (
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => {
                   mapRef.current?.flyTo(sheet.coords, 19, { duration: 0.8 });
                   setSheet(null);
                 }}
-                className="flex-1 py-2.5 px-3 rounded-xl bg-earth-100 text-earth-800 text-xs font-semibold active:bg-earth-200"
+                className="flex-1 min-w-[115px] py-2.5 px-3 rounded-xl bg-earth-100 hover:bg-earth-200 text-earth-800 text-xs font-semibold active:scale-95 transition-all"
               >
                 Perbesar Titik
               </button>
@@ -800,7 +831,7 @@ export default function MapView() {
                 href={`https://www.google.com/maps/dir/?api=1&destination=${sheet.coords[0]},${sheet.coords[1]}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-2.5 px-3 rounded-xl bg-islam-600 text-white text-xs font-semibold text-center active:bg-islam-700"
+                className="flex-1 min-w-[115px] py-2.5 px-3 rounded-xl bg-islam-600 hover:bg-islam-700 text-white text-xs font-semibold text-center flex items-center justify-center active:scale-95 transition-all"
               >
                 Rute Google Maps
               </a>
