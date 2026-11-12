@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
 import data from '../data/cianjur-data.json';
 
-export type TabId = 'peta' | 'sejarah' | 'kuliner' | 'hotel' | 'misi';
+export type TabId = 'peta' | 'sejarah' | 'kuliner' | 'hotel' | 'panduan' | 'misi';
 
 export interface QuestState {
   visitor_nickname: string;
@@ -15,9 +15,11 @@ export interface QuestState {
   last_active_timestamp: number;
 }
 
-interface MapFocus {
+export interface MapFocus {
   coords: [number, number];
   zoom: number;
+  routeId?: string;
+  layer?: 'all' | 'heritage' | 'trash' | 'toilet' | 'culinary' | 'hotel';
 }
 
 interface AppContextValue {

@@ -566,6 +566,93 @@
         "Topping Risoles, Pais Usus & Kerupuk"
       ],
       "history_note": "Pilihan utama kuliner malam dan dini hari yang buka 24 jam penuh bagi wisatawan yang tiba di Cianjur di luar jam makan normal."
+    },
+    {
+      "id": "CUL-11",
+      "name": "Manisan & Asinan Buah Mulia Sari (Ny. Tan)",
+      "address": "Jl. HOS Cokroaminoto No. 205, Kel. Solokpandan, Kec. Cianjur",
+      "distance_m": 465,
+      "coords": [
+        -6.81785,
+        107.14312
+      ],
+      "price_range": "Rp15.000 - Rp38.000 / bungkus",
+      "min_price": 15000,
+      "open_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "open_time": "08:00",
+      "close_time": "19:30",
+      "signature_menu": [
+        "Manisan Mangga & Pala Basah/Kering",
+        "Asinan Buah & Sayur Segar",
+        "Manisan Kedondong & Salak Cianjur"
+      ],
+      "history_note": "Pusat oleh-oleh manisan buah dan asinan legendaris Ny. Tan di koridor Jl. HOS Cokroaminoto yang terkenal dengan manisan pala, mangga, dan salak berkuah segar manis-asam."
+    },
+    {
+      "id": "CUL-12",
+      "name": "Sentra Beras Pandanwangi Asli Cianjur (Oleh-Oleh)",
+      "address": "Jl. Pasar Bojong Meron / Jl. HOS Cokroaminoto, Kel. Solokpandan",
+      "distance_m": 240,
+      "coords": [
+        -6.82095,
+        107.14215
+      ],
+      "price_range": "Rp22.000 - Rp25.000 / kg (Kemasan 1-5 kg)",
+      "min_price": 22000,
+      "open_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "open_time": "07:00",
+      "close_time": "18:00",
+      "signature_menu": [
+        "Beras Pandanwangi Indikasi Geografis (Kemasan 1 kg & 5 kg)",
+        "Kopi Lokal Gunung Gede Cianjur",
+        "Aneka Keripik & Camilan UMKM Cianjur"
+      ],
+      "history_note": "Buah tangan kebanggaan agraris Cianjur berupa Beras Pandanwangi murni beraroma daun pandan alami dan bertekstur pulen yang telah bersertifikat Indikasi Geografis."
+    },
+    {
+      "id": "CUL-13",
+      "name": "Roti Popon Klasik & Oleh-Oleh Cianjur",
+      "address": "Kawasan Jl. Dewi Sartika / Pamoyanan, Pusat Kota Cianjur",
+      "distance_m": 285,
+      "coords": [
+        -6.82025,
+        107.13845
+      ],
+      "price_range": "Rp8.000 - Rp28.000",
+      "min_price": 8000,
+      "open_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "open_time": "07:30",
+      "close_time": "20:00",
+      "signature_menu": [
+        "Roti Popon Pisang Cokelat Hangat",
+        "Roti Cokelat Original & Keju Handmade",
+        "Mochi & Kentang Stik Khas Cianjur"
+      ],
+      "history_note": "Roti tradisional handmade khas Cianjur yang selalu hangat dari panggangan dan populer sebagai buah tangan keluarga selain Roti Tan Keng Cu."
     }
   ],
   "hotels": [
@@ -958,6 +1045,331 @@
         -6.822441,
         107.143152
       ]
+    }
+  ],
+  "toilets": [
+    {
+      "id": "TLT-01",
+      "name": "Toilet Pria & Wanita Bawah Tribun Koloseum (Amfiteater Maenpo)",
+      "zone": "INTERNAL",
+      "location_hint": "Lantai dasar bangunan multifungsi Tribun Amfiteater Maenpo (Koridor Tengah-Utara Taman Alun-Alun)",
+      "coords": [
+        -6.81995,
+        107.14098
+      ],
+      "facilities": [
+        "Toilet Pria & Wanita Terpisah",
+        "Ruang Ganti",
+        "Air Bersih Tandon 20m"
+      ],
+      "open_hours": "Mengikuti jam operasional Taman Alun-Alun"
+    },
+    {
+      "id": "TLT-02",
+      "name": "Toilet & Tempat Wudhu Utama Masjid Agung Cianjur",
+      "zone": "INTERNAL",
+      "location_hint": "Sayap selatan-barat kompleks Masjid Agung Cianjur (dekat pelataran Monumen Al-Qur'an)",
+      "coords": [
+        -6.82118,
+        107.13942
+      ],
+      "facilities": [
+        "Tempat Wudhu Luas Pria & Wanita",
+        "Toilet Bersih",
+        "Akses Ramah Lansia"
+      ],
+      "open_hours": "04:00 – 22:00 WIB (Setiap Hari)"
+    },
+    {
+      "id": "TLT-03",
+      "name": "Toilet Umum Koridor Utara & Pos Jaga Jl. Suroso",
+      "zone": "INTERNAL",
+      "location_hint": "Dekat Gerbang Masuk Utama Jalan Suroso & Menara Pandang",
+      "coords": [
+        -6.81922,
+        107.14118
+      ],
+      "facilities": [
+        "Toilet Pengunjung",
+        "Wastafel Cuci Tangan",
+        "Dekat Pos Keamanan Satpol PP"
+      ],
+      "open_hours": "Mengikuti jam operasional Taman Alun-Alun"
+    },
+    {
+      "id": "TLT-04",
+      "name": "Toilet Zona Kios Kuliner Sayap Timur (Arah Bomero)",
+      "zone": "INTERNAL",
+      "location_hint": "Di belakang deretan 6 kios kuliner kayu jati beratap cagak gunting, sayap timur Taman Alun-Alun",
+      "coords": [
+        -6.82068,
+        107.14135
+      ],
+      "facilities": [
+        "Toilet Umum",
+        "Wastafel Area Kuliner"
+      ],
+      "open_hours": "Mengikuti jam operasional Taman Alun-Alun"
+    }
+  ],
+  "events": [
+    {
+      "id": "EVT-01",
+      "title": "Bomero Culinary Night & Street Food Walk",
+      "location": "Bomero City Walk (Jl. Pasar Bojong Meron & Jl. Mangunsarkoro)",
+      "schedule": "Setiap Sore – Malam (16:00 – 22:30 WIB · Puncak Malam Minggu)",
+      "badge": "Berlangsung Tiap Sore/Malam",
+      "category": "Kuliner & Nongkrong Malam",
+      "coords": [
+        -6.821327,
+        107.141917
+      ],
+      "summary": "Keramaian pedestrian bergaya Malioboro di sisi timur Alun-Alun Cianjur. Deretan jajanan kaki lima UMKM, kopi malam, bangku taman klasik, bola batu granit, dan lampu jalan temaram di dekat Gedung Wisma Karya.",
+      "photo_url": null
+    },
+    {
+      "id": "EVT-02",
+      "title": "Pentas Seni Mamaos (Kecapi Suling) & Atraksi Pencak Silat Maenpo",
+      "location": "Tribun Koloseum Amfiteater (800 Kursi) & Panggung Suling Kecapi",
+      "schedule": "Sabtu & Minggu Sore (15:30 – 17:30 WIB) / Hari Besar Daerah",
+      "badge": "Agenda Akhir Pekan",
+      "category": "Seni & Budaya 3 Pilar",
+      "coords": [
+        -6.81995,
+        107.14095
+      ],
+      "summary": "Pementasan tembang Sunda Cianjuran (Mamaos) serta peragaan jurus silat Maenpo Cikalong dan Sabandar oleh sanggar-sanggar seni Kabupaten Cianjur di panggung terbuka Taman Alun-Alun.",
+      "photo_url": null
+    },
+    {
+      "id": "EVT-03",
+      "title": "Kajian Rutin & Syiar Islam Kota Santri (Pilar Ngaos)",
+      "location": "Masjid Agung Cianjur (1810) & Pelataran Monumen Al-Qur'an",
+      "schedule": "Setiap Hari Ba'da Maghrib & Subuh / Jumat Berkah",
+      "badge": "Rutin Harian",
+      "category": "Wisata Religi",
+      "coords": [
+        -6.82098,
+        107.13932
+      ],
+      "summary": "Kegiatan majelis taklim, tadarus Al-Qur'an, dan tausiyah keagamaan yang menghidupkan tradisi Ngaos di jantung Kota Santri Cianjur sejak abad ke-19.",
+      "photo_url": null
+    },
+    {
+      "id": "EVT-04",
+      "title": "Minggu Pagi Ceria: Olahraga Keluarga & Bazar UMKM Alun-Alun",
+      "location": "Koridor Jl. Suroso, Bomero City Walk & Lapangan Rumput Sintetis",
+      "schedule": "Minggu Pagi (06:30 – 10:30 WIB)",
+      "badge": "Setiap Minggu Pagi",
+      "category": "Rekreasi Keluarga & UMKM",
+      "coords": [
+        -6.82132,
+        107.14008
+      ],
+      "summary": "Aktivitas jalan sehat pagi, terapi refleksi batu kerikil, bermain anak di hamparan rumput sintetis, serta bazar jajanan pagi dan produk UMKM lokal Cianjur.",
+      "photo_url": null
+    }
+  ],
+  "routes": [
+    {
+      "id": "RTE-STASIUN",
+      "title": "Panduan Rute dari Stasiun KA Cianjur ke Alun-Alun",
+      "subtitle": "Stasiun Cianjur (KA Siliwangi) → Alun-Alun & Gerbang Jl. Suroso",
+      "distance_m": 485,
+      "duration_walk": "6–7 menit jalan kaki santai (atau 2 menit becak/ojek)",
+      "transport_info": "Dilayani Kereta Api Siliwangi relasi Sukabumi – Cianjur – Cipatat (Tarif ekonomis Rp3.000 – Rp5.000). Stasiun berada di Jl. Yulius Usman (+439 mdpl).",
+      "color": "#0284c7",
+      "waypoints": [
+        [
+          -6.824594,
+          107.142642
+        ],
+        [
+          -6.82325,
+          107.14228
+        ],
+        [
+          -6.821477,
+          107.141603
+        ],
+        [
+          -6.821327,
+          107.141917
+        ],
+        [
+          -6.82065,
+          107.14045
+        ],
+        [
+          -6.81904,
+          107.14124
+        ]
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "title": "Keluar Pintu Utama Stasiun Cianjur (Jl. Yulius Usman)",
+          "detail": "Keluar peron Stasiun Cianjur ke Jl. Yulius Usman (seberang Cordela Suites), lalu berjalan ke arah utara/barat laut sejauh 160 meter menuju persimpangan Jl. Mangunsarkoro."
+        },
+        {
+          "step": 2,
+          "title": "Susuri Trotoar Jl. Mangunsarkoro & Bomero City Walk",
+          "detail": "Berjalan lurus ke utara menyusuri trotoar ramah pejalan kaki di Jl. Mangunsarkoro melewati Vihara Bhumi Pharsjia (1880) dan koridor Bomero City Walk sejauh 200 meter."
+        },
+        {
+          "step": 3,
+          "title": "Masuk Kawasan Alun-Alun (Gerbang Utama Jl. Suroso)",
+          "detail": "Dari sisi timur/utara taman, lanjutkan ke Gerbang Utama Jalan Suroso sebagai akses masuk resmi ke dalam Taman Alun-Alun Cianjur (atau belok kiri ke Jl. Siti Jenab untuk langsung menuju Masjid Agung & Pendopo)."
+        }
+      ]
+    },
+    {
+      "id": "RTE-BOMERO",
+      "title": "Panduan Rute Alun-Alun ke Bomero City Walk",
+      "subtitle": "Taman Alun-Alun → Koridor Pedestrian Bojong Meron (Bomero)",
+      "distance_m": 210,
+      "duration_walk": "3 menit jalan kaki",
+      "transport_info": "Jalur pedestrian terhubung langsung di sisi timur-tenggara Taman Alun-Alun Cianjur (tanpa perlu naik kendaraan).",
+      "color": "#9333ea",
+      "waypoints": [
+        [
+          -6.82085,
+          107.14015
+        ],
+        [
+          -6.82058,
+          107.14088
+        ],
+        [
+          -6.82072,
+          107.14128
+        ],
+        [
+          -6.82115,
+          107.14175
+        ],
+        [
+          -6.821327,
+          107.141917
+        ]
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "title": "Dari Lorong 99 Tiang Asmaul Husna ke Sayap Timur",
+          "detail": "Dari koridor tengah Alun-Alun, berjalan ke arah timur melewati Panggung Suling Kecapi (Zona Mamaos) dan Lumbung Padi (Leuit) sejauh 110 meter."
+        },
+        {
+          "step": 2,
+          "title": "Menyeberang ke Koridor Jl. Mangunsarkoro",
+          "detail": "Keluar menuju sisi timur taman ke arah Jl. Mangunsarkoro (dekat sentra Dwigie Tauco Cookies & Vihara Bhumi Pharsjia) sejauh 60 meter."
+        },
+        {
+          "step": 3,
+          "title": "Tiba di Pedestrian Bomero City Walk & Wisma Karya",
+          "detail": "Masuki koridor pedestrian Jl. Pasar Bojong Meron (Bomero City Walk) yang dilengkapi bangku taman, bola batu granit, deretan street food, dan Bubur Ayam Sampurna."
+        }
+      ]
+    }
+  ],
+  "park_rules": {
+    "opening_hours": [
+      {
+        "days": "Senin – Jumat",
+        "hours": "13:00 – 18:00 WIB",
+        "note": "Pagi hari untuk pemeliharaan kebersihan & taman"
+      },
+      {
+        "days": "Sabtu",
+        "hours": "09:00 – 21:00 WIB",
+        "note": "Buka hingga malam hari (akhir pekan)"
+      },
+      {
+        "days": "Minggu",
+        "hours": "08:30 – 18:00 WIB",
+        "note": "Buka sejak pagi untuk rekreasi keluarga"
+      },
+      {
+        "days": "Masjid Agung & Bomero City Walk",
+        "hours": "04:00 – 23:00 WIB (Akses Luar 24 Jam)",
+        "note": "Ibadah di Masjid Agung & kuliner Bomero tetap dapat diakses di luar jam taman"
+      }
+    ],
+    "rules": [
+      {
+        "id": "RUL-01",
+        "title": "Wajib Melepas Alas Kaki di Rumput Sintetis",
+        "desc": "Pengunjung dilarang menginjak area hamparan rumput sintetis menggunakan sepatu atau sandal agar serat rumput tetap bersih, empuk, dan nyaman untuk duduk keluarga."
+      },
+      {
+        "id": "RUL-02",
+        "title": "Kawasan Bebas Asap Rokok",
+        "desc": "Dilarang merokok dan membuang puntung rokok di seluruh area Taman Alun-Alun, area bermain anak, dan pelataran Masjid Agung Cianjur."
+      },
+      {
+        "id": "RUL-03",
+        "title": "Masuk Satu Pintu Melalui Gerbang Utama Jl. Suroso",
+        "desc": "Akses masuk pengunjung Taman Alun-Alun terpusat di Gerbang Utara (Jl. Suroso eks Pasar Induk). Pintu sisi Masjid Agung dikhususkan untuk akses ibadah dan jalur keluar."
+      },
+      {
+        "id": "RUL-04",
+        "title": "Disiplin Budaya K5 & Buang Sampah Terpilah",
+        "desc": "Buanglah sampah organik dan anorganik pada 8 klaster tong sampah yang tersedia (Perda No. 13 Tahun 1986). Bila tempat sampah penuh saat akhir pekan, simpan sementara sampah Anda di kantong pribadi."
+      },
+      {
+        "id": "RUL-05",
+        "title": "Dilarang Merusak Fasilitas, Kolam & Ornamen Budaya",
+        "desc": "Dilarang memanjat patung, mencoret 99 Tiang Asmaul Husna, mengambil ikan/air di Kolam Perahu Monumen Al-Qur'an, atau merusak tanaman peneduh."
+      },
+      {
+        "id": "RUL-06",
+        "title": "Ketertiban PKL & Pengawasan Patroli Satpol PP",
+        "desc": "Pedagang kaki lima hanya diperbolehkan berjualan di zona kios resmi / Bomero City Walk. Petugas Satpol PP berpatroli rutin untuk menegakkan keamanan dan ketertiban."
+      }
+    ]
+  },
+  "photo_gallery": [
+    {
+      "id": "GAL-01",
+      "title": "Monumen Al-Qur'an Emas & Kolam Perahu Masjid Agung",
+      "category": "Pilar Ngaos",
+      "caption": "Ikon utama pelataran depan Masjid Agung Cianjur yang diresmikan pada 8 Februari 2019.",
+      "photo_url": null
+    },
+    {
+      "id": "GAL-02",
+      "title": "Selasar Lorong 99 Tiang Asmaul Husna",
+      "category": "Spot Instagramable",
+      "caption": "Deretan 99 pilar putih berukir kaligrafi Asmaul Husna yang menghubungkan Masjid Agung dengan Taman Alun-Alun.",
+      "photo_url": null
+    },
+    {
+      "id": "GAL-03",
+      "title": "Tribun Koloseum & Patung Pesilat Maenpo",
+      "category": "Pilar Maenpo",
+      "caption": "Amfiteater terbuka berkapasitas 800 penonton dengan siluet pesilat Maenpo Cikalong & Sabandar di puncaknya.",
+      "photo_url": null
+    },
+    {
+      "id": "GAL-04",
+      "title": "Panggung Suling, Kursi Kecapi & Leuit Ayam Pelung",
+      "category": "Pilar Mamaos",
+      "caption": "Ornamen alat musik Sunda Cianjuran berdampingan dengan lumbung padi tradisional dan patung Ayam Pelung.",
+      "photo_url": null
+    },
+    {
+      "id": "GAL-05",
+      "title": "Hamparan Rumput Sintetis & Taman Bermain Keluarga",
+      "category": "Zona Rekreasi",
+      "caption": "Lapangan hijau ramah anak tempat warga bersantai sore sambil menikmati pemandangan kubah Masjid Agung.",
+      "photo_url": null
+    },
+    {
+      "id": "GAL-06",
+      "title": "Suasana Sore & Malam di Bomero City Walk",
+      "category": "Event & Kuliner Malam",
+      "caption": "Koridor pedestrian Jl. Pasar Bojong Meron dengan bangku taman klasik, bola batu granit, dan jajanan malam.",
+      "photo_url": null
     }
   ]
 }

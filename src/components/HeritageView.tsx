@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import data from '../data/cianjur-data.json';
 import { useApp } from '../context/AppContext';
 import { formatDistance } from '../utils/time';
+import { getVisualUrl } from '../utils/visuals';
 
 type HeritageIcon = (typeof data.heritage_icons)[number];
 type ZoneFilter = 'ALL' | 'INTERNAL' | 'EXTERNAL';
@@ -48,6 +49,7 @@ export default function HeritageView() {
   const [search, setSearch] = useState('');
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [speakingId, setSpeakingId] = useState<string | null>(null);
+  const [lightboxItem, setLightboxItem] = useState<{ title: string; sub: string; url: string } | null>(null);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
 
   useEffect(() => {
@@ -190,6 +192,12 @@ export default function HeritageView() {
           const isOpen = expandedId === icon.id;
           const isSpeaking = speakingId === icon.id;
           const zb = ZONE_BADGE[icon.zone];
+          const visualUrl = getVisualUrl({
+            id: icon.id,
+            title: icon.name,
+            subtitle: `${PILAR_DISPLAY[icon.pilar_tag] ?? icon.pilar_tag} · ${icon.year_built}`,
+            category: icon.pilar_tag,
+          });
 
           return (
             <div
@@ -197,6 +205,27 @@ export default function HeritageView() {
               style={{ animationDelay: `${Math.min(idx, 10) * 40}ms` }}
               className="animate-card-cascade bg-white rounded-2xl border border-earth-200 overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-earth-300"
             >
+              <div
+                className="relative h-36 bg-earth-900 overflow-hidden group cursor-pointer"
+                onClick={() =>
+                  setLightboxItem({
+                    title: icon.name,
+                    sub: `${PILAR_DISPLAY[icon.pilar_tag] ?? icon.pilar_tag} · Tahun ${icon.year_built}`,
+                    url: visualUrl,
+                  })
+                }
+              >
+                <img
+                  src={visualUrl}
+                  alt={icon.name}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <span className="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">
+                  Perbesar Foto
+                </span>
+              </div>
+
               <button
                 type="button"
                 onClick={() => handleCardToggle(icon.id)}
@@ -312,6 +341,33 @@ export default function HeritageView() {
           );
         })}
       </div>
+
+      {lightboxItem && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-4 animate-view-enter"
+          onClick={() => setLightboxItem(null)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-earth-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img src={lightboxItem.url} alt={lightboxItem.title} className="w-full h-auto" />
+            <div className="p-4 flex items-start justify-between gap-3">
+              <div>
+                <h4 className="font-bold text-earth-900 text-sm sm:text-base">{lightboxItem.title}</h4>
+                <p className="text-xs text-earth-600 mt-0.5">{lightboxItem.sub}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setLightboxItem(null)}
+                className="px-3 py-1.5 rounded-xl bg-earth-800 text-white text-xs font-semibold"
+              >
+                Tutup
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

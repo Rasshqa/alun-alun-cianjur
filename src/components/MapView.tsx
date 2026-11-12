@@ -15,7 +15,7 @@ import { useApp } from '../context/AppContext';
 import { haversine } from '../utils/haversine';
 import { formatDistance, formatPrice, getOpenStatus } from '../utils/time';
 
-type Category = 'all' | 'trash' | 'heritage' | 'culinary' | 'hotel' | 'gate';
+type Category = 'all' | 'trash' | 'toilet' | 'heritage' | 'culinary' | 'hotel' | 'gate';
 type ViewScope = 'alun-alun' | 'city';
 
 interface SheetData {
@@ -57,6 +57,7 @@ const PILAR_LABEL: Record<string, string> = {
 
 const COLORS: Record<Exclude<Category, 'all'>, string> = {
   trash: '#16a34a',
+  toilet: '#0284c7',
   heritage: '#d97706',
   culinary: '#ea580c',
   hotel: '#7c3aed',
@@ -65,6 +66,7 @@ const COLORS: Record<Exclude<Category, 'all'>, string> = {
 
 const LABELS: Record<Exclude<Category, 'all'>, string> = {
   trash: 'TS',
+  toilet: 'WC',
   heritage: 'SJ',
   culinary: 'KL',
   hotel: 'HT',
@@ -88,6 +90,7 @@ function makeIcon(category: Exclude<Category, 'all'>, active = false) {
 
 const defaultIcons: Record<Exclude<Category, 'all'>, L.DivIcon> = {
   trash: makeIcon('trash', false),
+  toilet: makeIcon('toilet', false),
   heritage: makeIcon('heritage', false),
   culinary: makeIcon('culinary', false),
   hotel: makeIcon('hotel', false),
@@ -96,6 +99,7 @@ const defaultIcons: Record<Exclude<Category, 'all'>, L.DivIcon> = {
 
 const activeIcons: Record<Exclude<Category, 'all'>, L.DivIcon> = {
   trash: makeIcon('trash', true),
+  toilet: makeIcon('toilet', true),
   heritage: makeIcon('heritage', true),
   culinary: makeIcon('culinary', true),
   hotel: makeIcon('hotel', true),
@@ -134,6 +138,27 @@ function buildMarkers(): MarkerItem[] {
     });
   }
 
+  for (const t of data.toilets) {
+    items.push({
+      id: t.id,
+      coords: t.coords as [number, number],
+      category: 'toilet',
+      isInternal: true,
+      searchKeywords: `${t.name} ${t.location_hint} ${t.facilities.join(' ')} toilet wc wudhu kamar mandi`.toLowerCase(),
+      sheet: {
+        id: t.id,
+        name: t.name,
+        category: 'toilet',
+        categoryLabel: 'Fasilitas Toilet & Wudhu',
+        categoryColor: COLORS.toilet,
+        subLabel: t.open_hours,
+        detail: `${t.location_hint}. Fasilitas: ${t.facilities.join(', ')}.`,
+        distance: null,
+        coords: t.coords as [number, number],
+      },
+    });
+  }
+
   for (const h of data.heritage_icons) {
     const coords = h.coords as [number, number];
     const inDenah = h.zone === 'INTERNAL' || isInsideOverlayBounds(coords);
@@ -166,12 +191,12 @@ function buildMarkers(): MarkerItem[] {
       coords: c.coords as [number, number],
       category: 'culinary',
       isInternal: false,
-      searchKeywords: `${c.name} ${c.address} ${c.signature_menu.join(' ')} kuliner makanan`.toLowerCase(),
+      searchKeywords: `${c.name} ${c.address} ${c.signature_menu.join(' ')} kuliner makanan oleh-oleh`.toLowerCase(),
       sheet: {
         id: c.id,
         name: c.name,
         category: 'culinary',
-        categoryLabel: 'Kuliner Khas',
+        categoryLabel: 'Kuliner & Oleh-Oleh',
         categoryColor: COLORS.culinary,
         subLabel: `${c.price_range} · Jam ${c.open_time}–${c.close_time}`,
         detail: `${c.address}. Menu andalan: ${c.signature_menu.join(', ')}. ${c.history_note}`,
@@ -272,13 +297,16 @@ export default function MapView() {
     );
   }, [mapFocus]);
 
-  const [filter, setFilter] = useState<Category>('all');
+  const [filter, setFilter] = useState<Category>(() => (mapFocus?.layer as Category) ?? 'all');
   const [scope, setScope] = useState<ViewScope>(() =>
-    initialMatch && !initialMatch.isInternal ? 'city' : 'alun-alun',
+    mapFocus?.routeId || (initialMatch && !initialMatch.isInternal) ? 'city' : 'alun-alun',
   );
   const [showOverlay, setShowOverlay] = useState(true);
   const [sheet, setSheet] = useState<SheetData | null>(() => initialMatch?.sheet ?? null);
   const [routeLine, setRouteLine] = useState<[number, number][] | null>(null);
+  const [activeGuideRouteId, setActiveGuideRouteId] = useState<string | null>(
+    () => mapFocus?.routeId ?? null,
+  );
   const [userPos, setUserPos] = useState<[number, number] | null>(null);
   const [gpsLoading, setGpsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -290,6 +318,11 @@ export default function MapView() {
     [],
   );
 
+  const activeGuideRoute = useMemo(
+    () => data.routes.find((r) => r.id === activeGuideRouteId) ?? null,
+    [activeGuideRouteId],
+  );
+
   useEffect(() => {
     return () => {
       if ('speechSynthesis' in window) {
@@ -299,11 +332,18 @@ export default function MapView() {
   }, []);
 
   useEffect(() => {
+    if (mapFocus?.layer) {
+      setFilter(mapFocus.layer as Category);
+    }
+    if (mapFocus?.routeId) {
+      setActiveGuideRouteId(mapFocus.routeId);
+      setScope('city');
+    }
     if (!initialMatch) return;
     setScope(initialMatch.isInternal ? 'alun-alun' : 'city');
-    setFilter('all');
+    if (!mapFocus?.layer) setFilter('all');
     setSheet(initialMatch.sheet);
-  }, [initialMatch]);
+  }, [initialMatch, mapFocus]);
 
   const scopedMarkers = useMemo(
     () => (scope === 'alun-alun' ? ALL_MARKERS.filter((m) => m.isInternal) : ALL_MARKERS),
@@ -332,9 +372,10 @@ export default function MapView() {
     if (scope === 'alun-alun') {
       return [
         { id: 'all' as Category, label: 'Semua Taman', count: scopedMarkers.length },
+        { id: 'toilet' as Category, label: 'Toilet & Wudhu', count: data.toilets.length },
         { id: 'trash' as Category, label: 'Tong Sampah', count: counts('trash') },
         { id: 'heritage' as Category, label: 'Ikon Sejarah', count: data.heritage_icons.length },
-        { id: 'culinary' as Category, label: 'Kuliner', count: data.culinary_spots.length },
+        { id: 'culinary' as Category, label: 'Kuliner & Oleh-Oleh', count: data.culinary_spots.length },
         { id: 'hotel' as Category, label: 'Hotel', count: data.hotels.length },
         { id: 'gate' as Category, label: 'Gerbang', count: counts('gate') },
       ];
@@ -342,7 +383,8 @@ export default function MapView() {
 
     return [
       { id: 'all' as Category, label: 'Semua Kota', count: ALL_MARKERS.length },
-      { id: 'culinary' as Category, label: 'Kuliner', count: counts('culinary') },
+      { id: 'toilet' as Category, label: 'Toilet & Wudhu', count: counts('toilet') },
+      { id: 'culinary' as Category, label: 'Kuliner & Oleh-Oleh', count: counts('culinary') },
       { id: 'hotel' as Category, label: 'Hotel', count: counts('hotel') },
       { id: 'heritage' as Category, label: 'Sejarah', count: counts('heritage') },
       { id: 'trash' as Category, label: 'Tong Sampah', count: counts('trash') },
@@ -355,6 +397,7 @@ export default function MapView() {
     setFilter('all');
     setShowOverlay(true);
     setSheet(null);
+    setActiveGuideRouteId(null);
     mapRef.current?.flyTo(
       data.app_config.center_coords as [number, number],
       data.app_config.default_zoom,
@@ -382,9 +425,22 @@ export default function MapView() {
       if (pts.length > 0) {
         mapRef.current.flyToBounds(L.latLngBounds(pts).pad(0.18), { duration: 0.9, maxZoom: 17 });
       }
-    } else if (nextFilter === 'trash' || nextFilter === 'gate') {
+    } else if (nextFilter === 'trash' || nextFilter === 'toilet' || nextFilter === 'gate') {
       mapRef.current.flyTo(data.app_config.center_coords as [number, number], 18, { duration: 0.8 });
     }
+  }, []);
+
+  const toggleGuideRoute = useCallback((routeId: string) => {
+    setActiveGuideRouteId((prev) => {
+      const next = prev === routeId ? null : routeId;
+      const route = data.routes.find((r) => r.id === next);
+      if (route && mapRef.current) {
+        setScope('city');
+        const bounds = L.latLngBounds(route.waypoints as [number, number][]);
+        mapRef.current.flyToBounds(bounds.pad(0.25), { duration: 0.9, maxZoom: 18 });
+      }
+      return next;
+    });
   }, []);
 
   const handleSelectSearchResult = useCallback((item: MarkerItem) => {
@@ -527,14 +583,14 @@ export default function MapView() {
         </button>
       </div>
 
-      {/* Instant Search Bar & Category Filter Pills */}
+      {/* Instant Search Bar, Category Filter Pills & Quick Route Toggles */}
       <div className="bg-white/95 backdrop-blur-sm z-[1000] border-b border-earth-200 px-3 sm:px-4 pt-2 pb-2 space-y-2 relative shrink-0">
         <div className="relative">
           <input
             type="search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Cari destinasi: Lonceng, Bumi Ageung, Geco, Tan Keng Cu, Tong Sampah..."
+            placeholder="Cari: Toilet, Stasiun, Bomero, Lonceng, Geco, Tan Keng Cu..."
             className="w-full min-w-0 bg-earth-50 border border-earth-200 rounded-xl pl-8 pr-8 py-2 text-xs sm:text-sm text-earth-900 placeholder:text-earth-400 focus:outline-none focus:ring-2 focus:ring-islam-600 transition-shadow"
           />
           <svg
@@ -586,12 +642,12 @@ export default function MapView() {
           </div>
         )}
 
-        <div className="flex gap-1.5 overflow-x-auto no-scrollbar">
+        <div className="flex gap-1.5 overflow-x-auto no-scrollbar items-center">
           {filterPills.map((f) => (
             <button
               key={f.id}
               onClick={() => handleFilterChange(f.id)}
-              className={`shrink-0 min-h-9 px-3.5 rounded-full text-xs font-semibold transition-all active:scale-95 ${
+              className={`shrink-0 min-h-8 px-3 rounded-full text-xs font-semibold transition-all active:scale-95 ${
                 filter === f.id
                   ? 'bg-earth-800 text-white shadow-xs'
                   : 'bg-earth-100 text-earth-700 hover:bg-earth-200'
@@ -600,8 +656,56 @@ export default function MapView() {
               {f.label} ({f.count})
             </button>
           ))}
+          <span className="text-earth-300 text-xs px-0.5">|</span>
+          <button
+            onClick={() => toggleGuideRoute('RTE-STASIUN')}
+            className={`shrink-0 min-h-8 px-3 rounded-full text-xs font-semibold border transition-all active:scale-95 ${
+              activeGuideRouteId === 'RTE-STASIUN'
+                ? 'bg-sky-600 text-white border-sky-600 shadow-xs'
+                : 'bg-sky-50 text-sky-800 border-sky-200 hover:bg-sky-100'
+            }`}
+          >
+            Rute Stasiun (485m)
+          </button>
+          <button
+            onClick={() => toggleGuideRoute('RTE-BOMERO')}
+            className={`shrink-0 min-h-8 px-3 rounded-full text-xs font-semibold border transition-all active:scale-95 ${
+              activeGuideRouteId === 'RTE-BOMERO'
+                ? 'bg-purple-600 text-white border-purple-600 shadow-xs'
+                : 'bg-purple-50 text-purple-800 border-purple-200 hover:bg-purple-100'
+            }`}
+          >
+            Rute Bomero (210m)
+          </button>
         </div>
       </div>
+
+      {/* Active Route Banner */}
+      {activeGuideRoute && (
+        <div className="bg-earth-900/95 text-white px-3.5 py-2 flex items-center justify-between gap-2 z-[1000] border-b border-earth-700 shrink-0">
+          <div className="min-w-0">
+            <div className="text-xs font-bold text-gold-400 truncate">
+              {activeGuideRoute.title} ({activeGuideRoute.distance_m}m · {activeGuideRoute.duration_walk})
+            </div>
+            <div className="text-[11px] text-earth-200 truncate">{activeGuideRoute.subtitle}</div>
+          </div>
+          <div className="flex items-center gap-1.5 shrink-0">
+            <button
+              onClick={() => setActiveTab('panduan')}
+              className="px-2.5 py-1 rounded-lg bg-gold-500 text-earth-900 text-[11px] font-bold"
+            >
+              Detail Langkah
+            </button>
+            <button
+              onClick={() => setActiveGuideRouteId(null)}
+              className="w-6 h-6 rounded-full bg-earth-700 text-white text-xs flex items-center justify-center"
+              aria-label="Tutup rute"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Map Container */}
       <div className="flex-1 relative z-0 min-h-[420px]">
@@ -667,6 +771,18 @@ export default function MapView() {
               pathOptions={{ color: COLORS.trash, weight: 4, dashArray: '8 6' }}
             />
           )}
+
+          {activeGuideRoute && (
+            <Polyline
+              positions={activeGuideRoute.waypoints as [number, number][]}
+              pathOptions={{
+                color: activeGuideRoute.color,
+                weight: 5,
+                dashArray: '10 6',
+                opacity: 0.95,
+              }}
+            />
+          )}
         </MapContainer>
 
         {/* Custom Zoom Controls */}
@@ -694,6 +810,10 @@ export default function MapView() {
             <span>Gerbang (GB)</span>
           </div>
           <div className="flex items-center gap-1.5">
+            <span className="w-3 h-3 rounded-full inline-block" style={{ background: COLORS.toilet }} />
+            <span>Toilet & Wudhu (WC)</span>
+          </div>
+          <div className="flex items-center gap-1.5">
             <span className="w-3 h-3 rounded-full inline-block" style={{ background: COLORS.heritage }} />
             <span>Sejarah (SJ)</span>
           </div>
@@ -705,7 +825,7 @@ export default function MapView() {
             <>
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded-full inline-block" style={{ background: COLORS.culinary }} />
-                <span>Kuliner (KL)</span>
+                <span>Kuliner & Oleh2 (KL)</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded-full inline-block" style={{ background: COLORS.hotel }} />

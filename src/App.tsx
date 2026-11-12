@@ -6,6 +6,7 @@ const MapView = lazy(() => import('./components/MapView'));
 const HeritageView = lazy(() => import('./components/HeritageView'));
 const CulinaryView = lazy(() => import('./components/CulinaryView'));
 const HotelView = lazy(() => import('./components/HotelView'));
+const GuideView = lazy(() => import('./components/GuideView'));
 const QuestView = lazy(() => import('./components/QuestView'));
 const AdminMapper = lazy(() => import('./components/AdminMapper'));
 
@@ -68,6 +69,11 @@ const tabs: { id: TabId; label: string; icon: string }[] = [
     icon: 'M3 21V7a2 2 0 0 1 2-2h6v4h6a2 2 0 0 1 2 2v10H3zm4-12v2h2V9H7zm0 4v2h2v-2H7zm6 0v2h2v-2h-2z',
   },
   {
+    id: 'panduan',
+    label: 'Panduan',
+    icon: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z',
+  },
+  {
     id: 'misi',
     label: 'Misi',
     icon: 'M5 3l3.5 2L12 3l3.5 2L19 3v13l-3.5 2L12 20l-3.5-2L5 20V3z',
@@ -82,11 +88,11 @@ function BottomNav() {
   );
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 md:bottom-4 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-[540px] bg-white/95 backdrop-blur-md border-t md:border border-earth-200/90 md:rounded-2xl md:shadow-[0_10px_35px_rgba(62,39,35,0.16)] pb-[env(safe-area-inset-bottom)] md:pb-0 z-40 overflow-hidden">
+    <nav className="fixed bottom-0 inset-x-0 md:bottom-4 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-[620px] bg-white/95 backdrop-blur-md border-t md:border border-earth-200/90 md:rounded-2xl md:shadow-[0_10px_35px_rgba(62,39,35,0.16)] pb-[env(safe-area-inset-bottom)] md:pb-0 z-40 overflow-hidden">
       <div className="relative flex w-full">
         {/* Sliding active background indicator */}
         <div
-          className="absolute inset-y-1 left-0 w-1/5 px-1 transition-transform duration-300 ease-out pointer-events-none"
+          className="absolute inset-y-1 left-0 w-1/6 px-0.5 transition-transform duration-300 ease-out pointer-events-none"
           style={{ transform: `translateX(${activeIndex * 100}%)` }}
         >
           <div className="w-full h-full rounded-xl bg-islam-50 border border-islam-200/70" />
@@ -94,7 +100,7 @@ function BottomNav() {
 
         {/* Sliding top accent bar */}
         <div
-          className="absolute top-0 left-0 w-1/5 h-0.5 bg-islam-600 transition-transform duration-300 ease-out pointer-events-none"
+          className="absolute top-0 left-0 w-1/6 h-0.5 bg-islam-600 transition-transform duration-300 ease-out pointer-events-none"
           style={{ transform: `translateX(${activeIndex * 100}%)` }}
         />
 
@@ -149,6 +155,7 @@ function TabContent() {
         {activeTab === 'sejarah' && <HeritageView />}
         {activeTab === 'kuliner' && <CulinaryView />}
         {activeTab === 'hotel' && <HotelView />}
+        {activeTab === 'panduan' && <GuideView />}
         {activeTab === 'misi' && <QuestView />}
       </main>
     </Suspense>
