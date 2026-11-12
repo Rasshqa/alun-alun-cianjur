@@ -1,0 +1,963 @@
+{
+  "app_config": {
+    "center_coords": [
+      -6.82065,
+      107.14045
+    ],
+    "default_zoom": 17,
+    "park_status": "OPEN",
+    "status_message": "Alun-Alun & Taman Alun-Alun Cianjur dibuka untuk umum (Akses masuk melalui Gerbang Utama Jalan Suroso)."
+  },
+  "gates": [
+    {
+      "id": "suroso",
+      "name": "Gerbang Utama Jalan Suroso (Sisi Utara Taman Alun-Alun)",
+      "coords": [
+        -6.81904,
+        107.14124
+      ],
+      "welcome": "Selamat datang di Gerbang Utama Jalan Suroso! Ini adalah satu-satunya akses pintu masuk utama pengunjung menuju kawasan Taman Alun-Alun dan Alun-Alun Cianjur."
+    },
+    {
+      "id": "masjid-selatan",
+      "name": "Gerbang Selatan Masjid Agung (Jalan Siti Jenab)",
+      "coords": [
+        -6.82158,
+        107.13965
+      ],
+      "welcome": "Gerbang Selatan Masjid Agung di Jalan Siti Jenab (seberang Pendopo Kabupaten). Saat ini ditutup permanen untuk akses masuk umum dan difungsikan sebagai jalur keluar/darurat."
+    },
+    {
+      "id": "masjid-utara",
+      "name": "Gerbang Utara Masjid Agung (Jalan Nyi R. Siti Bodedar)",
+      "coords": [
+        -6.82055,
+        107.13958
+      ],
+      "welcome": "Gerbang Utara Masjid Agung di Jalan Nyi R. Siti Bodedar. Saat ini ditutup permanen untuk akses masuk umum demi ketertiban kawasan ibadah."
+    }
+  ],
+  "heritage_icons": [
+    {
+      "id": "ICN-01",
+      "name": "Monumen Al-Qur'an Raksasa & Kolam Perahu",
+      "zone": "INTERNAL",
+      "pilar_tag": "NGAOS",
+      "year_built": "2019",
+      "address": "Pelataran Depan Masjid Agung, Alun-Alun Cianjur",
+      "distance_m": 24,
+      "coords": [
+        -6.82112,
+        107.13978
+      ],
+      "summary": "Sculpture Al-Qur'an emas raksasa di tengah kolam berbentuk perahu dengan air mancur dan lampu hias tepat di halaman depan Masjid Agung Cianjur. Diresmikan Presiden Joko Widodo pada 8 Februari 2019 sebagai simbol utama pilar budaya Ngaos di Kota Santri.",
+      "quiz_id": null
+    },
+    {
+      "id": "ICN-02",
+      "name": "Lorong 99 Tiang Asmaul Husna",
+      "zone": "INTERNAL",
+      "pilar_tag": "NGAOS",
+      "year_built": "2018-2019",
+      "address": "Koridor Tengah Alun-Alun Cianjur",
+      "distance_m": 33,
+      "coords": [
+        -6.82085,
+        107.14015
+      ],
+      "summary": "Selasar pejalan kaki ikonik dengan 99 pilar putih bergaya klasik yang masing-masing berukir kaligrafi 99 nama Allah (Asmaul Husna), menghubungkan pelataran Masjid Agung dengan zona Taman Alun-Alun Cianjur.",
+      "quiz_id": null
+    },
+    {
+      "id": "ICN-03",
+      "name": "Panggung Suling & Kursi Kecapi (Zona Mamaos)",
+      "zone": "INTERNAL",
+      "pilar_tag": "MAMAOS",
+      "year_built": "2019",
+      "address": "Zona Tengah Taman Alun-Alun Cianjur",
+      "distance_m": 114,
+      "coords": [
+        -6.82058,
+        107.14088
+      ],
+      "summary": "Instalasi panggung dengan replika Suling Sunda dan tempat duduk berbentuk alat musik petik Kecapi di Taman Alun-Alun. Menghormati seni tembang Sunda Cianjuran (Mamaos) yang lahir pada masa Bupati R.A.A. Kusumaningrat (Dalem Pancaniti, 1834-1862).",
+      "quiz_id": null
+    },
+    {
+      "id": "ICN-04",
+      "name": "Lumbung Padi (Leuit) & Patung Ayam Pelung",
+      "zone": "INTERNAL",
+      "pilar_tag": "MAMAOS",
+      "year_built": "2019",
+      "address": "Sayap Timur Taman Alun-Alun Cianjur",
+      "distance_m": 148,
+      "coords": [
+        -6.82072,
+        107.14128
+      ],
+      "summary": "Replika Leuit (lumbung padi tradisional Sunda) berlantai batu alam sebagai simbol kejayaan Beras Pandanwangi Cianjur, bersanding dengan patung Ayam Pelung, ras ayam kokok panjang asli Cianjur yang dirintis H. Djarkasih (Mama Acih) di Bunikasih sejak 1850.",
+      "quiz_id": null
+    },
+    {
+      "id": "ICN-05",
+      "name": "Tribun Koloseum & Patung Pesilat Maenpo",
+      "zone": "INTERNAL",
+      "pilar_tag": "MAENPO",
+      "year_built": "2019",
+      "address": "Koridor Tengah-Utara Taman Alun-Alun Cianjur (Eks Pasar Induk)",
+      "distance_m": 166,
+      "coords": [
+        -6.81995,
+        107.14095
+      ],
+      "summary": "Bangunan amfiteater terbuka bergaya koloseum di atas lahan eks Pasar Induk Cianjur dengan patung pesilat di puncaknya. Melambangkan pilar budaya Maenpo, seni bela diri asli Cianjur aliran Cikalong (R. Djadjaperbata / H. Ibrahim, 1816-1906) dan aliran Sabandar (Mama Sabandar / Mohammad Kosim, 1800-1880).",
+      "quiz_id": null
+    },
+    {
+      "id": "ICN-06",
+      "name": "Menara Pandang (Viewing Tower)",
+      "zone": "INTERNAL",
+      "pilar_tag": "HERITAGE",
+      "year_built": "2019",
+      "address": "Koridor Utara Taman Alun-Alun Cianjur (Dekat Jl. Suroso)",
+      "distance_m": 227,
+      "coords": [
+        -6.81942,
+        107.14115
+      ],
+      "summary": "Menara observasi di koridor utara Taman Alun-Alun dekat Gerbang Jalan Suroso untuk memandang lanskap ruang terbuka hijau seluas 4 hektar lebih, kubah Masjid Agung, dan siluet Gunung Gede Pangrango (akses tangga atas saat ini dibatasi demi keselamatan).",
+      "quiz_id": null
+    },
+    {
+      "id": "ICN-07",
+      "name": "Hamparan Rumput Sintetis & Taman Bermain Anak",
+      "zone": "INTERNAL",
+      "pilar_tag": "HERITAGE",
+      "year_built": "2018-2019",
+      "address": "Zona Selatan Alun-Alun Cianjur",
+      "distance_m": 25,
+      "coords": [
+        -6.82132,
+        107.14008
+      ],
+      "summary": "Lapangan utama berlapis rumput sintetis hijau yang dilengkapi area bermain anak ramah keluarga, jalur terapi refleksi batu kerikil, serta pepohonan rindang. Pengunjung wajib melepas alas kaki saat menginjak zona rumput sintetis.",
+      "quiz_id": null
+    },
+    {
+      "id": "ICN-08",
+      "name": "Masjid Agung Cianjur",
+      "zone": "INTERNAL",
+      "pilar_tag": "NGAOS",
+      "year_built": "1810",
+      "address": "Jl. Siti Jenab / Jl. Nyi R. Siti Bodedar, Kel. Pamoyanan",
+      "distance_m": 76,
+      "coords": [
+        -6.82098,
+        107.13932
+      ],
+      "summary": "Masjid bersejarah kebanggaan masyarakat Cianjur yang berdiri sejak tahun 1810 di atas tanah wakaf Nyi Raden Siti Bodedar, putri Bupati Cianjur ke-4 Kangjeng Dalem Sabiruddin (R.A. Wiratanudatar IV). Sempat hancur akibat letusan Gunung Gede tahun 1840 dan mengalami 7 kali renovasi hingga menjadi masjid raya termegah seluas 2.500 m2.",
+      "quiz_id": "MSN-01"
+    },
+    {
+      "id": "ICN-09",
+      "name": "Pendopo Kabupaten Cianjur & Situs Badak Putih",
+      "zone": "EXTERNAL",
+      "pilar_tag": "HERITAGE",
+      "year_built": "1780",
+      "address": "Jl. Siti Jenab No. 31, Kel. Pamoyanan, Kec. Cianjur",
+      "distance_m": 107,
+      "coords": [
+        -6.82197,
+        107.13956
+      ],
+      "summary": "Pusat pemerintahan Kabupaten Cianjur yang dibangun sekitar tahun 1780 pasca gempa bumi besar 1779, berakar dari sejarah Bupati pertama Raden Aria Wiratanudatar I (Raden Jayasasana). Berarsitektur Sunda-Eropa menghadap utara ke arah Alun-Alun, dilengkapi Taman Pendopo berelief Ayam Pelung serta mata air keramat Situs Pangguyangan Badak Putih (Banyu Cikahuripan).",
+      "quiz_id": null
+    },
+    {
+      "id": "ICN-10",
+      "name": "Lonceng Batavia 1774 (Linggih)",
+      "zone": "EXTERNAL",
+      "pilar_tag": "HERITAGE",
+      "year_built": "1774",
+      "address": "Gerbang Utara Pendopo Kabupaten, Jl. Siti Jenab No. 31",
+      "distance_m": 80,
+      "coords": [
+        -6.82172,
+        107.13962
+      ],
+      "summary": "Lonceng perunggu kolonial bertuliskan 'BATAVIA ANNO 1774' yang tergantung pada bangunan menara kecil bernama Linggih di gerbang utara kompleks Pendopo Cianjur. Dibuat pada masa Gubernur Jenderal VOC Petrus Albertus van der Parra (1761-1775) sebagai penanda waktu dan tanda bahaya kota.",
+      "quiz_id": "MSN-02"
+    },
+    {
+      "id": "ICN-11",
+      "name": "Kantor Pos Cianjur (1880)",
+      "zone": "EXTERNAL",
+      "pilar_tag": "HERITAGE",
+      "year_built": "1880",
+      "address": "Jl. Siti Jenab No. 19, Kel. Pamoyanan, Kec. Cianjur",
+      "distance_m": 118,
+      "coords": [
+        -6.821658,
+        107.13908
+      ],
+      "summary": "Bangunan cagar budaya peninggalan kolonial Hindia Belanda di sudut barat daya Alun-Alun Cianjur yang berdiri sejak tahun 1880 dan masih berfungsi aktif melayani masyarakat hingga saat ini.",
+      "quiz_id": null
+    },
+    {
+      "id": "ICN-12",
+      "name": "Museum Bumi Ageung Cikidang (1886)",
+      "zone": "EXTERNAL",
+      "pilar_tag": "HERITAGE",
+      "year_built": "1886",
+      "address": "Jl. Moch. Ali No. 64, Kel. Solokpandan, Kec. Cianjur",
+      "distance_m": 378,
+      "coords": [
+        -6.822441,
+        107.143152
+      ],
+      "summary": "Rumah bangsawan bergaya Sunda-Kolonial milik R.A.A. Prawiradiredja II (Bupati Cianjur ke-10) yang dibangun tahun 1886 di atas lahan 1.880 m2. Menjadi saksi sejarah perjuangan kemerdekaan tempat tokoh nasional Gatot Mangkoepradja menginisiasi pembentukan tentara sukarela PETA (Pembela Tanah Air) pada 1943-1945 serta pernah disinggahi Presiden Soekarno.",
+      "quiz_id": "MSN-05"
+    },
+    {
+      "id": "ICN-13",
+      "name": "Tugu Ngaos, Mamaos, Maenpo & Tugu Tauco",
+      "zone": "EXTERNAL",
+      "pilar_tag": "HERITAGE",
+      "year_built": "Ikon Kota",
+      "address": "Simpang Jl. HOS Cokroaminoto - Jl. Dr. Muwardi & Simpang Pasir Hayam",
+      "distance_m": 1179,
+      "coords": [
+        -6.811921,
+        107.145326
+      ],
+      "summary": "Monumen penanda jati diri kultural Cianjur berupa Tugu Tauco di persimpangan Jl. HOS Cokroaminoto - Jl. Dr. Muwardi serta Tugu Tiga Pilar Budaya (visualisasi Al-Qur'an untuk Ngaos, Kecapi Suling untuk Mamaos, dan jurus silat untuk Maenpo).",
+      "quiz_id": null
+    },
+    {
+      "id": "ICN-14",
+      "name": "Vihara Bhumi Pharsjia / Hok Tek Bio (1880)",
+      "zone": "EXTERNAL",
+      "pilar_tag": "HERITAGE",
+      "year_built": "1880",
+      "address": "Jl. Mangunsarkoro No. 41, Kel. Solokpandan, Kec. Cianjur",
+      "distance_m": 182,
+      "coords": [
+        -6.821477,
+        107.141603
+      ],
+      "summary": "Klenteng dan vihara bersejarah yang berdiri sejak tahun 1880 di koridor niaga tua Jalan Mangunsarkoro tepat di sebelah tenggara Taman Alun-Alun. Menjadi simbol akulturasi budaya dan toleransi masyarakat Cianjur lintas generasi.",
+      "quiz_id": null
+    },
+    {
+      "id": "ICN-15",
+      "name": "Stasiun Kereta Api Cianjur (1883)",
+      "zone": "EXTERNAL",
+      "pilar_tag": "HERITAGE",
+      "year_built": "1883",
+      "address": "Jl. Yulius Usman, Kel. Sayang, Kec. Cianjur",
+      "distance_m": 485,
+      "coords": [
+        -6.824594,
+        107.142642
+      ],
+      "summary": "Stasiun kereta api kolonial berkode CJ pada ketinggian +439 mdpl yang dibangun oleh Staatsspoorwegen (SS) Hindia Belanda dan diresmikan pada 10 Mei 1883. Kini melayani perjalanan Kereta Api Siliwangi relasi Sukabumi-Cianjur-Cipatat.",
+      "quiz_id": null
+    },
+    {
+      "id": "ICN-16",
+      "name": "Kawasan Bojong Meron (Bomero City Walk) & Gedung Wisma Karya",
+      "zone": "EXTERNAL",
+      "pilar_tag": "HERITAGE",
+      "year_built": "1950-an - 2022",
+      "address": "Jl. Pasar Bojong Meron / Jl. Mangunsarkoro & Jl. Moch. Ali, Solokpandan",
+      "distance_m": 213,
+      "coords": [
+        -6.821327,
+        107.141917
+      ],
+      "summary": "Pusat keramaian kota dan koridor pedestrian di sisi timur Taman Alun-Alun yang ditata menjadi Bomero City Walk dengan bangku taman, lampu klasik, dan bola batu granit. Berdekatan dengan Gedung Wisma Karya di Jl. Moch. Ali (dibangun organisasi Tjung Hwa Tjung Hwee tahun 1950-an), tempat penyanyi Alfian tampil pada 1962 hingga melahirkan lagu legendaris 'Semalam di Cianjur'.",
+      "quiz_id": null
+    }
+  ],
+  "culinary_spots": [
+    {
+      "id": "CUL-01",
+      "name": "Bubur Ayam Sampurna (Bojongmeron)",
+      "address": "Jl. H. Agus Saleh No. 48, Bojongmeron, Kel. Solokpandan",
+      "distance_m": 259,
+      "coords": [
+        -6.821366,
+        107.142329
+      ],
+      "price_range": "Rp8.000 - Rp29.500",
+      "min_price": 8000,
+      "open_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "open_time": "06:00",
+      "close_time": "21:30",
+      "signature_menu": [
+        "Bubur Ayam Spesial Ati Ampela",
+        "Pepes Bawang Usus",
+        "Karoket (Rp3.000)",
+        "Telur Kampung Mentah",
+        "Sop Duren"
+      ],
+      "history_note": "Melegenda sejak 1975 di Bojongmeron, dimasak dari beras Pandanwangi Cianjur menjadi bubur kental gurih tanpa kuah kuning dengan pelengkap pepes bawang usus dan karoket."
+    },
+    {
+      "id": "CUL-02",
+      "name": "Geco Nusasari Pak Iding",
+      "address": "Jl. Siti Jenab No. 24, Kel. Pamoyanan (Dekat Alun-Alun / Seberang Kantor Pos)",
+      "distance_m": 144,
+      "coords": [
+        -6.8212,
+        107.138698
+      ],
+      "price_range": "Mulai Rp10.000",
+      "min_price": 10000,
+      "open_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "open_time": "08:30",
+      "close_time": "16:00",
+      "signature_menu": [
+        "Geco (Tauge & Tauco) Ketupat",
+        "Mie Aci Kuah Tauco",
+        "Tahu & Kentang Bumbu Tauco"
+      ],
+      "history_note": "Geco adalah singkatan dari Tauge dan Tauco, kuliner otentik Cianjur sejak era 1950-an bercita rasa gurih, manis, dan asam cuka aren segar yang paling dekat dari sisi barat daya Alun-Alun."
+    },
+    {
+      "id": "CUL-03",
+      "name": "Sate Maranggi Warujajar Ma' Nunung",
+      "address": "Jl. K.H. Hasyim Asy'ari No. 13, Warujajar, Kel. Solokpandan",
+      "distance_m": 493,
+      "coords": [
+        -6.81975,
+        107.14425
+      ],
+      "price_range": "Mulai Rp3.000 / tusuk",
+      "min_price": 15000,
+      "open_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "open_time": "06:30",
+      "close_time": "22:30",
+      "signature_menu": [
+        "Sate Maranggi Full Daging Sapi",
+        "Sate Maranggi Campur Lemak",
+        "Nasi Uduk Hangat",
+        "Ketan Bakar Sambal Oncom"
+      ],
+      "history_note": "Terhubung langsung dari koridor timur Jl. Suroso, warung legendaris ini menjual hingga 3.000 tusuk sate sapi berbumbu rempah manis-gurih setiap hari bersama nasi uduk."
+    },
+    {
+      "id": "CUL-04",
+      "name": "Toko Roti Tan Keng Cu (1926)",
+      "address": "Jl. HOS Cokroaminoto No. 95, Kel. Muka, Kec. Cianjur",
+      "distance_m": 740,
+      "coords": [
+        -6.815849,
+        107.144096
+      ],
+      "price_range": "Mulai Rp10.000",
+      "min_price": 10000,
+      "open_days": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "open_time": "09:30",
+      "close_time": "20:30",
+      "signature_menu": [
+        "Roti Manis Klasik",
+        "Roti Tawar Kuno Tungku Kayu",
+        "Roti Susu Dingin",
+        "Roti Gambang"
+      ],
+      "history_note": "Berdiri sejak 1926 dan dahulu menjadi pemasok roti bagi tentara kolonial Belanda se-Jawa Barat. Dipanggang menggunakan tungku bata berbahan bakar kayu karet (Tutup setiap hari Senin)."
+    },
+    {
+      "id": "CUL-05",
+      "name": "Pusat Oleh-Oleh Tauco Cap Meong (Ny. Tasma) & Kedai Geco",
+      "address": "Jl. HOS Cokroaminoto No. 160, Kel. Solokpandan, Kec. Cianjur",
+      "distance_m": 406,
+      "coords": [
+        -6.818657,
+        107.142727
+      ],
+      "price_range": "Rp15.400 - Rp50.000 (Tauco Botol Rp22.000)",
+      "min_price": 15400,
+      "open_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "open_time": "07:30",
+      "close_time": "20:00",
+      "signature_menu": [
+        "Tauco Botol Cap Meong 330ml (Rp22.000)",
+        "Geco Banjur (Rp25.000)",
+        "Bala-bala Bumbu Kacang (Rp19.000)",
+        "Minuman Sari Pala & Sari Markisa (Rp17.600)"
+      ],
+      "history_note": "Berdiri sejak 1880 oleh pasangan Tan Kei Hian (Babah Tasma) dan Tjoa Kim Nio (Ny. Tasma), kini dikelola generasi ke-5. Nama Cap Meong (Macan) lahir setelah ditemukan tapak kaki macan di dapur pengolahan kedelai."
+    },
+    {
+      "id": "CUL-06",
+      "name": "Dwigie Tauco Cookies",
+      "address": "Jl. Mangunsarkoro Gg. Melati No. 1, Kel. Solokpandan / Pamoyanan",
+      "distance_m": 193,
+      "coords": [
+        -6.82115,
+        107.14175
+      ],
+      "price_range": "Mulai Rp20.000",
+      "min_price": 20000,
+      "open_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "open_time": "08:00",
+      "close_time": "20:00",
+      "signature_menu": [
+        "Kue Kering Tauco Manis-Gurih",
+        "Cookies Cokelat & Keju Tauco Khas Cianjur"
+      ],
+      "history_note": "Inovasi oleh-oleh modern yang mengolah tauco legendaris Cianjur menjadi kue kering renyah bercita rasa manis-gurih unik di koridor Jalan Mangunsarkoro."
+    },
+    {
+      "id": "CUL-07",
+      "name": "Rogan Soup (Roti Degan)",
+      "address": "Jl. Selamet No. 27, Kel. Bojongherang, Kec. Cianjur",
+      "distance_m": 810,
+      "coords": [
+        -6.814175,
+        107.142229
+      ],
+      "price_range": "Mulai Rp12.000",
+      "min_price": 12000,
+      "open_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "open_time": "08:00",
+      "close_time": "21:00",
+      "signature_menu": [
+        "Rogan (Sup Roti, Degan/Kelapa Muda, Kacang Hijau, Kolang-Kaling & Susu Daun Pisang)"
+      ],
+      "history_note": "Kudapan hangat manis khas Cianjur berbungkus daun pisang beraroma pandan yang sangat cocok dinikmati sore atau malam hari di kawasan Jalan Selamet."
+    },
+    {
+      "id": "CUL-08",
+      "name": "Laksa Kang Aam",
+      "address": "Jl. Siliwangi No. 47A, Kel. Sawah Gede, Kec. Cianjur",
+      "distance_m": 873,
+      "coords": [
+        -6.82785,
+        107.13595
+      ],
+      "price_range": "Mulai Rp12.000",
+      "min_price": 12000,
+      "open_days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "open_time": "09:00",
+      "close_time": "14:00",
+      "signature_menu": [
+        "Laksa Cianjur Kuah Kuning Santan",
+        "Bihun, Tauge, Kemangi, Oncom & Telur Rebus"
+      ],
+      "history_note": "Sajian laksa khas Sunda Cianjur dengan kuah santan kuning kaya rempah serta aroma kemangi dan oncom merah yang kuat untuk makan siang."
+    },
+    {
+      "id": "CUL-09",
+      "name": "Bubur Ayam Mang Ade Suge",
+      "address": "Jl. Taifur Yusuf, Kel. Pamoyanan, Kec. Cianjur",
+      "distance_m": 306,
+      "coords": [
+        -6.818483,
+        107.139182
+      ],
+      "price_range": "Mulai Rp6.000",
+      "min_price": 6000,
+      "open_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "open_time": "06:00",
+      "close_time": "22:00",
+      "signature_menu": [
+        "Bubur Ayam Cianjur Ekonomis",
+        "Sate Usus & Ati Ampela"
+      ],
+      "history_note": "Salah satu kuliner bubur ayam khas Cianjur paling terjangkau yang populer di Kelurahan Pamoyanan dekat pusat kota."
+    },
+    {
+      "id": "CUL-10",
+      "name": "Bubur Ayam Lestari (24 Jam)",
+      "address": "Jl. Dr. Muwardi No. 133, Kel. Muka, Kec. Cianjur",
+      "distance_m": 1172,
+      "coords": [
+        -6.81205,
+        107.14542
+      ],
+      "price_range": "Rp6.500 - Rp9.000",
+      "min_price": 6500,
+      "open_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "open_time": "00:00",
+      "close_time": "23:59",
+      "signature_menu": [
+        "Bubur Ayam 24 Jam",
+        "Topping Risoles, Pais Usus & Kerupuk"
+      ],
+      "history_note": "Pilihan utama kuliner malam dan dini hari yang buka 24 jam penuh bagi wisatawan yang tiba di Cianjur di luar jam makan normal."
+    }
+  ],
+  "hotels": [
+    {
+      "id": "HTL-01",
+      "name": "Alamii Kaoem Guest House",
+      "address": "Jl. Masjid Agung No. 121 (Kawasan Kaum), Kel. Pamoyanan, Kec. Cianjur",
+      "distance_m": 311,
+      "coords": [
+        -6.819923,
+        107.137451
+      ],
+      "rating": 8.6,
+      "review_count": 142,
+      "price_start_idr": 183707,
+      "facilities": [
+        "Jalan Kaki ke Alun-Alun",
+        "WiFi",
+        "AC",
+        "Fasilitas Bisnis"
+      ]
+    },
+    {
+      "id": "HTL-02",
+      "name": "Shine BnB Cianjur",
+      "address": "Jl. Selamet No. 60, Kel. Bojongherang, Kec. Cianjur",
+      "distance_m": 487,
+      "coords": [
+        -6.81692,
+        107.141281
+      ],
+      "rating": 8.4,
+      "review_count": 2200,
+      "price_start_idr": 242000,
+      "facilities": [
+        "Kafe & Restoran",
+        "WiFi Gratis",
+        "Parkir Mobil",
+        "Jalan Kaki ke Alun-Alun"
+      ]
+    },
+    {
+      "id": "HTL-03",
+      "name": "Cordela Suites Cianjur",
+      "address": "Jl. Yulius Usman No. 28, Kel. Sayang, Kec. Cianjur (Dekat Stasiun Cianjur)",
+      "distance_m": 452,
+      "coords": [
+        -6.824503,
+        107.142254
+      ],
+      "rating": 9.3,
+      "review_count": 320,
+      "price_start_idr": 495000,
+      "facilities": [
+        "Kolam Renang Outdoor",
+        "Restoran Mr. Ebood",
+        "Dekat Stasiun (59m)",
+        "Lift",
+        "Resepsionis 24 Jam"
+      ]
+    },
+    {
+      "id": "HTL-04",
+      "name": "OYO 94802 Hotel Prima",
+      "address": "Jl. Prof. Moch. Yamin No. 77B, Kel. Sayang, Kec. Cianjur",
+      "distance_m": 697,
+      "coords": [
+        -6.824184,
+        107.145501
+      ],
+      "rating": 8.1,
+      "review_count": 48,
+      "price_start_idr": 108000,
+      "facilities": [
+        "Ultra-Budget",
+        "TV",
+        "Resepsionis",
+        "Opsi Suite Keluarga"
+      ]
+    },
+    {
+      "id": "HTL-05",
+      "name": "Bydiel Hotel Cianjur",
+      "address": "Jl. Ir. H. Juanda No. 70A, Panembong, Kel. Mekarsari, Kec. Cianjur",
+      "distance_m": 1711,
+      "coords": [
+        -6.811933,
+        107.127556
+      ],
+      "rating": 8.0,
+      "review_count": 562,
+      "price_start_idr": 153000,
+      "facilities": [
+        "Restoran",
+        "Layanan Kamar",
+        "Dapur & Kulkas (Tipe Tertentu)"
+      ]
+    },
+    {
+      "id": "HTL-06",
+      "name": "Mulyadi Suites Cianjur",
+      "address": "Jl. Barisan Banteng No. 39, Kel. Solokpandan, Kec. Cianjur",
+      "distance_m": 909,
+      "coords": [
+        -6.814803,
+        107.145232
+      ],
+      "rating": 9.0,
+      "review_count": 93,
+      "price_start_idr": 393280,
+      "facilities": [
+        "Premium Suites",
+        "Kebersihan Tinggi",
+        "AC",
+        "WiFi"
+      ]
+    },
+    {
+      "id": "HTL-07",
+      "name": "Green Costel Hotel",
+      "address": "Jl. Dr. Muwardi Bypass No. 124, Kel. Bojongherang, Kec. Cianjur",
+      "distance_m": 940,
+      "coords": [
+        -6.812661,
+        107.139777
+      ],
+      "rating": 8.4,
+      "review_count": 320,
+      "price_start_idr": 274000,
+      "facilities": [
+        "Parkir Luas Bypass",
+        "Restoran",
+        "WiFi Gratis",
+        "AC"
+      ]
+    },
+    {
+      "id": "HTL-08",
+      "name": "Super OYO 1898 Louise Place",
+      "address": "Jl. Siliwangi No. 69, Kel. Sawah Gede, Kec. Cianjur",
+      "distance_m": 1131,
+      "coords": [
+        -6.8301,
+        107.1352
+      ],
+      "rating": 8.0,
+      "review_count": 242,
+      "price_start_idr": 165000,
+      "facilities": [
+        "Check-out Ekspres",
+        "Parkir Mobil",
+        "Dekat Sentra Kuliner"
+      ]
+    },
+    {
+      "id": "HTL-09",
+      "name": "Hotel Gino Feruci Cianjur (Bintang 4)",
+      "address": "Jl. K.H. Abdullah Bin Nuh No. 46, Kel. Pamoyanan, Kec. Cianjur",
+      "distance_m": 1267,
+      "coords": [
+        -6.8198,
+        107.1286
+      ],
+      "rating": 9.1,
+      "review_count": 1390,
+      "price_start_idr": 493000,
+      "facilities": [
+        "Hotel Bintang 4",
+        "Kolam Renang Dewasa & Anak",
+        "Gym & Spa",
+        "Ballroom",
+        "Restoran"
+      ]
+    },
+    {
+      "id": "HTL-10",
+      "name": "TW Penginapan Syariah (TW 2)",
+      "address": "Jl. Gunung Gede No. 22, Kel. Sawah Gede, Kec. Cianjur",
+      "distance_m": 1112,
+      "coords": [
+        -6.829219,
+        107.134111
+      ],
+      "rating": 7.8,
+      "review_count": 104,
+      "price_start_idr": 128000,
+      "facilities": [
+        "Syariah",
+        "WiFi Gratis",
+        "Parkir Gratis",
+        "Resepsionis 24 Jam"
+      ]
+    },
+    {
+      "id": "HTL-11",
+      "name": "TW Hotel & Humbly Hotel",
+      "address": "Jl. K.H. Abdullah Bin Nuh No. 8, Rancagoong, Kec. Cilaku, Cianjur",
+      "distance_m": 1793,
+      "coords": [
+        -6.8325,
+        107.1285
+      ],
+      "rating": 8.6,
+      "review_count": 115,
+      "price_start_idr": 190000,
+      "facilities": [
+        "Restoran",
+        "Sewa Mobil",
+        "Layanan Pijat",
+        "Parkir Luas"
+      ]
+    },
+    {
+      "id": "HTL-12",
+      "name": "Miracle Hotel Cianjur",
+      "address": "Jl. Perintis Kemerdekaan, Desa Sirnagalih, Kec. Cilaku, Cianjur",
+      "distance_m": 3146,
+      "coords": [
+        -6.848955,
+        107.13494
+      ],
+      "rating": 8.8,
+      "review_count": 53,
+      "price_start_idr": 298041,
+      "facilities": [
+        "Kolam Renang",
+        "Ramah Disabilitas",
+        "Fasilitas Bisnis"
+      ]
+    }
+  ],
+  "trash_bins": [
+    {
+      "id": "BIN-SRS-01",
+      "cluster_name": "Klaster Gerbang Utama Jalan Suroso",
+      "coords": [
+        -6.81908,
+        107.14122
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Di sisi dalam Gerbang Utama Jalan Suroso sebelah kanan jalur masuk utara Taman Alun-Alun"
+    },
+    {
+      "id": "BIN-MNP-01",
+      "cluster_name": "Klaster Menara Pandang (Koridor Utara Taman)",
+      "coords": [
+        -6.81948,
+        107.14118
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Di tepi jalur pedestrian koridor utara dekat Menara Pandang Taman Alun-Alun Cianjur"
+    },
+    {
+      "id": "BIN-KOL-01",
+      "cluster_name": "Klaster Tribun Koloseum Maenpo",
+      "coords": [
+        -6.81998,
+        107.14088
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Di pintu masuk amfiteater Tribun Koloseum & Patung Pesilat Maenpo"
+    },
+    {
+      "id": "BIN-SLG-01",
+      "cluster_name": "Klaster Zona Mamaos (Panggung Suling & Leuit)",
+      "coords": [
+        -6.82062,
+        107.14105
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Di antara Panggung Suling Kecapi dan Lumbung Padi (Leuit) sayap timur Taman Alun-Alun"
+    },
+    {
+      "id": "BIN-ASH-01",
+      "cluster_name": "Klaster Lorong Asmaul Husna (Ujung Utara)",
+      "coords": [
+        -6.82078,
+        107.14012
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Di ujung utara selasar Lorong 99 Tiang Asmaul Husna dekat penghubung Taman Alun-Alun"
+    },
+    {
+      "id": "BIN-ASH-02",
+      "cluster_name": "Klaster Lorong Asmaul Husna (Ujung Selatan)",
+      "coords": [
+        -6.82102,
+        107.14018
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Di ujung selatan selasar Lorong 99 Tiang Asmaul Husna menuju lapangan rumput sintetis"
+    },
+    {
+      "id": "BIN-QRN-01",
+      "cluster_name": "Klaster Monumen Al-Qur'an & Pelataran Masjid",
+      "coords": [
+        -6.82112,
+        107.13972
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Di tepi barat Kolam Perahu Monumen Al-Qur'an menghadap halaman Masjid Agung Cianjur"
+    },
+    {
+      "id": "BIN-STJ-01",
+      "cluster_name": "Klaster Lapangan Selatan & Gerbang Siti Jenab",
+      "coords": [
+        -6.82152,
+        107.13985
+      ],
+      "bin_type": "ORGANIK_ANORGANIK_B3",
+      "landmark_hint": "Di dekat Gerbang Selatan Masjid Agung (Jl. Siti Jenab) dan batas selatan lapangan rumput sintetis"
+    }
+  ],
+  "missions": [
+    {
+      "id": "MSN-01",
+      "title": "Jejak Santri: Rahasia Wakaf 1810",
+      "pilar": "Ngaos",
+      "xp_reward": 100,
+      "badge_name": "Penjaga Pilar Ngaos",
+      "verification_type": "QUIZ",
+      "question": "Siapakah nama putri Bupati Cianjur ke-4 (Kangjeng Dalem Sabiruddin) yang mewakafkan tanah Masjid Agung Cianjur pada tahun 1810?",
+      "answer_key": [
+        "siti bodedar",
+        "nyi raden siti bodedar"
+      ],
+      "target_coords": [
+        -6.82098,
+        107.13932
+      ]
+    },
+    {
+      "id": "MSN-02",
+      "title": "Harmoni Nada & Lonceng Kolonial",
+      "pilar": "Mamaos",
+      "xp_reward": 150,
+      "badge_name": "Maestro Mamaos & Sejarah",
+      "verification_type": "QUIZ",
+      "question": "Seberangi Jalan Siti Jenab menuju gerbang utara Pendopo Kabupaten. Berapakah 4 digit angka tahun pembuatan yang terukir pada Lonceng Batavia di sana?",
+      "answer_key": [
+        "1774"
+      ],
+      "target_coords": [
+        -6.82172,
+        107.13962
+      ]
+    },
+    {
+      "id": "MSN-03",
+      "title": "Ksatria K5: Operasi Bersih Alun-Alun",
+      "pilar": "Maenpo & Budaya K5",
+      "xp_reward": 200,
+      "badge_name": "Pahlawan Kebersihan K5",
+      "verification_type": "GPS_TRASH_CHECKIN",
+      "question": "Gunakan fitur Peta untuk menuju salah satu titik Tong Sampah di Alun-Alun atau Taman Alun-Alun, buang sampahmu pada tempatnya untuk menjaga Budaya K5, lalu klik tombol Verifikasi Lokasi di bawah ini!",
+      "answer_key": [],
+      "target_coords": null
+    },
+    {
+      "id": "MSN-04",
+      "title": "Legenda Kota Tauco 1880",
+      "pilar": "Kuliner Warisan",
+      "xp_reward": 100,
+      "badge_name": "Duta Kuliner Pandanwangi",
+      "verification_type": "QUIZ",
+      "question": "Berdasarkan sejarah kuliner Cianjur tahun 1880, tapak kaki hewan apakah yang ditemukan di dapur Nyonya Tasma sehingga melahirkan merek Tauco tertua di Cianjur?",
+      "answer_key": [
+        "meong",
+        "macan",
+        "harimau"
+      ],
+      "target_coords": [
+        -6.818657,
+        107.142727
+      ]
+    },
+    {
+      "id": "MSN-05",
+      "title": "Jejak Pejuang Kemerdekaan di Cikidang",
+      "pilar": "Sejarah Perjuangan",
+      "xp_reward": 150,
+      "badge_name": "Sejarawan Tatar Cianjur",
+      "verification_type": "QUIZ",
+      "question": "Di rumah cagar budaya Bumi Ageung Cikidang (1886), organisasi militer bela tanah air apakah yang dibentuk oleh Gatot Mangkoepradja pada tahun 1943-1945?",
+      "answer_key": [
+        "peta",
+        "pembela tanah air"
+      ],
+      "target_coords": [
+        -6.822441,
+        107.143152
+      ]
+    }
+  ]
+}

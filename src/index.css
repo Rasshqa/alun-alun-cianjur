@@ -1,0 +1,31 @@
+@import 'tailwindcss';
+@import 'leaflet/dist/leaflet.css';
+
+@theme {
+  --color-earth-900: #3E2723;
+  --color-earth-800: #4E342E;
+  --color-earth-700: #5D4037;
+  --color-earth-600: #6D4C41;
+  --color-earth-500: #795548;
+  --color-earth-400: #8D6E63;
+  --color-earth-300: #A1887F;
+  --color-earth-200: #BCAAA4;
+  --color-earth-100: #D7CCC8;
+  --color-earth-50: #EFEBE9;
+  --color-islam-700: #1B5E20;
+  --color-islam-600: #2E7D32;
+  --color-islam-500: #388E3C;
+  --color-islam-400: #4CAF50;
+  --color-islam-300: #81C784;
+  --color-islam-100: #C8E6C9;
+  --color-islam-50: #E8F5E9;
+  --color-gold-500: #C8A951;
+  --color-gold-400: #D4B95E;
+  --color-gold-300: #E0CA7A;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-earth-50);
+  color: var(--color-earth-900);
+}
