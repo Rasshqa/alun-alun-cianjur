@@ -239,9 +239,15 @@ function MapController({
 
   useEffect(() => {
     mapRef.current = map;
+    const t1 = setTimeout(() => map.invalidateSize(), 50);
+    const t2 = setTimeout(() => map.invalidateSize(), 300);
     const handleResize = () => map.invalidateSize();
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      window.removeEventListener('resize', handleResize);
+    };
   }, [map, mapRef]);
 
   useEffect(() => {
@@ -598,13 +604,13 @@ export default function MapView() {
       </div>
 
       {/* Map Container */}
-      <div className="flex-1 relative z-0 min-h-[320px]">
+      <div className="flex-1 relative z-0 min-h-[420px]">
         <MapContainer
           center={center}
           zoom={data.app_config.default_zoom}
           minZoom={13}
           maxZoom={20}
-          className="h-full w-full"
+          className="absolute inset-0 h-full w-full"
           zoomControl={false}
           attributionControl={false}
         >
