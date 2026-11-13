@@ -37,7 +37,7 @@ function pickTheme(id: string, title: string, category?: string): SceneTheme {
   if (t.includes('kantor pos') || t.includes('vihara') || t.includes('tugu')) return 'colonial';
   if (t.includes('toilet') || t.includes('wudhu')) return 'toilet';
   if (t.includes('event') || t.includes('night') || t.includes('pentas') || t.includes('malam minggu')) return 'event';
-  if (t.includes('oleh') || t.includes('tauco') || t.includes('roti') || t.includes('manisan') || t.includes('souvenir'))
+  if (!t.includes('rogan') && (t.includes('oleh') || t.includes('tauco') || t.includes('roti') || t.includes('manisan') || t.includes('souvenir')))
     return 'souvenir';
   if (t.includes('htl-') || t.includes('hotel') || t.includes('guest') || t.includes('suites'))
     return 'hotel';
