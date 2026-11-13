@@ -4,7 +4,7 @@ import { useApp } from '../context/AppContext';
 import { getVisualUrl } from '../utils/visuals';
 import { formatDistance } from '../utils/time';
 
-type GuideSection = 'all' | 'hadir' | 'event' | 'rute' | 'toilet' | 'aturan' | 'oleh2' | 'galeri';
+type GuideSection = 'all' | 'sadaya' | 'hadir' | 'event' | 'rute' | 'toilet' | 'aturan' | 'oleh2' | 'galeri';
 
 interface AttendanceEntry {
   id: string;
@@ -135,10 +135,10 @@ export default function GuideView() {
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <div>
             <h2 className="text-sm sm:text-base font-bold text-earth-900">
-              Pusat Informasi, Kehadiran & Panduan Pengunjung
+              Pusat Informasi SADAYA, Kehadiran & Panduan Pengunjung
             </h2>
             <p className="text-xs text-earth-500">
-              Kehadiran Opsional, Event Malam Minggu, Rute Stasiun, Toilet, Oleh-Oleh & Galeri Foto
+              Profil SADAYA, Kehadiran Opsional, Event Malam Minggu, Rute Stasiun, Toilet, Oleh-Oleh & Galeri
             </p>
           </div>
         </div>
@@ -146,10 +146,11 @@ export default function GuideView() {
         <div className="flex gap-1.5 overflow-x-auto no-scrollbar pt-0.5">
           {[
             { id: 'all' as GuideSection, label: 'Semua Info' },
+            { id: 'sadaya' as GuideSection, label: 'Tentang SADAYA' },
             { id: 'hadir' as GuideSection, label: 'Kehadiran (Opsional)' },
             { id: 'event' as GuideSection, label: 'Event Malam Minggu' },
             { id: 'rute' as GuideSection, label: 'Panduan Stasiun & Rute' },
-            { id: 'toilet' as GuideSection, label: 'Lokasi Toilet (4)' },
+            { id: 'toilet' as GuideSection, label: `Lokasi Toilet (${data.toilets.length})` },
             { id: 'oleh2' as GuideSection, label: 'Oleh-Oleh Khas (6)' },
             { id: 'galeri' as GuideSection, label: 'Galeri Foto' },
             { id: 'aturan' as GuideSection, label: 'Tata Tertib' },
@@ -169,6 +170,42 @@ export default function GuideView() {
           ))}
         </div>
       </div>
+
+      {/* PROFIL SADAYA — SOCIAL PROJECT MOJANG JAJAKA KABUPATEN CIANJUR */}
+      {(section === 'all' || section === 'sadaya') && (
+        <section className="animate-view-enter">
+          <div className="bg-earth-900 text-white rounded-2xl border border-earth-800 p-4 sm:p-5 shadow-xs flex flex-col md:flex-row items-center gap-4">
+            <img
+              src="/sadaya-logo.jpg"
+              alt="Logo SADAYA — Sarana Digital Wisata, Budaya, dan Lingkungan Asri"
+              onClick={() =>
+                setLightboxItem({
+                  title: 'SADAYA — Sarana Digital Wisata, Budaya, dan Lingkungan Asri',
+                  sub: 'Social Project Mojang Jajaka Kabupaten Cianjur (Kelompok 6 Swaranusa)',
+                  url: '/sadaya-logo.jpg',
+                })
+              }
+              className="w-40 sm:w-48 h-auto rounded-xl bg-white p-1.5 border-2 border-gold-500 shrink-0 cursor-pointer hover:scale-[1.02] transition-transform"
+            />
+            <div className="space-y-2 text-left">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="bg-gold-500 text-earth-900 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                  Social Project · Mojang Jajaka Kabupaten Cianjur
+                </span>
+                <span className="bg-earth-800 text-gold-300 border border-gold-500/30 text-[10px] font-semibold px-2.5 py-0.5 rounded-full">
+                  Kelompok 6 · Swaranusa
+                </span>
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-gold-400 leading-snug">
+                SADAYA (Sarana Digital Wisata, Budaya, dan Lingkungan Asri)
+              </h3>
+              <p className="text-xs sm:text-sm text-earth-200 leading-relaxed">
+                <strong>SADAYA</strong> merupakan salah satu <strong>Social Project dari Mojang Jajaka Kabupaten Cianjur</strong> yang mengintegrasikan informasi wisata kawasan Alun-Alun Cianjur, edukasi sejarah 3 Pilar Budaya (<em>Ngaos, Mamaos, Maenpo</em>), promosi UMKM kuliner & oleh-oleh khas Cianjur, serta gerakan menjaga kebersihan dan ketertiban lingkungan asri (Budaya K5).
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 0. KEHADIRAN / BUKU TAMU PENGUNJUNG (OPSIONAL) */}
       {(section === 'all' || section === 'hadir') && (
@@ -264,7 +301,7 @@ export default function GuideView() {
                 />
                 <button
                   type="submit"
-                  className="shrink-0 h-10 px-5 rounded-xl bg-islam-600 hover:bg-islam-700 text-white text-xs sm:text-sm font-semibold active:scale-95 transition-all"
+                  className="shrink-0 h-10 px-5 rounded-xl bg-islam-700 hover:bg-islam-600 text-white text-xs sm:text-sm font-semibold active:scale-95 transition-all"
                 >
                   Catat Kehadiran
                 </button>
@@ -272,14 +309,14 @@ export default function GuideView() {
             </form>
 
             {submittedNotice && (
-              <div className="bg-islam-50 border border-islam-200 text-islam-800 rounded-xl px-3.5 py-2.5 text-xs font-semibold">
-                Terima kasih! Kehadiran & tujuan kunjungan Anda telah tercatat di buku tamu Alun-Alun Cianjur.
+              <div className="bg-islam-50 border border-islam-200 text-islam-700 rounded-xl px-3.5 py-2.5 text-xs font-semibold">
+                Terima kasih! Kehadiran & tujuan kunjungan Anda telah tercatat di buku tamu SADAYA Alun-Alun Cianjur.
               </div>
             )}
 
             {/* Recent Attendance List */}
             <div className="pt-2 border-t border-earth-100 space-y-2">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-earth-400">
+              <div className="text-[11px] font-bold uppercase tracking-wider text-earth-500">
                 Kunjungan Terbaru Pengunjung
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
@@ -323,7 +360,7 @@ export default function GuideView() {
             <button
               type="button"
               onClick={() => showRouteOnMap('RTE-BOMERO', [-6.821327, 107.141917])}
-              className="shrink-0 px-3.5 py-2 rounded-xl bg-purple-700 hover:bg-purple-800 text-white text-xs font-semibold active:scale-95 transition-all"
+              className="shrink-0 px-3.5 py-2 rounded-xl bg-earth-800 hover:bg-earth-900 text-white text-xs font-semibold active:scale-95 transition-all"
             >
               Tampilkan Rute ke Bomero di Peta
             </button>
@@ -390,7 +427,7 @@ export default function GuideView() {
                       <button
                         type="button"
                         onClick={() => showRouteOnMap('RTE-BOMERO', ev.coords)}
-                        className="flex-1 min-w-[120px] py-2 px-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold active:scale-95 transition-all"
+                        className="flex-1 min-w-[120px] py-2 px-3 rounded-xl bg-islam-700 hover:bg-islam-600 text-white text-xs font-semibold active:scale-95 transition-all"
                       >
                         Rute Jalan Kaki (210m)
                       </button>
@@ -415,35 +452,35 @@ export default function GuideView() {
             </p>
           </div>
 
-          {/* Ringkasan Cepat: Berapa Lama dari Stasiun ke Alun-Alun? */}
-          <div className="bg-sky-900 text-white rounded-2xl p-4 space-y-2.5">
+          {/* Ringkasan Cepat: Berapa Lama dari Stasiun ke Alun-Alun? — Consistent earth/gold theme */}
+          <div className="bg-earth-900 text-white rounded-2xl p-4 space-y-2.5 border border-earth-800">
             <div className="flex items-center justify-between gap-2 flex-wrap">
               <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400">
                 Berapa Lama dari Stasiun Cianjur ke Alun-Alun? (Jarak ±485 Meter)
               </h4>
-              <span className="text-[11px] bg-sky-800 px-2.5 py-0.5 rounded-full text-sky-200">
+              <span className="text-[11px] bg-earth-800 border border-earth-700 px-2.5 py-0.5 rounded-full text-earth-200">
                 Stasiun Cianjur · Jl. Yulius Usman
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-              <div className="bg-sky-800/90 border border-sky-700 rounded-xl p-3">
-                <div className="text-xs text-sky-200">Jalan Kaki Santai</div>
+              <div className="bg-earth-800/90 border border-earth-700 rounded-xl p-3">
+                <div className="text-xs text-earth-200">Jalan Kaki Santai</div>
                 <div className="text-base font-bold text-gold-400">±6 – 7 Menit</div>
-                <div className="text-[11px] text-sky-200 mt-0.5">
+                <div className="text-[11px] text-earth-300 mt-0.5">
                   485 meter via trotoar Jl. Yulius Usman → Jl. Mangunsarkoro (Bomero)
                 </div>
               </div>
-              <div className="bg-sky-800/90 border border-sky-700 rounded-xl p-3">
-                <div className="text-xs text-sky-200">Naik Becak / Ojek</div>
+              <div className="bg-earth-800/90 border border-earth-700 rounded-xl p-3">
+                <div className="text-xs text-earth-200">Naik Becak / Ojek</div>
                 <div className="text-base font-bold text-gold-400">±2 Menit</div>
-                <div className="text-[11px] text-sky-200 mt-0.5">
+                <div className="text-[11px] text-earth-300 mt-0.5">
                   Tersedia tepat di pintu keluar Stasiun Cianjur (Rp10.000 – Rp15.000)
                 </div>
               </div>
-              <div className="bg-sky-800/90 border border-sky-700 rounded-xl p-3">
-                <div className="text-xs text-sky-200">Dari Alun-Alun ke Bomero</div>
+              <div className="bg-earth-800/90 border border-earth-700 rounded-xl p-3">
+                <div className="text-xs text-earth-200">Dari Alun-Alun ke Bomero</div>
                 <div className="text-base font-bold text-gold-400">±3 Menit</div>
-                <div className="text-[11px] text-sky-200 mt-0.5">
+                <div className="text-[11px] text-earth-300 mt-0.5">
                   210 meter jalan kaki langsung lewat sayap timur taman
                 </div>
               </div>
@@ -523,7 +560,7 @@ export default function GuideView() {
           <div className="flex items-center justify-between gap-2 flex-wrap">
             <div>
               <h3 className="text-base font-bold text-earth-900">
-                Lokasi Toilet & Tempat Wudhu di Sekitar Alun-Alun (4 Titik)
+                Lokasi WC / Toilet di Kawasan Alun-Alun ({data.toilets.length} Titik)
               </h3>
               <p className="text-xs text-earth-600">
                 Daftar posisi toilet pengunjung & fasilitas wudhu beserta penanda WC di peta
@@ -532,7 +569,7 @@ export default function GuideView() {
             <button
               type="button"
               onClick={() => showPointOnMap(data.app_config.center_coords, 'toilet')}
-              className="shrink-0 px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold active:scale-95 transition-all"
+              className="shrink-0 px-3.5 py-2 rounded-xl bg-earth-800 hover:bg-earth-900 text-white text-xs font-semibold active:scale-95 transition-all"
             >
               Tampilkan Semua Pin Toilet di Peta
             </button>
@@ -546,7 +583,7 @@ export default function GuideView() {
               >
                 <div className="space-y-2">
                   <div className="flex items-start justify-between gap-2">
-                    <span className="inline-block text-[10px] font-bold bg-sky-100 text-sky-800 px-2.5 py-0.5 rounded-full">
+                    <span className="inline-block text-[10px] font-bold bg-islam-50 text-islam-700 border border-islam-200 px-2.5 py-0.5 rounded-full">
                       Pin Peta: WC · {t.id}
                     </span>
                     <span className="text-[11px] font-medium text-earth-500">{t.open_hours}</span>
@@ -562,7 +599,7 @@ export default function GuideView() {
                     {t.facilities.map((fac) => (
                       <span
                         key={fac}
-                        className="bg-sky-50 text-sky-900 border border-sky-200 text-[11px] px-2 py-0.5 rounded-lg"
+                        className="bg-earth-50 text-earth-800 border border-earth-200 text-[11px] px-2 py-0.5 rounded-lg"
                       >
                         {fac}
                       </span>
@@ -574,7 +611,7 @@ export default function GuideView() {
                   <button
                     type="button"
                     onClick={() => showPointOnMap(t.coords, 'toilet')}
-                    className="flex-1 min-w-[120px] py-2 px-3 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold active:scale-95 transition-all"
+                    className="flex-1 min-w-[120px] py-2 px-3 rounded-xl bg-islam-700 hover:bg-islam-600 text-white text-xs font-semibold active:scale-95 transition-all"
                   >
                     Lihat Posisi Toilet di Peta
                   </button>
@@ -647,7 +684,7 @@ export default function GuideView() {
                     </div>
                     <div className="p-3.5 space-y-1.5">
                       <div className="flex items-center justify-between gap-2 text-[11px] text-earth-500">
-                        <span className="font-semibold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">
+                        <span className="font-semibold text-earth-900 bg-gold-300/35 border border-gold-500/40 px-2 py-0.5 rounded-full">
                           {formatDistance(item.distance_m)} dari Alun-Alun
                         </span>
                         <span>{item.open_time}–{item.close_time}</span>
@@ -669,7 +706,7 @@ export default function GuideView() {
                       href={`https://www.google.com/maps/dir/?api=1&destination=${item.coords[0]},${item.coords[1]}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="py-2 px-3 rounded-xl bg-islam-600 hover:bg-islam-700 text-white text-xs font-semibold active:scale-95 transition-all"
+                      className="py-2 px-3 rounded-xl bg-islam-700 hover:bg-islam-600 text-white text-xs font-semibold active:scale-95 transition-all"
                     >
                       Maps
                     </a>

@@ -886,84 +886,174 @@
   ],
   "trash_bins": [
     {
-      "id": "BIN-SRS-01",
-      "cluster_name": "Klaster Gerbang Utama Jalan Suroso",
+      "id": "BIN-01",
+      "cluster_name": "Titik Sampah 01 — Koridor Barat-Utara (Selatan Menara Pandang)",
       "coords": [
-        -6.81908,
-        107.14122
+        -6.819528,
+        107.140806
       ],
       "bin_type": "ORGANIK_ANORGANIK",
-      "landmark_hint": "Di sisi dalam Gerbang Utama Jalan Suroso sebelah kanan jalur masuk utara Taman Alun-Alun"
+      "landmark_hint": "Koordinat 6°49'10.3\"S 107°08'26.9\"E — Jalur pedestrian barat-utara Taman Alun-Alun, selatan Menara Pandang"
     },
     {
-      "id": "BIN-MNP-01",
-      "cluster_name": "Klaster Menara Pandang (Koridor Utara Taman)",
+      "id": "BIN-02",
+      "cluster_name": "Titik Sampah 02 — Koridor Utara Tribun Koloseum Maenpo",
       "coords": [
-        -6.81948,
-        107.14118
+        -6.819639,
+        107.140944
       ],
       "bin_type": "ORGANIK_ANORGANIK",
-      "landmark_hint": "Di tepi jalur pedestrian koridor utara dekat Menara Pandang Taman Alun-Alun Cianjur"
+      "landmark_hint": "Koordinat 6°49'10.7\"S 107°08'27.4\"E — Jalur penghubung utara menuju amfiteater Tribun Koloseum Maenpo"
     },
     {
-      "id": "BIN-KOL-01",
-      "cluster_name": "Klaster Tribun Koloseum Maenpo",
+      "id": "BIN-03",
+      "cluster_name": "Titik Sampah 03 — Area Barat Menara Pandang",
       "coords": [
-        -6.81998,
-        107.14088
+        -6.819472,
+        107.140861
       ],
       "bin_type": "ORGANIK_ANORGANIK",
-      "landmark_hint": "Di pintu masuk amfiteater Tribun Koloseum & Patung Pesilat Maenpo"
+      "landmark_hint": "Koordinat 6°49'10.1\"S 107°08'27.1\"E — Sisi barat daya Menara Pandang koridor utara Taman Alun-Alun"
     },
     {
-      "id": "BIN-SLG-01",
-      "cluster_name": "Klaster Zona Mamaos (Panggung Suling & Leuit)",
+      "id": "BIN-04",
+      "cluster_name": "Titik Sampah 04 — Plaza Utara Menara Pandang (Sisi Barat)",
       "coords": [
-        -6.82062,
-        107.14105
+        -6.819306,
+        107.141028
       ],
       "bin_type": "ORGANIK_ANORGANIK",
-      "landmark_hint": "Di antara Panggung Suling Kecapi dan Lumbung Padi (Leuit) sayap timur Taman Alun-Alun"
+      "landmark_hint": "Koordinat 6°49'09.5\"S 107°08'27.7\"E — Dekat Menara Pandang & WC Koridor Utara (Gerbang Jl. Suroso)"
     },
     {
-      "id": "BIN-ASH-01",
-      "cluster_name": "Klaster Lorong Asmaul Husna (Ujung Utara)",
+      "id": "BIN-05",
+      "cluster_name": "Titik Sampah 05 — Plaza Gerbang Utama Jl. Suroso (Sisi Timur)",
       "coords": [
-        -6.82078,
-        107.14012
+        -6.819333,
+        107.141278
       ],
       "bin_type": "ORGANIK_ANORGANIK",
-      "landmark_hint": "Di ujung utara selasar Lorong 99 Tiang Asmaul Husna dekat penghubung Taman Alun-Alun"
+      "landmark_hint": "Koordinat 6°49'09.6\"S 107°08'28.6\"E — Sisi timur plaza masuk Gerbang Utama Jalan Suroso"
     },
     {
-      "id": "BIN-ASH-02",
-      "cluster_name": "Klaster Lorong Asmaul Husna (Ujung Selatan)",
+      "id": "BIN-06",
+      "cluster_name": "Titik Sampah 06 — Sisi Selatan Tribun Koloseum Maenpo",
       "coords": [
-        -6.82102,
-        107.14018
+        -6.820139,
+        107.140944
       ],
       "bin_type": "ORGANIK_ANORGANIK",
-      "landmark_hint": "Di ujung selatan selasar Lorong 99 Tiang Asmaul Husna menuju lapangan rumput sintetis"
+      "landmark_hint": "Koordinat 6°49'12.5\"S 107°08'27.4\"E — Tepat di selatan bangunan bundar Tribun Koloseum & Patung Pesilat Maenpo"
     },
     {
-      "id": "BIN-QRN-01",
-      "cluster_name": "Klaster Monumen Al-Qur'an & Pelataran Masjid",
+      "id": "BIN-07",
+      "cluster_name": "Titik Sampah 07 — Jalur Pedestrian Barat-Tengah (Utara)",
       "coords": [
-        -6.82112,
-        107.13972
+        -6.820222,
+        107.140694
       ],
       "bin_type": "ORGANIK_ANORGANIK",
-      "landmark_hint": "Di tepi barat Kolam Perahu Monumen Al-Qur'an menghadap halaman Masjid Agung Cianjur"
+      "landmark_hint": "Koordinat 6°49'12.8\"S 107°08'26.5\"E — Tepi jalur pedestrian barat-tengah Taman Alun-Alun (utara)"
     },
     {
-      "id": "BIN-STJ-01",
-      "cluster_name": "Klaster Lapangan Selatan & Gerbang Siti Jenab",
+      "id": "BIN-08",
+      "cluster_name": "Titik Sampah 08 — Jalur Pedestrian Barat-Tengah (Tengah)",
       "coords": [
-        -6.82152,
-        107.13985
+        -6.820306,
+        107.140667
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Koordinat 6°49'13.1\"S 107°08'26.4\"E — Tepi jalur pedestrian barat-tengah Taman Alun-Alun (tengah)"
+    },
+    {
+      "id": "BIN-09",
+      "cluster_name": "Titik Sampah 09 — Jalur Pedestrian Barat-Tengah (Selatan)",
+      "coords": [
+        -6.820389,
+        107.140639
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Koordinat 6°49'13.4\"S 107°08'26.3\"E — Tepi jalur pedestrian barat-tengah Taman Alun-Alun (selatan)"
+    },
+    {
+      "id": "BIN-10",
+      "cluster_name": "Titik Sampah 10 — Simpang Tengah Taman & Lorong Asmaul Husna",
+      "coords": [
+        -6.820444,
+        107.1405
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Koordinat 6°49'13.6\"S 107°08'25.8\"E — Koridor penghubung tengah menuju Lorong 99 Tiang Asmaul Husna"
+    },
+    {
+      "id": "BIN-11",
+      "cluster_name": "Titik Sampah 11 — Selasar Timur Lorong 99 Tiang Asmaul Husna",
+      "coords": [
+        -6.820778,
+        107.140361
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Koordinat 6°49'14.8\"S 107°08'25.3\"E — Di koridor timur Lorong 99 Tiang Asmaul Husna"
+    },
+    {
+      "id": "BIN-12",
+      "cluster_name": "Titik Sampah 12 — Tepi Timur Lapangan Rumput Sintetis",
+      "coords": [
+        -6.821,
+        107.140472
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Koordinat 6°49'15.6\"S 107°08'25.7\"E — Di tepi timur hamparan rumput sintetis Alun-Alun Cianjur"
+    },
+    {
+      "id": "BIN-13",
+      "cluster_name": "Titik Sampah 13 — Sisi Tenggara Lapangan Rumput Sintetis",
+      "coords": [
+        -6.821139,
+        107.140361
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Koordinat 6°49'16.1\"S 107°08'25.3\"E — Di sisi tenggara lapangan rumput sintetis & area bermain anak"
+    },
+    {
+      "id": "BIN-14",
+      "cluster_name": "Titik Sampah 14 — Tepi Utara Lapangan Rumput Sintetis",
+      "coords": [
+        -6.820972,
+        107.140306
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Koordinat 6°49'15.5\"S 107°08'25.1\"E — Batas utara lapangan rumput sintetis depan Lorong Asmaul Husna"
+    },
+    {
+      "id": "BIN-15",
+      "cluster_name": "Titik Sampah 15 — Selasar Barat Lorong 99 Tiang Asmaul Husna",
+      "coords": [
+        -6.820806,
+        107.139806
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Koordinat 6°49'14.9\"S 107°08'23.3\"E — Ujung barat Lorong 99 Tiang Asmaul Husna arah Masjid Agung"
+    },
+    {
+      "id": "BIN-16",
+      "cluster_name": "Titik Sampah 16 — Pelataran Utara Masjid Agung Cianjur",
+      "coords": [
+        -6.820778,
+        107.139694
+      ],
+      "bin_type": "ORGANIK_ANORGANIK",
+      "landmark_hint": "Koordinat 6°49'14.8\"S 107°08'22.9\"E — Pelataran timur laut Masjid Agung dekat Gerbang Utara"
+    },
+    {
+      "id": "BIN-17",
+      "cluster_name": "Titik Sampah 17 — Pelataran Monumen Al-Qur'an & Masjid Agung",
+      "coords": [
+        -6.821167,
+        107.139611
       ],
       "bin_type": "ORGANIK_ANORGANIK_B3",
-      "landmark_hint": "Di dekat Gerbang Selatan Masjid Agung (Jl. Siti Jenab) dan batas selatan lapangan rumput sintetis"
+      "landmark_hint": "Koordinat 6°49'16.2\"S 107°08'22.6\"E — Tepi barat Kolam Perahu Monumen Al-Qur'an depan Masjid Agung"
     }
   ],
   "missions": [
@@ -1050,64 +1140,49 @@
   "toilets": [
     {
       "id": "TLT-01",
-      "name": "Toilet Pria & Wanita Bawah Tribun Koloseum (Amfiteater Maenpo)",
+      "name": "WC / Toilet Koridor Tengah (Simpang Lorong Asmaul Husna)",
       "zone": "INTERNAL",
-      "location_hint": "Lantai dasar bangunan multifungsi Tribun Amfiteater Maenpo (Koridor Tengah-Utara Taman Alun-Alun)",
+      "location_hint": "Koordinat 6°49'14.2\"S 107°08'25.5\"E — Koridor penghubung antara ujung timur Lorong 99 Tiang Asmaul Husna dan Taman Alun-Alun",
       "coords": [
-        -6.81995,
-        107.14098
+        -6.820611,
+        107.140417
       ],
       "facilities": [
-        "Toilet Pria & Wanita Terpisah",
-        "Ruang Ganti",
-        "Air Bersih Tandon 20m"
+        "Toilet Pria & Wanita",
+        "Wastafel Cuci Tangan",
+        "Air Bersih"
       ],
       "open_hours": "Mengikuti jam operasional Taman Alun-Alun"
     },
     {
       "id": "TLT-02",
-      "name": "Toilet & Tempat Wudhu Utama Masjid Agung Cianjur",
+      "name": "WC / Toilet Zona Tengah Taman (Area Panggung Suling & Kecapi)",
       "zone": "INTERNAL",
-      "location_hint": "Sayap selatan-barat kompleks Masjid Agung Cianjur (dekat pelataran Monumen Al-Qur'an)",
+      "location_hint": "Koordinat 6°49'14.7\"S 107°08'26.8\"E — Zona tengah Taman Alun-Alun dekat Panggung Suling Kecapi & Sayap Timur",
       "coords": [
-        -6.82118,
-        107.13942
+        -6.82075,
+        107.140778
       ],
       "facilities": [
-        "Tempat Wudhu Luas Pria & Wanita",
-        "Toilet Bersih",
-        "Akses Ramah Lansia"
-      ],
-      "open_hours": "04:00 – 22:00 WIB (Setiap Hari)"
-    },
-    {
-      "id": "TLT-03",
-      "name": "Toilet Umum Koridor Utara & Pos Jaga Jl. Suroso",
-      "zone": "INTERNAL",
-      "location_hint": "Dekat Gerbang Masuk Utama Jalan Suroso & Menara Pandang",
-      "coords": [
-        -6.81922,
-        107.14118
-      ],
-      "facilities": [
-        "Toilet Pengunjung",
-        "Wastafel Cuci Tangan",
-        "Dekat Pos Keamanan Satpol PP"
+        "Toilet Pengunjung Pria & Wanita",
+        "Air Bersih",
+        "Dekat Zona Mamaos"
       ],
       "open_hours": "Mengikuti jam operasional Taman Alun-Alun"
     },
     {
-      "id": "TLT-04",
-      "name": "Toilet Zona Kios Kuliner Sayap Timur (Arah Bomero)",
+      "id": "TLT-03",
+      "name": "WC / Toilet Koridor Utara (Dekat Gerbang Jl. Suroso & Menara Pandang)",
       "zone": "INTERNAL",
-      "location_hint": "Di belakang deretan 6 kios kuliner kayu jati beratap cagak gunting, sayap timur Taman Alun-Alun",
+      "location_hint": "Koordinat 6°49'09.5\"S 107°08'28.1\"E — Koridor utara Taman Alun-Alun dekat Menara Pandang dan Gerbang Utama Jalan Suroso",
       "coords": [
-        -6.82068,
-        107.14135
+        -6.819306,
+        107.141139
       ],
       "facilities": [
-        "Toilet Umum",
-        "Wastafel Area Kuliner"
+        "Toilet Pengunjung",
+        "Wastafel Cuci Tangan",
+        "Dekat Pintu Masuk Utama Jl. Suroso"
       ],
       "open_hours": "Mengikuti jam operasional Taman Alun-Alun"
     }
@@ -1178,7 +1253,7 @@
       "distance_m": 485,
       "duration_walk": "6–7 menit jalan kaki santai (atau 2 menit becak/ojek)",
       "transport_info": "Dilayani Kereta Api Siliwangi relasi Sukabumi – Cianjur – Cipatat (Tarif ekonomis Rp3.000 – Rp5.000). Stasiun berada di Jl. Yulius Usman (+439 mdpl).",
-      "color": "#0284c7",
+      "color": "#2E7D32",
       "waypoints": [
         [
           -6.824594,
@@ -1230,7 +1305,7 @@
       "distance_m": 210,
       "duration_walk": "3 menit jalan kaki",
       "transport_info": "Jalur pedestrian terhubung langsung di sisi timur-tenggara Taman Alun-Alun Cianjur (tanpa perlu naik kendaraan).",
-      "color": "#9333ea",
+      "color": "#5D4037",
       "waypoints": [
         [
           -6.82085,

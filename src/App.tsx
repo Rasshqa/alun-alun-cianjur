@@ -1,4 +1,4 @@
-import { useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { AppProvider, useApp, type TabId } from './context/AppContext';
 import data from './data/cianjur-data.json';
 
@@ -10,28 +10,44 @@ const GuideView = lazy(() => import('./components/GuideView'));
 const QuestView = lazy(() => import('./components/QuestView'));
 const AdminMapper = lazy(() => import('./components/AdminMapper'));
 
-function TopHeader() {
+function TopHeader({ onOpenAbout }: { onOpenAbout: () => void }) {
   const { questState, setActiveTab } = useApp();
   const entryGateObj = data.gates.find((g) => g.id === questState.entry_gate);
 
   return (
     <header className="bg-earth-900 text-white border-b border-earth-800 shrink-0">
       <div className="px-3 sm:px-6 py-2.5 flex items-center justify-between gap-2">
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
-            <span className="text-xs sm:text-base font-bold tracking-tight text-white truncate">
-              Portal Alun-Alun Cianjur
-            </span>
+        <button
+          type="button"
+          onClick={onOpenAbout}
+          className="min-w-0 flex-1 flex items-center gap-2.5 text-left group"
+          aria-label="Tentang SADAYA — Social Project Mojang Jajaka Kabupaten Cianjur"
+        >
+          <img
+            src="/sadaya-logo.jpg"
+            alt="Logo SADAYA"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl object-contain bg-white p-0.5 border border-gold-500/60 shrink-0 shadow-xs group-hover:scale-105 transition-transform"
+          />
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="text-xs sm:text-base font-bold tracking-tight text-gold-400 truncate">
+                SADAYA
+              </span>
+              <span className="text-[10px] sm:text-xs font-semibold text-earth-200 truncate">
+                · Alun-Alun Cianjur
+              </span>
+            </div>
+            <p className="text-[10px] sm:text-xs text-earth-300 truncate mt-0.5">
+              {entryGateObj
+                ? `Gerbang Aktif: ${entryGateObj.name}`
+                : 'Sarana Digital Wisata, Budaya & Lingkungan Asri'}
+            </p>
           </div>
-          <p className="text-[11px] sm:text-xs text-earth-300 truncate mt-0.5">
-            {entryGateObj
-              ? `Gerbang Aktif: ${entryGateObj.name}`
-              : 'Ngaos · Mamaos · Maenpo · Ksatria K5'}
-          </p>
-        </div>
+        </button>
 
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           <button
+            type="button"
             onClick={() => setActiveTab('panduan')}
             className="min-h-10 px-2.5 sm:px-3 py-1.5 rounded-xl bg-islam-700 hover:bg-islam-600 active:scale-95 text-white text-[11px] sm:text-xs font-semibold transition-all duration-200 shadow-xs"
             aria-label="Isi kehadiran pengunjung opsional"
@@ -40,6 +56,7 @@ function TopHeader() {
           </button>
 
           <button
+            type="button"
             onClick={() => setActiveTab('misi')}
             className="min-h-10 px-2.5 sm:px-3.5 py-1.5 rounded-xl bg-earth-800 hover:bg-earth-700 active:scale-95 border border-gold-500/40 text-left transition-all duration-200 shadow-xs"
             aria-label="Lihat progres misi dan XP"
@@ -54,6 +71,128 @@ function TopHeader() {
         </div>
       </div>
     </header>
+  );
+}
+
+function SadayaIntroBanner({
+  onOpenModal,
+  onDismiss,
+}: {
+  onOpenModal: () => void;
+  onDismiss: () => void;
+}) {
+  return (
+    <div className="bg-earth-800 text-white border-b border-gold-500/30 px-3 sm:px-6 py-2.5 shrink-0">
+      <div className="flex items-start sm:items-center justify-between gap-2.5">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className="inline-block bg-gold-500 text-earth-900 text-[10px] font-bold px-2 py-0.5 rounded-full">
+              Social Project Mojang Jajaka Kab. Cianjur
+            </span>
+            <span className="text-xs font-bold text-gold-300">
+              SADAYA — Sarana Digital Wisata, Budaya, dan Lingkungan Asri
+            </span>
+          </div>
+          <p className="text-[11px] text-earth-200 mt-0.5 leading-snug">
+            Inisiatif digital Mojang Jajaka Kabupaten Cianjur untuk panduan wisata sejarah, kuliner & oleh-oleh, rute Stasiun/Bomero, dan edukasi Budaya K5 Alun-Alun Cianjur.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-1.5 shrink-0">
+          <button
+            type="button"
+            onClick={onOpenModal}
+            className="px-2.5 py-1 rounded-lg bg-earth-700 hover:bg-earth-600 text-gold-300 text-[11px] font-semibold border border-gold-500/30 transition-all"
+          >
+            Tentang SADAYA
+          </button>
+          <button
+            type="button"
+            onClick={onDismiss}
+            className="w-6 h-6 rounded-full bg-earth-700 hover:bg-earth-600 text-earth-200 text-xs flex items-center justify-center"
+            aria-label="Sembunyikan banner pengantar SADAYA"
+          >
+            ×
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SadayaAboutModal({
+  onClose,
+  onGoToGuide,
+}: {
+  onClose: () => void;
+  onGoToGuide: () => void;
+}) {
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4 animate-view-enter"
+      onClick={onClose}
+    >
+      <div
+        className="bg-earth-50 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-earth-200"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="bg-earth-900 text-white p-4 sm:p-5 flex items-center gap-3.5 border-b border-earth-800">
+          <img
+            src="/sadaya-logo.jpg"
+            alt="Logo SADAYA"
+            className="w-20 h-14 sm:w-24 sm:h-16 rounded-xl object-contain bg-white p-1 border border-gold-500 shrink-0"
+          />
+          <div className="min-w-0">
+            <span className="inline-block bg-gold-500 text-earth-900 text-[10px] font-bold px-2.5 py-0.5 rounded-full mb-1">
+              Social Project · Mojang Jajaka Kab. Cianjur
+            </span>
+            <h2 className="text-base sm:text-lg font-bold text-gold-400 leading-tight">
+              SADAYA Cianjur
+            </h2>
+            <p className="text-xs text-earth-200 mt-0.5">
+              Sarana Digital Wisata, Budaya, dan Lingkungan Asri
+            </p>
+          </div>
+        </div>
+
+        <div className="p-4 sm:p-5 space-y-3 text-xs sm:text-sm text-earth-800 leading-relaxed">
+          <p>
+            <strong>SADAYA (Sarana Digital Wisata, Budaya, dan Lingkungan Asri)</strong> merupakan salah satu <strong>Social Project dari Mojang Jajaka Kabupaten Cianjur</strong> (Kelompok 6 Swaranusa) yang dirancang sebagai pusat informasi digital terpadu bagi masyarakat dan wisatawan di kawasan Alun-Alun Cianjur.
+          </p>
+          <div className="bg-white rounded-xl p-3.5 border border-earth-200 space-y-1.5 text-xs">
+            <div className="font-bold text-earth-900">Pilar Utama Program SADAYA:</div>
+            <ul className="list-disc pl-4 space-y-1 text-earth-700">
+              <li>
+                <strong>Wisata & Aksesibilitas:</strong> Peta interaktif Alun-Alun, titik lokasi toilet & wudhu, panduan waktu tempuh dari Stasiun Cianjur (6 menit jalan kaki), serta event pameran Malam Minggu di Bunderan & Bomero City Walk.
+              </li>
+              <li>
+                <strong>Pelestarian Budaya:</strong> Ensiklopedia dan pemandu suara 16 ikon sejarah 3 Pilar Budaya Cianjur (<em>Ngaos, Mamaos, Maenpo</em>) beserta rekomendasi oleh-oleh khas Cianjur.
+              </li>
+              <li>
+                <strong>Lingkungan Asri (Budaya K5):</strong> Edukasi ketertiban kawasan, titik tempat sampah terpilah, serta gamifikasi Misi Ksatria K5 berhadiah sertifikat digital.
+              </li>
+            </ul>
+          </div>
+
+          <div className="flex flex-wrap gap-2 pt-1">
+            <button
+              type="button"
+              onClick={onGoToGuide}
+              className="flex-1 min-w-[140px] py-2.5 px-3.5 rounded-xl bg-islam-700 hover:bg-islam-600 text-white text-xs font-semibold active:scale-95 transition-all"
+            >
+              Isi Kehadiran & Buka Panduan
+            </button>
+            <button
+              type="button"
+              onClick={onClose}
+              className="py-2.5 px-4 rounded-xl bg-earth-800 hover:bg-earth-900 text-white text-xs font-semibold active:scale-95 transition-all"
+            >
+              Mulai Jelajahi
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -173,7 +312,9 @@ function TabContent() {
 }
 
 function AppShell() {
-  const { setMapFocus, updateQuest } = useApp();
+  const { setMapFocus, updateQuest, setActiveTab } = useApp();
+  const [showIntroBanner, setShowIntroBanner] = useState(true);
+  const [showAboutModal, setShowAboutModal] = useState(false);
 
   useEffect(() => {
     const rawGate = new URLSearchParams(window.location.search).get('gate');
@@ -194,10 +335,26 @@ function AppShell() {
   return (
     <div className="min-h-dvh bg-earth-100/80 flex flex-col">
       <div className="w-full max-w-6xl mx-auto min-h-dvh flex flex-col bg-earth-50 shadow-sm lg:border-x lg:border-earth-200/80">
-        <TopHeader />
+        <TopHeader onOpenAbout={() => setShowAboutModal(true)} />
+        {showIntroBanner && (
+          <SadayaIntroBanner
+            onOpenModal={() => setShowAboutModal(true)}
+            onDismiss={() => setShowIntroBanner(false)}
+          />
+        )}
         <TabContent />
         <BottomNav />
       </div>
+
+      {showAboutModal && (
+        <SadayaAboutModal
+          onClose={() => setShowAboutModal(false)}
+          onGoToGuide={() => {
+            setShowAboutModal(false);
+            setActiveTab('panduan');
+          }}
+        />
+      )}
     </div>
   );
 }

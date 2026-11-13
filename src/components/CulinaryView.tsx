@@ -166,7 +166,7 @@ export default function CulinaryView() {
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0 flex-1">
                     {spot.isSouvenir && (
-                      <span className="inline-block mb-1 text-[10px] font-bold bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full">
+                      <span className="inline-block mb-1 text-[10px] font-bold bg-gold-300/35 text-earth-900 border border-gold-500/40 px-2 py-0.5 rounded-full">
                         Rekomendasi Oleh-Oleh
                       </span>
                     )}

@@ -56,11 +56,11 @@ const PILAR_LABEL: Record<string, string> = {
 };
 
 const COLORS: Record<Exclude<Category, 'all'>, string> = {
-  trash: '#16a34a',
-  toilet: '#0284c7',
-  heritage: '#d97706',
-  culinary: '#ea580c',
-  hotel: '#7c3aed',
+  trash: '#2E7D32',
+  toilet: '#5D4037',
+  heritage: '#C8A951',
+  culinary: '#6D4C41',
+  hotel: '#4E342E',
   gate: '#3E2723',
 };
 
@@ -661,8 +661,8 @@ export default function MapView() {
             onClick={() => toggleGuideRoute('RTE-STASIUN')}
             className={`shrink-0 min-h-8 px-3 rounded-full text-xs font-semibold border transition-all active:scale-95 ${
               activeGuideRouteId === 'RTE-STASIUN'
-                ? 'bg-sky-600 text-white border-sky-600 shadow-xs'
-                : 'bg-sky-50 text-sky-800 border-sky-200 hover:bg-sky-100'
+                ? 'bg-islam-600 text-white border-islam-600 shadow-xs'
+                : 'bg-islam-50 text-islam-700 border-islam-200 hover:bg-islam-100'
             }`}
           >
             Rute Stasiun (485m)
@@ -671,8 +671,8 @@ export default function MapView() {
             onClick={() => toggleGuideRoute('RTE-BOMERO')}
             className={`shrink-0 min-h-8 px-3 rounded-full text-xs font-semibold border transition-all active:scale-95 ${
               activeGuideRouteId === 'RTE-BOMERO'
-                ? 'bg-purple-600 text-white border-purple-600 shadow-xs'
-                : 'bg-purple-50 text-purple-800 border-purple-200 hover:bg-purple-100'
+                ? 'bg-earth-800 text-white border-earth-800 shadow-xs'
+                : 'bg-earth-100 text-earth-700 border-earth-200 hover:bg-earth-200'
             }`}
           >
             Rute Bomero (210m)
@@ -910,8 +910,8 @@ export default function MapView() {
                 onClick={() => toggleSheetAudio(sheet.id, sheet.audioScript)}
                 className={`flex-1 min-w-[140px] py-2.5 px-3 rounded-xl text-xs font-semibold border transition-all active:scale-95 ${
                   speakingId === sheet.id
-                    ? 'bg-amber-600 text-white border-amber-600'
-                    : 'bg-amber-50 text-amber-900 border-amber-300 hover:bg-amber-100'
+                    ? 'bg-earth-800 text-white border-earth-800'
+                    : 'bg-earth-100 text-earth-800 border-earth-200 hover:bg-earth-200'
                 }`}
               >
                 {speakingId === sheet.id ? 'Hentikan Audio Sejarah' : 'Dengarkan Audio Sejarah'}
