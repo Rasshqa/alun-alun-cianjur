@@ -82,19 +82,19 @@ function SadayaIntroBanner({
   onDismiss: () => void;
 }) {
   return (
-    <div className="bg-earth-800 text-white border-b border-gold-500/30 px-3 sm:px-6 py-2.5 shrink-0">
-      <div className="flex items-start sm:items-center justify-between gap-2.5">
+    <div className="bg-earth-800 text-white border-b border-gold-500/30 px-3 sm:px-6 py-2 shrink-0">
+      <div className="flex items-center justify-between gap-2">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="inline-block bg-gold-500 text-earth-900 text-[10px] font-bold px-2 py-0.5 rounded-full">
+            <span className="inline-block bg-gold-500 text-earth-900 text-[10px] font-bold px-2 py-0.5 rounded-md leading-tight">
               Social Project Mojang Jajaka Kab. Cianjur
             </span>
-            <span className="text-xs font-bold text-gold-300">
-              SADAYA — Sarana Digital Wisata, Budaya, dan Lingkungan Asri
+            <span className="text-[11px] sm:text-xs font-bold text-gold-300 truncate">
+              SADAYA — Sarana Digital Wisata, Budaya & Lingkungan Asri
             </span>
           </div>
-          <p className="text-[11px] text-earth-200 mt-0.5 leading-snug">
-            Inisiatif digital Mojang Jajaka Kabupaten Cianjur untuk panduan wisata sejarah, kuliner & oleh-oleh, rute Stasiun/Bomero, dan edukasi Budaya K5 Alun-Alun Cianjur.
+          <p className="hidden sm:block text-[11px] text-earth-200 mt-0.5 leading-snug truncate">
+            Inisiatif digital Mojang Jajaka Kabupaten Cianjur (Kelompok 6 Swaranusa) untuk panduan wisata sejarah, kuliner & oleh-oleh, dan Budaya K5 Alun-Alun Cianjur.
           </p>
         </div>
 
@@ -102,14 +102,14 @@ function SadayaIntroBanner({
           <button
             type="button"
             onClick={onOpenModal}
-            className="px-2.5 py-1 rounded-lg bg-earth-700 hover:bg-earth-600 text-gold-300 text-[11px] font-semibold border border-gold-500/30 transition-all"
+            className="px-2.5 py-1 rounded-lg bg-earth-700 hover:bg-earth-600 text-gold-300 text-[11px] font-semibold border border-gold-500/30 transition-all whitespace-nowrap"
           >
             Tentang SADAYA
           </button>
           <button
             type="button"
             onClick={onDismiss}
-            className="w-6 h-6 rounded-full bg-earth-700 hover:bg-earth-600 text-earth-200 text-xs flex items-center justify-center"
+            className="w-6 h-6 rounded-full bg-earth-700 hover:bg-earth-600 text-earth-200 text-xs flex items-center justify-center shrink-0"
             aria-label="Sembunyikan banner pengantar SADAYA"
           >
             ×
@@ -129,33 +129,49 @@ function SadayaAboutModal({
 }) {
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4 animate-view-enter"
+      className="fixed inset-0 z-[2000] bg-black/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 animate-view-enter"
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="sadaya-modal-title"
     >
       <div
-        className="bg-earth-50 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-earth-200"
+        className="bg-earth-50 rounded-2xl max-w-lg w-full max-h-[90dvh] flex flex-col overflow-hidden shadow-2xl border border-earth-200"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="bg-earth-900 text-white p-4 sm:p-5 flex items-center gap-3.5 border-b border-earth-800">
-          <img
-            src="/sadaya-logo.jpg"
-            alt="Logo SADAYA"
-            className="w-20 h-14 sm:w-24 sm:h-16 rounded-xl object-contain bg-white p-1 border border-gold-500 shrink-0"
-          />
-          <div className="min-w-0">
-            <span className="inline-block bg-gold-500 text-earth-900 text-[10px] font-bold px-2.5 py-0.5 rounded-full mb-1">
-              Social Project · Mojang Jajaka Kab. Cianjur
-            </span>
-            <h2 className="text-base sm:text-lg font-bold text-gold-400 leading-tight">
-              SADAYA Cianjur
-            </h2>
-            <p className="text-xs text-earth-200 mt-0.5">
-              Sarana Digital Wisata, Budaya, dan Lingkungan Asri
-            </p>
+        <div className="bg-earth-900 text-white p-3.5 sm:p-5 flex items-start justify-between gap-3 border-b border-earth-800 shrink-0">
+          <div className="flex items-center gap-3 min-w-0 flex-1">
+            <img
+              src="/sadaya-logo.jpg"
+              alt="Logo SADAYA"
+              className="w-16 h-12 sm:w-22 sm:h-15 rounded-xl object-contain bg-white p-1 border border-gold-500 shrink-0"
+            />
+            <div className="min-w-0 flex-1">
+              <span className="inline-block bg-gold-500 text-earth-900 text-[10px] font-bold px-2 py-0.5 rounded-md mb-1 leading-tight">
+                Social Project · Mojang Jajaka Kab. Cianjur
+              </span>
+              <h2
+                id="sadaya-modal-title"
+                className="text-sm sm:text-lg font-bold text-gold-400 leading-tight"
+              >
+                SADAYA Cianjur
+              </h2>
+              <p className="text-[11px] sm:text-xs text-earth-200 mt-0.5 leading-snug">
+                Sarana Digital Wisata, Budaya, dan Lingkungan Asri
+              </p>
+            </div>
           </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-7 h-7 rounded-full bg-earth-800 hover:bg-earth-700 text-earth-200 text-sm flex items-center justify-center shrink-0"
+            aria-label="Tutup dialog Tentang SADAYA"
+          >
+            ×
+          </button>
         </div>
 
-        <div className="p-4 sm:p-5 space-y-3 text-xs sm:text-sm text-earth-800 leading-relaxed">
+        <div className="p-4 sm:p-5 space-y-3 text-xs sm:text-sm text-earth-800 leading-relaxed overflow-y-auto">
           <p>
             <strong>SADAYA (Sarana Digital Wisata, Budaya, dan Lingkungan Asri)</strong> merupakan salah satu <strong>Social Project dari Mojang Jajaka Kabupaten Cianjur</strong> (Kelompok 6 Swaranusa) yang dirancang sebagai pusat informasi digital terpadu bagi masyarakat dan wisatawan di kawasan Alun-Alun Cianjur.
           </p>
@@ -169,7 +185,7 @@ function SadayaAboutModal({
                 <strong>Pelestarian Budaya:</strong> Ensiklopedia dan pemandu suara 16 ikon sejarah 3 Pilar Budaya Cianjur (<em>Ngaos, Mamaos, Maenpo</em>) beserta rekomendasi oleh-oleh khas Cianjur.
               </li>
               <li>
-                <strong>Lingkungan Asri (Budaya K5):</strong> Edukasi ketertiban kawasan, titik tempat sampah terpilah, serta gamifikasi Misi Ksatria K5 berhadiah sertifikat digital.
+                <strong>Lingkungan Asri (Budaya K5):</strong> Edukasi ketertiban kawasan, 17 titik tempat sampah terpilah, serta gamifikasi Misi Ksatria K5 berhadiah sertifikat digital.
               </li>
             </ul>
           </div>
@@ -299,7 +315,7 @@ function TabContent() {
         </div>
       }
     >
-      <main key={activeTab} className="flex-1 flex flex-col min-w-0 animate-view-enter">
+      <main key={activeTab} className="flex-1 flex flex-col min-w-0 min-h-0">
         {activeTab === 'peta' && <MapView />}
         {activeTab === 'sejarah' && <HeritageView />}
         {activeTab === 'kuliner' && <CulinaryView />}
@@ -312,7 +328,7 @@ function TabContent() {
 }
 
 function AppShell() {
-  const { setMapFocus, updateQuest, setActiveTab } = useApp();
+  const { activeTab, setMapFocus, updateQuest, setActiveTab } = useApp();
   const [showIntroBanner, setShowIntroBanner] = useState(true);
   const [showAboutModal, setShowAboutModal] = useState(false);
 
@@ -333,8 +349,16 @@ function AppShell() {
   }, [setMapFocus, updateQuest]);
 
   return (
-    <div className="min-h-dvh bg-earth-100/80 flex flex-col">
-      <div className="w-full max-w-6xl mx-auto min-h-dvh flex flex-col bg-earth-50 shadow-sm lg:border-x lg:border-earth-200/80">
+    <div
+      className={`bg-earth-100/80 flex flex-col ${
+        activeTab === 'peta' ? 'h-dvh overflow-hidden' : 'min-h-dvh'
+      }`}
+    >
+      <div
+        className={`w-full max-w-6xl mx-auto flex flex-col bg-earth-50 shadow-sm lg:border-x lg:border-earth-200/80 ${
+          activeTab === 'peta' ? 'h-dvh overflow-hidden' : 'min-h-dvh'
+        }`}
+      >
         <TopHeader onOpenAbout={() => setShowAboutModal(true)} />
         {showIntroBanner && (
           <SadayaIntroBanner

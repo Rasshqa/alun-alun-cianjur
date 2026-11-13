@@ -484,7 +484,7 @@ export default function QuestView() {
       {toast && (
         <div
           key={toast.key}
-          className="fixed bottom-20 md:bottom-24 left-4 right-4 max-w-md mx-auto bg-earth-900 text-white text-xs font-medium px-4 py-3 rounded-xl text-center z-50 shadow-xl border border-gold-500/30 animate-view-enter"
+          className="fixed bottom-20 md:bottom-24 left-4 right-4 max-w-md mx-auto bg-earth-900 text-white text-xs font-medium px-4 py-3 rounded-xl text-center z-[1500] pointer-events-none shadow-xl border border-gold-500/30 animate-view-enter"
         >
           {toast.msg}
         </div>

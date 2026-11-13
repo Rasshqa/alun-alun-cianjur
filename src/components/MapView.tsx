@@ -544,9 +544,9 @@ export default function MapView() {
   }, []);
 
   return (
-    <div className="relative flex-1 flex flex-col min-h-[480px] h-[calc(100dvh-118px)] sm:h-[calc(100dvh-114px)] pb-[56px] md:pb-0">
+    <div className="relative flex-1 flex flex-col min-h-0 pb-[56px] md:pb-0">
       {/* Mode Switcher: Denah Internal vs Peta Sekitar Kota */}
-      <div className="bg-earth-900 text-white px-2.5 sm:px-4 py-2 flex items-center justify-between gap-2 z-[1000] shrink-0">
+      <div className="bg-earth-900 text-white px-2.5 sm:px-4 py-2 flex items-center justify-between gap-2 relative z-10 shrink-0">
         <div className="flex bg-earth-800 p-0.5 rounded-xl flex-1 min-w-0">
           <button
             onClick={switchToAlunAlun}
@@ -584,13 +584,13 @@ export default function MapView() {
       </div>
 
       {/* Instant Search Bar, Category Filter Pills & Quick Route Toggles */}
-      <div className="bg-white/95 backdrop-blur-sm z-[1000] border-b border-earth-200 px-3 sm:px-4 pt-2 pb-2 space-y-2 relative shrink-0">
+      <div className="bg-white/95 backdrop-blur-sm relative z-20 border-b border-earth-200 px-3 sm:px-4 pt-2 pb-2 space-y-2 shrink-0">
         <div className="relative">
           <input
             type="search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Cari: Toilet, Stasiun, Bomero, Lonceng, Geco, Tan Keng Cu..."
+            placeholder="Cari: Toilet, Stasiun, Bomero, Lonceng, Geco..."
             className="w-full min-w-0 bg-earth-50 border border-earth-200 rounded-xl pl-8 pr-8 py-2 text-xs sm:text-sm text-earth-900 placeholder:text-earth-400 focus:outline-none focus:ring-2 focus:ring-islam-600 transition-shadow"
           />
           <svg
@@ -615,7 +615,7 @@ export default function MapView() {
         </div>
 
         {searchResults.length > 0 && (
-          <div className="absolute left-3 right-3 sm:left-4 sm:right-4 top-12 bg-white rounded-2xl shadow-xl border border-earth-200 divide-y divide-earth-100 max-h-60 overflow-y-auto z-[1200] animate-view-enter">
+          <div className="absolute left-3 right-3 sm:left-4 sm:right-4 top-12 bg-white rounded-2xl shadow-xl border border-earth-200 divide-y divide-earth-100 max-h-60 overflow-y-auto z-30 animate-view-enter">
             {searchResults.map((item) => (
               <button
                 key={item.id}
@@ -682,7 +682,7 @@ export default function MapView() {
 
       {/* Active Route Banner */}
       {activeGuideRoute && (
-        <div className="bg-earth-900/95 text-white px-3.5 py-2 flex items-center justify-between gap-2 z-[1000] border-b border-earth-700 shrink-0">
+        <div className="bg-earth-900/95 text-white px-3.5 py-2 flex items-center justify-between gap-2 relative z-10 border-b border-earth-700 shrink-0">
           <div className="min-w-0">
             <div className="text-xs font-bold text-gold-400 truncate">
               {activeGuideRoute.title} ({activeGuideRoute.distance_m}m · {activeGuideRoute.duration_walk})
@@ -708,7 +708,7 @@ export default function MapView() {
       )}
 
       {/* Map Container */}
-      <div className="flex-1 relative z-0 min-h-[420px]">
+      <div className="flex-1 relative isolate z-0 min-h-[280px]">
         <MapContainer
           center={center}
           zoom={data.app_config.default_zoom}
@@ -786,7 +786,7 @@ export default function MapView() {
         </MapContainer>
 
         {/* Custom Zoom Controls */}
-        <div className="absolute top-3 right-3 z-[900] flex flex-col gap-1.5">
+        <div className="absolute top-3 right-3 z-[800] flex flex-col gap-1.5">
           <button
             onClick={() => mapRef.current?.zoomIn()}
             className="w-10 h-10 rounded-xl bg-white/95 hover:bg-white text-earth-900 font-bold text-lg shadow-md border border-earth-200 flex items-center justify-center active:scale-95 transition-transform"
@@ -804,31 +804,35 @@ export default function MapView() {
         </div>
 
         {/* Compact Legend */}
-        <div className="absolute top-3 left-3 z-[900] bg-white/92 backdrop-blur-sm px-2.5 py-2 rounded-xl shadow-md border border-earth-200 text-[11px] text-earth-800 space-y-1">
+        <div
+          className={`absolute top-3 left-3 z-[800] bg-white/92 backdrop-blur-sm px-2.5 py-2 rounded-xl shadow-md border border-earth-200 text-[10px] sm:text-[11px] text-earth-800 space-y-1 transition-opacity ${
+            sheet ? 'opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' : 'opacity-100'
+          }`}
+        >
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full inline-block" style={{ background: COLORS.gate }} />
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full inline-block shrink-0" style={{ background: COLORS.gate }} />
             <span>Gerbang (GB)</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full inline-block" style={{ background: COLORS.toilet }} />
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full inline-block shrink-0" style={{ background: COLORS.toilet }} />
             <span>Toilet & Wudhu (WC)</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full inline-block" style={{ background: COLORS.heritage }} />
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full inline-block shrink-0" style={{ background: COLORS.heritage }} />
             <span>Sejarah (SJ)</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full inline-block" style={{ background: COLORS.trash }} />
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full inline-block shrink-0" style={{ background: COLORS.trash }} />
             <span>Tong Sampah (TS)</span>
           </div>
           {scope === 'city' && (
             <>
               <div className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded-full inline-block" style={{ background: COLORS.culinary }} />
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full inline-block shrink-0" style={{ background: COLORS.culinary }} />
                 <span>Kuliner & Oleh2 (KL)</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded-full inline-block" style={{ background: COLORS.hotel }} />
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full inline-block shrink-0" style={{ background: COLORS.hotel }} />
                 <span>Hotel (HT)</span>
               </div>
             </>
@@ -839,7 +843,9 @@ export default function MapView() {
         <button
           onClick={findNearestBin}
           disabled={gpsLoading}
-          className="absolute bottom-4 md:bottom-20 left-1/2 -translate-x-1/2 z-[900] bg-islam-700 hover:bg-islam-800 text-white px-4 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs font-semibold shadow-lg border border-islam-500 active:scale-95 transition-all disabled:opacity-60 whitespace-nowrap max-w-[92vw] truncate"
+          className={`absolute bottom-4 md:bottom-20 left-1/2 -translate-x-1/2 z-[800] bg-islam-700 hover:bg-islam-800 text-white px-4 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs font-semibold shadow-lg border border-islam-500 active:scale-95 transition-all disabled:opacity-60 whitespace-nowrap max-w-[92vw] truncate ${
+            sheet ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}
         >
           {gpsLoading ? 'Mencari Lokasi GPS...' : 'Cari Tong Sampah Terdekat'}
         </button>

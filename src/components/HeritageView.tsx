@@ -344,23 +344,29 @@ export default function HeritageView() {
 
       {lightboxItem && (
         <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-4 animate-view-enter"
+          className="fixed inset-0 z-[2000] bg-black/80 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 animate-view-enter"
           onClick={() => setLightboxItem(null)}
+          role="dialog"
+          aria-modal="true"
         >
           <div
-            className="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-earth-200"
+            className="bg-white rounded-2xl max-w-lg w-full max-h-[90dvh] flex flex-col overflow-hidden shadow-2xl border border-earth-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <img src={lightboxItem.url} alt={lightboxItem.title} className="w-full h-auto" />
-            <div className="p-4 flex items-start justify-between gap-3">
-              <div>
-                <h4 className="font-bold text-earth-900 text-sm sm:text-base">{lightboxItem.title}</h4>
-                <p className="text-xs text-earth-600 mt-0.5">{lightboxItem.sub}</p>
+            <img
+              src={lightboxItem.url}
+              alt={lightboxItem.title}
+              className="w-full max-h-[65dvh] object-contain bg-earth-900 shrink-0"
+            />
+            <div className="p-4 flex items-start justify-between gap-3 overflow-y-auto">
+              <div className="min-w-0 flex-1">
+                <h4 className="font-bold text-earth-900 text-sm sm:text-base break-words">{lightboxItem.title}</h4>
+                <p className="text-xs text-earth-600 mt-0.5 break-words">{lightboxItem.sub}</p>
               </div>
               <button
                 type="button"
                 onClick={() => setLightboxItem(null)}
-                className="px-3 py-1.5 rounded-xl bg-earth-800 text-white text-xs font-semibold"
+                className="shrink-0 px-3 py-1.5 rounded-xl bg-earth-800 text-white text-xs font-semibold"
               >
                 Tutup
               </button>
