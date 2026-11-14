@@ -35,7 +35,7 @@ function pickTheme(id: string, title: string, category?: string): SceneTheme {
   if (t.includes('stasiun') || t.includes('kereta')) return 'station';
   if (t.includes('bomero') || t.includes('bojong meron')) return 'bomero';
   if (t.includes('kantor pos') || t.includes('vihara') || t.includes('tugu')) return 'colonial';
-  if (t.includes('toilet') || t.includes('wudhu')) return 'toilet';
+  if (t.includes('toilet')) return 'toilet';
   if (t.includes('event') || t.includes('night') || t.includes('pentas') || t.includes('malam minggu')) return 'event';
   if (!t.includes('rogan') && (t.includes('oleh') || t.includes('tauco') || t.includes('roti') || t.includes('manisan') || t.includes('souvenir')))
     return 'souvenir';
@@ -60,7 +60,7 @@ const PALETTES: Record<SceneTheme, { bg1: string; bg2: string; accent: string; b
   culinary: { bg1: '#4E342E', bg2: '#6D4C41', accent: '#E0CA7A', badge: 'Kuliner Legendaris' },
   souvenir: { bg1: '#3E2723', bg2: '#5D4037', accent: '#D4B95E', badge: 'Oleh-Oleh Khas Cianjur' },
   hotel: { bg1: '#3E2723', bg2: '#4E342E', accent: '#E0CA7A', badge: 'Akomodasi & Penginapan' },
-  toilet: { bg1: '#1B5E20', bg2: '#2E7D32', accent: '#E0CA7A', badge: 'Fasilitas Toilet & Wudhu' },
+  toilet: { bg1: '#1B5E20', bg2: '#2E7D32', accent: '#E0CA7A', badge: 'Fasilitas Toilet' },
   event: { bg1: '#3E2723', bg2: '#5D4037', accent: '#D4B95E', badge: 'Event Malam Minggu & Budaya' },
 };
 
@@ -190,6 +190,9 @@ export function getVisualUrl(opts: {
 }): string {
   if (opts.photoUrl && opts.photoUrl.trim().length > 0) {
     return opts.photoUrl;
+  }
+  if (/^(ICN-\d{2}|CUL-\d{2}|HTL-\d{2}|EVT-\d{2}|GAL-\d{2}|TLT-\d{2}|suroso|masjid-selatan|masjid-utara)$/.test(opts.id)) {
+    return `/photos/${opts.id}.jpg`;
   }
   const theme = pickTheme(opts.id, opts.title, opts.category);
   const p = PALETTES[theme];

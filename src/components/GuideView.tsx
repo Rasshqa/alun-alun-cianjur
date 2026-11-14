@@ -131,14 +131,14 @@ export default function GuideView() {
   return (
     <div className="px-3.5 sm:px-6 pt-3.5 pb-28 md:pb-32 space-y-5">
       {/* Section Filter Chips */}
-      <div className="bg-white rounded-2xl p-3 sm:p-4 border border-earth-200 shadow-xs space-y-2.5">
+      <div className="heritage-card rounded-2xl p-3.5 sm:p-4 space-y-2.5">
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <div>
-            <h2 className="text-sm sm:text-base font-bold text-earth-900">
-              Pusat Informasi SADAYA, Kehadiran & Panduan Pengunjung
+            <h2 className="font-heritage text-base sm:text-lg font-bold text-earth-900">
+              Pusat Informasi SADAYA, Kehadiran &amp; Panduan Pengunjung
             </h2>
-            <p className="text-xs text-earth-500">
-              Profil SADAYA, Kehadiran Opsional, Event Malam Minggu, Rute Stasiun, Toilet, Oleh-Oleh & Galeri
+            <p className="text-xs text-earth-600">
+              Profil SADAYA, Kehadiran Opsional, Event Malam Minggu, Rute Stasiun, Toilet, Oleh-Oleh &amp; Galeri
             </p>
           </div>
         </div>
@@ -161,8 +161,8 @@ export default function GuideView() {
               onClick={() => setSection(tab.id)}
               className={`shrink-0 min-h-8 px-3.5 rounded-full text-xs font-semibold transition-all active:scale-95 ${
                 section === tab.id
-                  ? 'bg-earth-800 text-white shadow-xs'
-                  : 'bg-earth-100 text-earth-700 hover:bg-earth-200'
+                  ? 'bg-earth-800 text-gold-300 border border-gold-500/50 shadow-xs'
+                  : 'bg-earth-100/90 text-earth-800 hover:bg-earth-200 border border-earth-200/80'
               }`}
             >
               {tab.label}
@@ -174,33 +174,37 @@ export default function GuideView() {
       {/* PROFIL SADAYA — SOCIAL PROJECT MOJANG JAJAKA KABUPATEN CIANJUR */}
       {(section === 'all' || section === 'sadaya') && (
         <section className="animate-view-enter">
-          <div className="bg-earth-900 text-white rounded-2xl border border-earth-800 p-4 sm:p-5 shadow-xs flex flex-col md:flex-row items-center gap-4">
-            <img
-              src="/sadaya-logo.jpg"
-              alt="Logo SADAYA — Sarana Digital Wisata, Budaya, dan Lingkungan Asri"
+          <div className="bg-sundanese-dark text-white rounded-2xl border border-gold-500/40 p-4 sm:p-5 shadow-md flex flex-col md:flex-row items-center gap-4">
+            <div
               onClick={() =>
                 setLightboxItem({
                   title: 'SADAYA — Sarana Digital Wisata, Budaya, dan Lingkungan Asri',
                   sub: 'Social Project Mojang Jajaka Kabupaten Cianjur (Kelompok 6 Swaranusa)',
-                  url: '/sadaya-logo.jpg',
+                  url: '/sadaya-logo.png',
                 })
               }
-              className="w-40 sm:w-48 h-auto rounded-xl bg-white p-1.5 border-2 border-gold-500 shrink-0 cursor-pointer hover:scale-[1.02] transition-transform"
-            />
+              className="w-40 sm:w-48 rounded-2xl bg-[#FAF6F0] px-3 py-2.5 border-2 border-gold-400/90 shrink-0 cursor-pointer hover:scale-[1.02] transition-transform shadow-md flex items-center justify-center"
+            >
+              <img
+                src="/sadaya-logo.png"
+                alt="Logo SADAYA — Sarana Digital Wisata, Budaya, dan Lingkungan Asri"
+                className="w-full h-auto object-contain"
+              />
+            </div>
             <div className="space-y-2 text-left">
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="bg-gold-500 text-earth-900 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
                   Social Project · Mojang Jajaka Kabupaten Cianjur
                 </span>
-                <span className="bg-earth-800 text-gold-300 border border-gold-500/30 text-[10px] font-semibold px-2.5 py-0.5 rounded-full">
+                <span className="bg-earth-800/90 text-gold-300 border border-gold-500/40 text-[10px] font-semibold px-2.5 py-0.5 rounded-full">
                   Kelompok 6 · Swaranusa
                 </span>
               </div>
-              <h3 className="text-base sm:text-lg font-bold text-gold-400 leading-snug">
+              <h3 className="font-heritage text-base sm:text-xl font-bold text-gold-300 leading-snug">
                 SADAYA (Sarana Digital Wisata, Budaya, dan Lingkungan Asri)
               </h3>
-              <p className="text-xs sm:text-sm text-earth-200 leading-relaxed">
-                <strong>SADAYA</strong> merupakan salah satu <strong>Social Project dari Mojang Jajaka Kabupaten Cianjur</strong> yang mengintegrasikan informasi wisata kawasan Alun-Alun Cianjur, edukasi sejarah 3 Pilar Budaya (<em>Ngaos, Mamaos, Maenpo</em>), promosi UMKM kuliner & oleh-oleh khas Cianjur, serta gerakan menjaga kebersihan dan ketertiban lingkungan asri (Budaya K5).
+              <p className="text-xs sm:text-sm text-earth-100 leading-relaxed">
+                <strong>SADAYA</strong> merupakan salah satu <strong>Social Project dari Mojang Jajaka Kabupaten Cianjur</strong> yang mengintegrasikan informasi wisata kawasan Alun-Alun Cianjur, edukasi sejarah 3 Pilar Budaya (<em>Ngaos, Mamaos, Maenpo</em>), promosi UMKM kuliner &amp; oleh-oleh khas Cianjur, serta gerakan menjaga kebersihan dan ketertiban lingkungan asri (Budaya K5).
               </p>
             </div>
           </div>
@@ -554,16 +558,16 @@ export default function GuideView() {
         </section>
       )}
 
-      {/* 3. DAERAH TOILET & TEMPAT WUDHU SEBELAH MANA SAJA */}
+      {/* 3. DAERAH TOILET SEBELAH MANA SAJA */}
       {(section === 'all' || section === 'toilet') && (
         <section className="space-y-3 animate-view-enter">
           <div className="flex items-center justify-between gap-2 flex-wrap">
             <div>
-              <h3 className="text-base font-bold text-earth-900">
+              <h3 className="font-heritage text-base font-bold text-earth-900">
                 Lokasi WC / Toilet di Kawasan Alun-Alun ({data.toilets.length} Titik)
               </h3>
               <p className="text-xs text-earth-600">
-                Daftar posisi toilet pengunjung & fasilitas wudhu beserta penanda WC di peta
+                Daftar posisi fasilitas toilet pengunjung beserta penanda WC di peta
               </p>
             </div>
             <button
@@ -575,57 +579,89 @@ export default function GuideView() {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-            {data.toilets.map((t) => (
-              <div
-                key={t.id}
-                className="bg-white rounded-2xl border border-earth-200 p-4 shadow-xs flex flex-col justify-between space-y-3"
-              >
-                <div className="space-y-2">
-                  <div className="flex items-start justify-between gap-2">
-                    <span className="inline-block text-[10px] font-bold bg-islam-50 text-islam-700 border border-islam-200 px-2.5 py-0.5 rounded-full">
-                      Pin Peta: WC · {t.id}
-                    </span>
-                    <span className="text-[11px] font-medium text-earth-500">{t.open_hours}</span>
-                  </div>
-                  <h4 className="font-bold text-earth-900 text-sm sm:text-base leading-snug">
-                    {t.name}
-                  </h4>
-                  <p className="text-xs text-earth-700 leading-relaxed">
-                    <span className="font-semibold text-earth-900">Patokan Lokasi: </span>
-                    {t.location_hint}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 pt-0.5">
-                    {t.facilities.map((fac) => (
-                      <span
-                        key={fac}
-                        className="bg-earth-50 text-earth-800 border border-earth-200 text-[11px] px-2 py-0.5 rounded-lg"
-                      >
-                        {fac}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+            {data.toilets.map((t) => {
+              const toiletPhoto = getVisualUrl({
+                id: t.id,
+                title: t.name,
+                subtitle: 'Fasilitas Toilet',
+                category: 'toilet',
+                photoUrl: (t as { photo_url?: string | null }).photo_url ?? null,
+              });
+              return (
+                <div
+                  key={t.id}
+                  className="heritage-card rounded-2xl overflow-hidden flex flex-col justify-between transition-all"
+                >
+                  <div>
+                    <div
+                      className="relative h-32 bg-earth-900 overflow-hidden group cursor-pointer"
+                      onClick={() =>
+                        setLightboxItem({
+                          title: t.name,
+                          sub: `${t.location_hint} · ${t.open_hours}`,
+                          url: toiletPhoto,
+                        })
+                      }
+                    >
+                      <img
+                        src={toiletPhoto}
+                        alt={t.name}
+                        loading="lazy"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <span className="absolute top-2.5 left-2.5 bg-islam-700/95 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-xs">
+                        Pin Peta: WC · {t.id}
                       </span>
-                    ))}
+                      <span className="absolute bottom-2 right-2 bg-black/65 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">
+                        Perbesar
+                      </span>
+                    </div>
+
+                    <div className="p-4 space-y-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[11px] font-semibold text-islam-700">{t.open_hours}</span>
+                      </div>
+                      <h4 className="font-bold text-earth-900 text-sm sm:text-base leading-snug">
+                        {t.name}
+                      </h4>
+                      <p className="text-xs text-earth-700 leading-relaxed">
+                        <span className="font-semibold text-earth-900">Patokan Lokasi: </span>
+                        {t.location_hint}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5 pt-0.5">
+                        {t.facilities.map((fac) => (
+                          <span
+                            key={fac}
+                            className="bg-earth-50 text-earth-800 border border-earth-200 text-[11px] px-2 py-0.5 rounded-lg"
+                          >
+                            {fac}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="px-4 pb-4 pt-1 flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => showPointOnMap(t.coords, 'toilet')}
+                      className="flex-1 min-w-[120px] py-2 px-3 rounded-xl bg-islam-700 hover:bg-islam-600 text-white text-xs font-semibold active:scale-95 transition-all"
+                    >
+                      Lihat Posisi Toilet di Peta
+                    </button>
+                    <a
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${t.coords[0]},${t.coords[1]}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-2 px-3 rounded-xl bg-earth-100 hover:bg-earth-200 text-earth-800 text-xs font-semibold active:scale-95 transition-all"
+                    >
+                      Rute Maps
+                    </a>
                   </div>
                 </div>
-
-                <div className="flex flex-wrap gap-2 pt-1">
-                  <button
-                    type="button"
-                    onClick={() => showPointOnMap(t.coords, 'toilet')}
-                    className="flex-1 min-w-[120px] py-2 px-3 rounded-xl bg-islam-700 hover:bg-islam-600 text-white text-xs font-semibold active:scale-95 transition-all"
-                  >
-                    Lihat Posisi Toilet di Peta
-                  </button>
-                  <a
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${t.coords[0]},${t.coords[1]}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="py-2 px-3 rounded-xl bg-earth-100 hover:bg-earth-200 text-earth-800 text-xs font-semibold active:scale-95 transition-all"
-                  >
-                    Rute Maps
-                  </a>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
       )}
@@ -635,11 +671,11 @@ export default function GuideView() {
         <section className="space-y-3 animate-view-enter">
           <div className="flex items-center justify-between gap-2 flex-wrap">
             <div>
-              <h3 className="text-base font-bold text-earth-900">
-                Rekomendasi Oleh-Oleh Terdekat & Khas Cianjur ({souvenirs.length} Destinasi)
+              <h3 className="font-heritage text-base font-bold text-earth-900">
+                Rekomendasi Oleh-Oleh Terdekat &amp; Khas Cianjur ({souvenirs.length} Destinasi)
               </h3>
               <p className="text-xs text-earth-600">
-                Buah tangan khas Cianjur terdekat dari Alun-Alun: Tauco 1880, Roti Tan Keng Cu 1926, Manisan, & Beras Pandanwangi
+                Buah tangan khas Cianjur terdekat dari Alun-Alun: Tauco 1880, Roti Tan Keng Cu 1926, Manisan, &amp; Beras Pandanwangi
               </p>
             </div>
             <button
@@ -647,7 +683,7 @@ export default function GuideView() {
               onClick={() => setActiveTab('kuliner')}
               className="shrink-0 px-3.5 py-2 rounded-xl bg-earth-800 hover:bg-earth-900 text-white text-xs font-semibold active:scale-95 transition-all"
             >
-              Buka Katalog Kuliner & Oleh-Oleh
+              Buka Katalog Kuliner &amp; Oleh-Oleh
             </button>
           </div>
 
@@ -658,6 +694,7 @@ export default function GuideView() {
                 title: item.name,
                 subtitle: 'Oleh-Oleh Khas Cianjur',
                 category: 'souvenir',
+                photoUrl: item.photo_url,
               });
               return (
                 <div

@@ -54,7 +54,15 @@ export default function HotelView() {
 
   return (
     <div className="px-3.5 sm:px-6 pt-3.5 pb-28 md:pb-32 space-y-3.5">
-      <div className="bg-white rounded-2xl p-3.5 sm:p-4 border border-earth-200 shadow-xs space-y-2.5">
+      <div className="heritage-card rounded-2xl p-3.5 sm:p-4 space-y-2.5">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="font-heritage text-base sm:text-lg font-bold text-earth-900">
+            Akomodasi &amp; Hotel Terdekat dari Alun-Alun Cianjur
+          </h2>
+          <span className="text-[11px] font-semibold text-earth-800 bg-gold-300/35 border border-gold-500/40 px-2.5 py-0.5 rounded-full shrink-0">
+            {data.hotels.length} Penginapan
+          </span>
+        </div>
         <input
           type="search"
           value={search}
@@ -72,7 +80,7 @@ export default function HotelView() {
                 onClick={() => setSortBy(opt.key)}
                 className={`shrink-0 px-3.5 min-h-9 rounded-full text-xs font-semibold transition-all active:scale-95 ${
                   sortBy === opt.key
-                    ? 'bg-earth-800 text-white shadow-xs'
+                    ? 'bg-earth-800 text-gold-300 border border-gold-500/50 shadow-xs'
                     : 'bg-earth-100 text-earth-700 border border-earth-200 hover:bg-earth-200'
                 }`}
               >
@@ -89,7 +97,7 @@ export default function HotelView() {
                 onClick={() => setFacility(fac)}
                 className={`shrink-0 px-3 min-h-8 rounded-full text-xs font-medium transition-all active:scale-95 ${
                   facility === fac
-                    ? 'bg-islam-600 text-white shadow-xs'
+                    ? 'bg-islam-700 text-white shadow-xs'
                     : 'bg-white text-earth-600 border border-earth-200 hover:bg-earth-100'
                 }`}
               >
@@ -100,12 +108,12 @@ export default function HotelView() {
         </div>
       </div>
 
-      <p className="text-xs text-earth-500 px-0.5">
+      <p className="text-xs text-earth-600 px-0.5">
         Menampilkan {hotels.length} dari {data.hotels.length} rekomendasi penginapan
       </p>
 
       {hotels.length === 0 && (
-        <div className="bg-white rounded-2xl border border-earth-200 p-6 text-center space-y-2 animate-view-enter">
+        <div className="heritage-card rounded-2xl p-6 text-center space-y-2 animate-view-enter">
           <p className="text-sm font-medium text-earth-700">
             Tidak ada hotel dengan filter tersebut.
           </p>
@@ -131,13 +139,14 @@ export default function HotelView() {
             title: hotel.name,
             subtitle: `Rating ★ ${hotel.rating.toFixed(1)} · ${formatDistance(hotel.distance_m)}`,
             category: 'hotel',
+            photoUrl: hotel.photo_url,
           });
           return (
             <div
               key={hotel.id}
               style={{ animationDelay: `${Math.min(idx, 10) * 45}ms` }}
               onClick={() => setExpandedId(expanded ? null : hotel.id)}
-              className="animate-card-cascade bg-white rounded-2xl border border-earth-200 overflow-hidden shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-earth-300 cursor-pointer"
+              className="animate-card-cascade heritage-card rounded-2xl overflow-hidden transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
             >
               <div
                 className="relative h-36 bg-earth-900 overflow-hidden group"

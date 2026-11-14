@@ -53,7 +53,15 @@ export default function CulinaryView() {
 
   return (
     <div className="px-3.5 sm:px-6 pt-3.5 pb-28 md:pb-32 space-y-3.5">
-      <div className="bg-white rounded-2xl p-3.5 sm:p-4 border border-earth-200 shadow-xs space-y-2.5">
+      <div className="heritage-card rounded-2xl p-3.5 sm:p-4 space-y-2.5">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="font-heritage text-base sm:text-lg font-bold text-earth-900">
+            Kuliner Legendaris &amp; Oleh-Oleh Khas Cianjur
+          </h2>
+          <span className="text-[11px] font-semibold text-earth-800 bg-gold-300/35 border border-gold-500/40 px-2.5 py-0.5 rounded-full shrink-0">
+            {data.culinary_spots.length} Destinasi
+          </span>
+        </div>
         <input
           type="search"
           value={search}
@@ -77,7 +85,7 @@ export default function CulinaryView() {
               onClick={() => setTypeFilter(tab.id)}
               className={`shrink-0 min-h-8 px-3.5 rounded-full text-xs font-semibold transition-all active:scale-95 ${
                 typeFilter === tab.id
-                  ? 'bg-earth-800 text-white shadow-xs'
+                  ? 'bg-earth-800 text-gold-300 border border-gold-500/50 shadow-xs'
                   : 'bg-earth-100 text-earth-700 hover:bg-earth-200'
               }`}
             >
@@ -105,7 +113,7 @@ export default function CulinaryView() {
       </div>
 
       {spots.length === 0 && (
-        <div className="bg-white rounded-2xl border border-earth-200 p-6 text-center space-y-2 animate-view-enter">
+        <div className="heritage-card rounded-2xl p-6 text-center space-y-2 animate-view-enter">
           <p className="text-sm font-medium text-earth-700">
             Tidak ada tempat kuliner yang cocok dengan filter saat ini.
           </p>
@@ -118,7 +126,7 @@ export default function CulinaryView() {
             }}
             className="px-4 py-2 rounded-xl bg-earth-800 text-white text-xs font-semibold active:scale-95 transition-transform"
           >
-            Tampilkan Semua Kuliner & Oleh-Oleh
+            Tampilkan Semua Kuliner &amp; Oleh-Oleh
           </button>
         </div>
       )}
@@ -132,13 +140,14 @@ export default function CulinaryView() {
             title: spot.name,
             subtitle: spot.isSouvenir ? 'Oleh-Oleh Khas Cianjur' : 'Kuliner Legendaris',
             category: spot.isSouvenir ? 'souvenir' : 'culinary',
+            photoUrl: spot.photo_url,
           });
           return (
             <div
               key={spot.id}
               style={{ animationDelay: `${Math.min(idx, 10) * 45}ms` }}
               onClick={() => setExpandedId(expanded ? null : spot.id)}
-              className="animate-card-cascade bg-white rounded-2xl border border-earth-200 overflow-hidden shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-earth-300 cursor-pointer"
+              className="animate-card-cascade heritage-card rounded-2xl overflow-hidden transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
             >
               <div
                 className="relative h-36 bg-earth-900 overflow-hidden group"

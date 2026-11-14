@@ -119,7 +119,15 @@ export default function HeritageView() {
   return (
     <div className="px-3.5 sm:px-6 pt-3.5 pb-28 md:pb-32 space-y-3.5">
       {/* Search Input & Filter Controls */}
-      <div className="bg-white rounded-2xl p-3.5 sm:p-4 border border-earth-200 shadow-xs space-y-2.5">
+      <div className="heritage-card rounded-2xl p-3.5 sm:p-4 space-y-2.5">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="font-heritage text-base sm:text-lg font-bold text-earth-900">
+            Ensiklopedia Ikon Sejarah &amp; 3 Pilar Budaya Cianjur
+          </h2>
+          <span className="text-[11px] font-semibold text-islam-700 bg-islam-50 border border-islam-200 px-2.5 py-0.5 rounded-full shrink-0">
+            {data.heritage_icons.length} Ikon
+          </span>
+        </div>
         <input
           type="search"
           value={search}
@@ -137,7 +145,7 @@ export default function HeritageView() {
                 onClick={() => setZone(o.value)}
                 className={`shrink-0 px-3.5 min-h-9 rounded-full text-xs font-semibold whitespace-nowrap transition-all active:scale-95 ${
                   zone === o.value
-                    ? 'bg-earth-800 text-white shadow-xs'
+                    ? 'bg-earth-800 text-gold-300 border border-gold-500/50 shadow-xs'
                     : 'bg-earth-100 text-earth-700 hover:bg-earth-200'
                 }`}
               >
@@ -154,7 +162,7 @@ export default function HeritageView() {
                 onClick={() => setPilar(p.value)}
                 className={`shrink-0 px-3 min-h-8 rounded-full text-xs font-medium whitespace-nowrap transition-all active:scale-95 ${
                   pilar === p.value
-                    ? 'bg-islam-600 text-white shadow-xs'
+                    ? 'bg-islam-700 text-white shadow-xs'
                     : 'bg-white text-earth-600 border border-earth-200 hover:bg-earth-100'
                 }`}
               >
@@ -166,12 +174,12 @@ export default function HeritageView() {
       </div>
 
       {/* Result count */}
-      <p className="text-xs text-earth-500 px-0.5">
-        Menampilkan {filtered.length} dari {data.heritage_icons.length} ikon sejarah & cagar budaya
+      <p className="text-xs text-earth-600 px-0.5">
+        Menampilkan {filtered.length} dari {data.heritage_icons.length} ikon sejarah &amp; cagar budaya
       </p>
 
       {filtered.length === 0 && (
-        <div className="bg-white rounded-2xl border border-earth-200 p-6 text-center space-y-2 animate-view-enter">
+        <div className="heritage-card rounded-2xl p-6 text-center space-y-2 animate-view-enter">
           <p className="text-sm font-medium text-earth-700">Tidak ada ikon sejarah yang cocok.</p>
           <button
             onClick={() => {
@@ -197,13 +205,14 @@ export default function HeritageView() {
             title: icon.name,
             subtitle: `${PILAR_DISPLAY[icon.pilar_tag] ?? icon.pilar_tag} · ${icon.year_built}`,
             category: icon.pilar_tag,
+            photoUrl: icon.photo_url,
           });
 
           return (
             <div
               key={icon.id}
               style={{ animationDelay: `${Math.min(idx, 10) * 40}ms` }}
-              className="animate-card-cascade bg-white rounded-2xl border border-earth-200 overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-earth-300"
+              className="animate-card-cascade heritage-card rounded-2xl overflow-hidden transition-all duration-200 hover:-translate-y-0.5"
             >
               <div
                 className="relative h-36 bg-earth-900 overflow-hidden group cursor-pointer"

@@ -10,12 +10,159 @@ const GuideView = lazy(() => import('./components/GuideView'));
 const QuestView = lazy(() => import('./components/QuestView'));
 const AdminMapper = lazy(() => import('./components/AdminMapper'));
 
+const SPLASH_STORAGE_KEY = 'sadaya_splash_last_shown_at';
+const SPLASH_SESSION_KEY = 'sadaya_splash_session_seen';
+const SPLASH_TTL_MS = 3 * 60 * 60 * 1000; // 3 jam
+
+function shouldShowSplashOnMount(): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    const navEntries = window.performance?.getEntriesByType?.('navigation') as
+      | PerformanceNavigationTiming[]
+      | undefined;
+    if (navEntries && navEntries.length > 0 && navEntries[0].type === 'reload') {
+      return false;
+    }
+    if (window.sessionStorage.getItem(SPLASH_SESSION_KEY) === '1') {
+      return false;
+    }
+    const lastShownRaw = window.localStorage.getItem(SPLASH_STORAGE_KEY);
+    if (lastShownRaw) {
+      const elapsed = Date.now() - Number(lastShownRaw);
+      if (!Number.isNaN(elapsed) && elapsed >= 0 && elapsed < SPLASH_TTL_MS) {
+        window.sessionStorage.setItem(SPLASH_SESSION_KEY, '1');
+        return false;
+      }
+    }
+    const nowStr = String(Date.now());
+    window.localStorage.setItem(SPLASH_STORAGE_KEY, nowStr);
+    window.sessionStorage.setItem(SPLASH_SESSION_KEY, '1');
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function SadayaSplashScreen({ onFinish }: { onFinish: () => void }) {
+  const [exiting, setExiting] = useState(false);
+
+  useEffect(() => {
+    const exitTimer = window.setTimeout(() => setExiting(true), 2200);
+    const doneTimer = window.setTimeout(() => onFinish(), 2650);
+    return () => {
+      window.clearTimeout(exitTimer);
+      window.clearTimeout(doneTimer);
+    };
+  }, [onFinish]);
+
+  const handleSkip = () => {
+    setExiting(true);
+    window.setTimeout(() => onFinish(), 320);
+  };
+
+  return (
+    <div
+      className={`fixed inset-0 z-[3000] bg-sundanese-dark text-white flex flex-col items-center justify-between p-6 select-none overflow-hidden transition-all duration-500 ease-out ${
+        exiting ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100 scale-100'
+      }`}
+      role="status"
+      aria-label="Memuat SADAYA Alun-Alun Cianjur"
+    >
+      {/* Decorative rotating Sundanese Kawung & Islamic geometric mandala rings */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
+        <svg
+          viewBox="0 0 400 400"
+          className="w-[340px] h-[340px] sm:w-[460px] sm:h-[460px] text-gold-500/15 animate-splash-orbit"
+          fill="none"
+        >
+          <circle cx="200" cy="200" r="180" stroke="currentColor" strokeWidth="1" strokeDasharray="6 6" />
+          <rect x="72" y="72" width="256" height="256" stroke="currentColor" strokeWidth="1" />
+          <rect
+            x="72"
+            y="72"
+            width="256"
+            height="256"
+            stroke="currentColor"
+            strokeWidth="1"
+            transform="rotate(45 200 200)"
+          />
+        </svg>
+        <svg
+          viewBox="0 0 320 320"
+          className="absolute w-[250px] h-[250px] sm:w-[340px] sm:h-[340px] text-gold-400/20 animate-splash-orbit-rev"
+          fill="none"
+        >
+          <circle cx="160" cy="160" r="136" stroke="currentColor" strokeWidth="1.2" />
+          <path
+            d="M160 24 L296 160 L160 296 L24 160 Z"
+            stroke="currentColor"
+            strokeWidth="1"
+          />
+        </svg>
+      </div>
+
+      {/* Top cultural header */}
+      <div className="relative z-10 flex items-center gap-2 pt-2 text-[10px] sm:text-xs tracking-[0.22em] uppercase text-gold-300 font-semibold">
+        <span className="w-6 h-px bg-gold-500/60" />
+        <span>Tatar Santri · Kabupaten Cianjur</span>
+        <span className="w-6 h-px bg-gold-500/60" />
+      </div>
+
+      {/* Center Logo & Editorial Identity */}
+      <div className="relative z-10 flex flex-col items-center text-center max-w-md my-auto animate-splash-logo">
+        <div className="relative mb-5">
+          <div className="absolute -inset-3 rounded-full bg-gold-500/20 blur-xl" />
+          <div className="relative w-36 h-24 sm:w-44 sm:h-28 rounded-2xl bg-[#FAF6F0] px-3 py-2 flex items-center justify-center shadow-[0_14px_40px_rgba(0,0,0,0.45)] ring-2 ring-gold-400/80">
+            <img
+              src="/sadaya-logo.png"
+              alt="Logo SADAYA"
+              className="w-full h-full object-contain drop-shadow-xs"
+            />
+          </div>
+        </div>
+
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-islam-700/90 border border-gold-400/50 text-gold-300 text-[10px] sm:text-xs font-bold tracking-wider uppercase mb-2.5 shadow-sm">
+          <span>Ngaos</span>
+          <span className="text-gold-400">◆</span>
+          <span>Mamaos</span>
+          <span className="text-gold-400">◆</span>
+          <span>Maenpo</span>
+        </div>
+
+        <h1 className="font-heritage text-2xl sm:text-4xl font-bold text-gold-300 tracking-tight leading-tight">
+          SADAYA Cianjur
+        </h1>
+        <p className="text-xs sm:text-sm font-medium text-earth-100 mt-1.5 max-w-xs sm:max-w-sm leading-relaxed">
+          Sarana Digital Wisata, Budaya &amp; Lingkungan Asri Kawasan Alun-Alun Cianjur
+        </p>
+
+        {/* Progress Bar */}
+        <div className="w-48 sm:w-56 h-1.5 bg-earth-800/90 rounded-full overflow-hidden mt-6 border border-gold-500/30 p-[1px]">
+          <div className="w-full h-full rounded-full bg-gradient-to-r from-islam-500 via-gold-400 to-gold-300 animate-splash-progress" />
+        </div>
+      </div>
+
+      {/* Bottom Attribution & Skip */}
+      <div className="relative z-10 w-full max-w-md flex items-center justify-between gap-3 pb-1 text-[11px] text-earth-200">
+        <span className="truncate">Mojang Jajaka Kab. Cianjur · Kelompok 6 Swaranusa</span>
+        <button
+          type="button"
+          onClick={handleSkip}
+          className="px-3 py-1 rounded-full bg-earth-800/90 hover:bg-earth-700 text-gold-300 font-semibold border border-gold-500/40 transition-colors shrink-0"
+        >
+          Masuk →
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function TopHeader({ onOpenAbout }: { onOpenAbout: () => void }) {
   const { questState, setActiveTab } = useApp();
   const entryGateObj = data.gates.find((g) => g.id === questState.entry_gate);
 
   return (
-    <header className="bg-earth-900 text-white border-b border-earth-800 shrink-0">
+    <header className="bg-sundanese-dark text-white border-b border-gold-500/35 shrink-0">
       <div className="px-3 sm:px-6 py-2.5 flex items-center justify-between gap-2">
         <button
           type="button"
@@ -23,21 +170,23 @@ function TopHeader({ onOpenAbout }: { onOpenAbout: () => void }) {
           className="min-w-0 flex-1 flex items-center gap-2.5 text-left group"
           aria-label="Tentang SADAYA — Social Project Mojang Jajaka Kabupaten Cianjur"
         >
-          <img
-            src="/sadaya-logo.jpg"
-            alt="Logo SADAYA"
-            className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl object-contain bg-white p-0.5 border border-gold-500/60 shrink-0 shadow-xs group-hover:scale-105 transition-transform"
-          />
+          <div className="w-11 h-10 sm:w-13 sm:h-11 rounded-xl bg-[#FAF6F0] px-1.5 py-1 border border-gold-400/80 shrink-0 shadow-sm flex items-center justify-center group-hover:scale-105 transition-transform">
+            <img
+              src="/sadaya-logo.png"
+              alt="Logo SADAYA"
+              className="w-full h-full object-contain"
+            />
+          </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="text-xs sm:text-base font-bold tracking-tight text-gold-400 truncate">
+              <span className="font-heritage text-sm sm:text-lg font-bold tracking-tight text-gold-300 truncate">
                 SADAYA
               </span>
               <span className="text-[10px] sm:text-xs font-semibold text-earth-200 truncate">
                 · Alun-Alun Cianjur
               </span>
             </div>
-            <p className="text-[10px] sm:text-xs text-earth-300 truncate mt-0.5">
+            <p className="text-[10px] sm:text-xs text-earth-200/90 truncate mt-0.5">
               {entryGateObj
                 ? `Gerbang Aktif: ${entryGateObj.name}`
                 : 'Sarana Digital Wisata, Budaya & Lingkungan Asri'}
@@ -49,7 +198,7 @@ function TopHeader({ onOpenAbout }: { onOpenAbout: () => void }) {
           <button
             type="button"
             onClick={() => setActiveTab('panduan')}
-            className="min-h-10 px-2.5 sm:px-3 py-1.5 rounded-xl bg-islam-700 hover:bg-islam-600 active:scale-95 text-white text-[11px] sm:text-xs font-semibold transition-all duration-200 shadow-xs"
+            className="min-h-10 px-2.5 sm:px-3.5 py-1.5 rounded-xl bg-islam-700 hover:bg-islam-600 active:scale-95 text-white text-[11px] sm:text-xs font-semibold border border-islam-500/50 transition-all duration-200 shadow-xs"
             aria-label="Isi kehadiran pengunjung opsional"
           >
             Isi Kehadiran
@@ -58,13 +207,13 @@ function TopHeader({ onOpenAbout }: { onOpenAbout: () => void }) {
           <button
             type="button"
             onClick={() => setActiveTab('misi')}
-            className="min-h-10 px-2.5 sm:px-3.5 py-1.5 rounded-xl bg-earth-800 hover:bg-earth-700 active:scale-95 border border-gold-500/40 text-left transition-all duration-200 shadow-xs"
+            className="min-h-10 px-2.5 sm:px-3.5 py-1.5 rounded-xl bg-earth-800/90 hover:bg-earth-700 active:scale-95 border border-gold-500/45 text-left transition-all duration-200 shadow-xs tabular-nums"
             aria-label="Lihat progres misi dan XP"
           >
-            <div className="text-xs sm:text-sm font-bold text-gold-400 leading-none">
+            <div className="text-xs sm:text-sm font-bold text-gold-300 leading-none">
               {questState.total_xp} XP
             </div>
-            <div className="text-[10px] text-earth-300 mt-0.5 whitespace-nowrap">
+            <div className="text-[10px] text-earth-200 mt-0.5 whitespace-nowrap">
               {questState.completed_missions.length}/{data.missions.length} Misi
             </div>
           </button>
@@ -136,23 +285,25 @@ function SadayaAboutModal({
       aria-labelledby="sadaya-modal-title"
     >
       <div
-        className="bg-earth-50 rounded-2xl max-w-lg w-full max-h-[90dvh] flex flex-col overflow-hidden shadow-2xl border border-earth-200"
+        className="bg-[#FAF6F0] rounded-2xl max-w-lg w-full max-h-[90dvh] flex flex-col overflow-hidden shadow-2xl border border-gold-500/40"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="bg-earth-900 text-white p-3.5 sm:p-5 flex items-start justify-between gap-3 border-b border-earth-800 shrink-0">
+        <div className="bg-sundanese-dark text-white p-3.5 sm:p-5 flex items-start justify-between gap-3 border-b border-gold-500/35 shrink-0">
           <div className="flex items-center gap-3 min-w-0 flex-1">
-            <img
-              src="/sadaya-logo.jpg"
-              alt="Logo SADAYA"
-              className="w-16 h-12 sm:w-22 sm:h-15 rounded-xl object-contain bg-white p-1 border border-gold-500 shrink-0"
-            />
+            <div className="w-16 h-12 sm:w-22 sm:h-15 rounded-xl bg-[#FAF6F0] px-1.5 py-1 border border-gold-400/80 shrink-0 flex items-center justify-center shadow-sm">
+              <img
+                src="/sadaya-logo.png"
+                alt="Logo SADAYA"
+                className="w-full h-full object-contain"
+              />
+            </div>
             <div className="min-w-0 flex-1">
               <span className="inline-block bg-gold-500 text-earth-900 text-[10px] font-bold px-2 py-0.5 rounded-md mb-1 leading-tight">
                 Social Project · Mojang Jajaka Kab. Cianjur
               </span>
               <h2
                 id="sadaya-modal-title"
-                className="text-sm sm:text-lg font-bold text-gold-400 leading-tight"
+                className="font-heritage text-sm sm:text-lg font-bold text-gold-300 leading-tight"
               >
                 SADAYA Cianjur
               </h2>
@@ -175,11 +326,11 @@ function SadayaAboutModal({
           <p>
             <strong>SADAYA (Sarana Digital Wisata, Budaya, dan Lingkungan Asri)</strong> merupakan salah satu <strong>Social Project dari Mojang Jajaka Kabupaten Cianjur</strong> (Kelompok 6 Swaranusa) yang dirancang sebagai pusat informasi digital terpadu bagi masyarakat dan wisatawan di kawasan Alun-Alun Cianjur.
           </p>
-          <div className="bg-white rounded-xl p-3.5 border border-earth-200 space-y-1.5 text-xs">
+          <div className="heritage-card rounded-xl p-3.5 space-y-1.5 text-xs">
             <div className="font-bold text-earth-900">Pilar Utama Program SADAYA:</div>
             <ul className="list-disc pl-4 space-y-1 text-earth-700">
               <li>
-                <strong>Wisata & Aksesibilitas:</strong> Peta interaktif Alun-Alun, titik lokasi toilet & wudhu, panduan waktu tempuh dari Stasiun Cianjur (6 menit jalan kaki), serta event pameran Malam Minggu di Bunderan & Bomero City Walk.
+                <strong>Wisata &amp; Aksesibilitas:</strong> Peta interaktif Alun-Alun, titik lokasi toilet, panduan waktu tempuh dari Stasiun Cianjur (6 menit jalan kaki), serta event pameran Malam Minggu di Bunderan &amp; Bomero City Walk.
               </li>
               <li>
                 <strong>Pelestarian Budaya:</strong> Ensiklopedia dan pemandu suara 16 ikon sejarah 3 Pilar Budaya Cianjur (<em>Ngaos, Mamaos, Maenpo</em>) beserta rekomendasi oleh-oleh khas Cianjur.
@@ -329,6 +480,7 @@ function TabContent() {
 
 function AppShell() {
   const { activeTab, setMapFocus, updateQuest, setActiveTab } = useApp();
+  const [showSplash, setShowSplash] = useState(shouldShowSplashOnMount);
   const [showIntroBanner, setShowIntroBanner] = useState(true);
   const [showAboutModal, setShowAboutModal] = useState(false);
 
@@ -350,12 +502,13 @@ function AppShell() {
 
   return (
     <div
-      className={`bg-earth-100/80 flex flex-col ${
+      className={`bg-sundanese-light flex flex-col ${
         activeTab === 'peta' ? 'h-dvh overflow-hidden' : 'min-h-dvh'
       }`}
     >
+      {showSplash && <SadayaSplashScreen onFinish={() => setShowSplash(false)} />}
       <div
-        className={`w-full max-w-6xl mx-auto flex flex-col bg-earth-50 shadow-sm lg:border-x lg:border-earth-200/80 ${
+        className={`w-full max-w-6xl mx-auto flex flex-col bg-sundanese-light shadow-md lg:border-x lg:border-gold-500/30 ${
           activeTab === 'peta' ? 'h-dvh overflow-hidden' : 'min-h-dvh'
         }`}
       >

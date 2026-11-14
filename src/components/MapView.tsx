@@ -28,6 +28,7 @@ interface SheetData {
   detail: string;
   distance: number | null;
   coords: [number, number];
+  photoUrl?: string | null;
   audioScript?: string;
   quizId?: string | null;
   openStatus?: { isOpen: boolean; label: string };
@@ -134,6 +135,7 @@ function buildMarkers(): MarkerItem[] {
         detail: g.welcome,
         distance: null,
         coords: g.coords as [number, number],
+        photoUrl: (g as { photo_url?: string | null }).photo_url ?? null,
       },
     });
   }
@@ -144,17 +146,18 @@ function buildMarkers(): MarkerItem[] {
       coords: t.coords as [number, number],
       category: 'toilet',
       isInternal: true,
-      searchKeywords: `${t.name} ${t.location_hint} ${t.facilities.join(' ')} toilet wc wudhu kamar mandi`.toLowerCase(),
+      searchKeywords: `${t.name} ${t.location_hint} ${t.facilities.join(' ')} toilet wc kamar mandi`.toLowerCase(),
       sheet: {
         id: t.id,
         name: t.name,
         category: 'toilet',
-        categoryLabel: 'Fasilitas Toilet & Wudhu',
+        categoryLabel: 'Fasilitas Toilet',
         categoryColor: COLORS.toilet,
         subLabel: t.open_hours,
         detail: `${t.location_hint}. Fasilitas: ${t.facilities.join(', ')}.`,
         distance: null,
         coords: t.coords as [number, number],
+        photoUrl: (t as { photo_url?: string | null }).photo_url ?? null,
       },
     });
   }
@@ -178,6 +181,7 @@ function buildMarkers(): MarkerItem[] {
         detail: h.summary,
         distance: h.distance_m,
         coords,
+        photoUrl: h.photo_url ?? null,
         audioScript: `${h.name}. ${h.summary}`,
         quizId: h.quiz_id,
       },
@@ -202,6 +206,7 @@ function buildMarkers(): MarkerItem[] {
         detail: `${c.address}. Menu andalan: ${c.signature_menu.join(', ')}. ${c.history_note}`,
         distance: c.distance_m,
         coords: c.coords as [number, number],
+        photoUrl: c.photo_url ?? null,
         openStatus: status,
       },
     });
@@ -224,6 +229,7 @@ function buildMarkers(): MarkerItem[] {
         detail: `${h.address}. Fasilitas: ${h.facilities.join(', ')}.`,
         distance: h.distance_m,
         coords: h.coords as [number, number],
+        photoUrl: h.photo_url ?? null,
       },
     });
   }
@@ -372,7 +378,7 @@ export default function MapView() {
     if (scope === 'alun-alun') {
       return [
         { id: 'all' as Category, label: 'Semua Taman', count: scopedMarkers.length },
-        { id: 'toilet' as Category, label: 'Toilet & Wudhu', count: data.toilets.length },
+        { id: 'toilet' as Category, label: 'Toilet', count: data.toilets.length },
         { id: 'trash' as Category, label: 'Tong Sampah', count: counts('trash') },
         { id: 'heritage' as Category, label: 'Ikon Sejarah', count: data.heritage_icons.length },
         { id: 'culinary' as Category, label: 'Kuliner & Oleh-Oleh', count: data.culinary_spots.length },
@@ -383,7 +389,7 @@ export default function MapView() {
 
     return [
       { id: 'all' as Category, label: 'Semua Kota', count: ALL_MARKERS.length },
-      { id: 'toilet' as Category, label: 'Toilet & Wudhu', count: counts('toilet') },
+      { id: 'toilet' as Category, label: 'Toilet', count: counts('toilet') },
       { id: 'culinary' as Category, label: 'Kuliner & Oleh-Oleh', count: counts('culinary') },
       { id: 'hotel' as Category, label: 'Hotel', count: counts('hotel') },
       { id: 'heritage' as Category, label: 'Sejarah', count: counts('heritage') },
@@ -815,7 +821,7 @@ export default function MapView() {
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full inline-block shrink-0" style={{ background: COLORS.toilet }} />
-            <span>Toilet & Wudhu (WC)</span>
+            <span>Toilet (WC)</span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full inline-block shrink-0" style={{ background: COLORS.heritage }} />
@@ -853,7 +859,7 @@ export default function MapView() {
 
       {/* Detail Bottom Sheet (Mobile bottom sheet + Desktop floating card) */}
       <div
-        className={`fixed bottom-[56px] inset-x-0 md:inset-x-auto md:right-6 md:bottom-24 md:w-[400px] z-30 bg-white rounded-t-2xl md:rounded-2xl shadow-[0_-8px_30px_rgba(0,0,0,0.18)] md:shadow-2xl transition-all duration-300 ease-out border-t md:border border-earth-200 max-h-[54dvh] md:max-h-[68dvh] overflow-y-auto ${
+        className={`fixed bottom-[56px] inset-x-0 md:inset-x-auto md:right-6 md:bottom-24 md:w-[400px] z-30 bg-[#FFFDF9] rounded-t-2xl md:rounded-2xl shadow-[0_-8px_30px_rgba(0,0,0,0.18)] md:shadow-2xl transition-all duration-300 ease-out border-t md:border border-gold-500/40 max-h-[58dvh] md:max-h-[72dvh] overflow-y-auto ${
           sheet
             ? 'translate-y-0 opacity-100'
             : 'translate-y-[120%] opacity-0 pointer-events-none'
@@ -861,6 +867,16 @@ export default function MapView() {
       >
         <div className="w-10 h-1 bg-earth-300 rounded-full mx-auto mt-2.5 md:hidden" />
         <div className="p-4 pt-2.5 md:pt-4">
+          {sheet?.photoUrl && (
+            <div className="mb-3 rounded-xl overflow-hidden border border-gold-500/30 h-32 bg-earth-900">
+              <img
+                src={sheet.photoUrl}
+                alt={sheet.name}
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
           <div className="flex items-start justify-between gap-3 mb-2">
             <div className="min-w-0 flex-1">
               {sheet && (

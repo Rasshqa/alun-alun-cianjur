@@ -16,7 +16,8 @@
         -6.81904,
         107.14124
       ],
-      "welcome": "Selamat datang di Gerbang Utama Jalan Suroso! Ini adalah satu-satunya akses pintu masuk utama pengunjung menuju kawasan Taman Alun-Alun dan Alun-Alun Cianjur."
+      "welcome": "Selamat datang di Gerbang Utama Jalan Suroso! Ini adalah satu-satunya akses pintu masuk utama pengunjung menuju kawasan Taman Alun-Alun dan Alun-Alun Cianjur.",
+      "photo_url": "/photos/suroso.jpg"
     },
     {
       "id": "masjid-selatan",
@@ -25,7 +26,8 @@
         -6.82158,
         107.13965
       ],
-      "welcome": "Gerbang Selatan Masjid Agung di Jalan Siti Jenab (seberang Pendopo Kabupaten). Saat ini ditutup permanen untuk akses masuk umum dan difungsikan sebagai jalur keluar/darurat."
+      "welcome": "Gerbang Selatan Masjid Agung di Jalan Siti Jenab (seberang Pendopo Kabupaten). Saat ini ditutup permanen untuk akses masuk umum dan difungsikan sebagai jalur keluar/darurat.",
+      "photo_url": "/photos/masjid-selatan.jpg"
     },
     {
       "id": "masjid-utara",
@@ -34,7 +36,8 @@
         -6.82055,
         107.13958
       ],
-      "welcome": "Gerbang Utara Masjid Agung di Jalan Nyi R. Siti Bodedar. Saat ini ditutup permanen untuk akses masuk umum demi ketertiban kawasan ibadah."
+      "welcome": "Gerbang Utara Masjid Agung di Jalan Nyi R. Siti Bodedar. Saat ini ditutup permanen untuk akses masuk umum demi ketertiban kawasan ibadah.",
+      "photo_url": "/photos/masjid-utara.jpg"
     }
   ],
   "heritage_icons": [
@@ -51,7 +54,8 @@
         107.13978
       ],
       "summary": "Sculpture Al-Qur'an emas raksasa di tengah kolam berbentuk perahu dengan air mancur dan lampu hias tepat di halaman depan Masjid Agung Cianjur. Diresmikan Presiden Joko Widodo pada 8 Februari 2019 sebagai simbol utama pilar budaya Ngaos di Kota Santri.",
-      "quiz_id": null
+      "quiz_id": null,
+      "photo_url": "/photos/ICN-01.jpg"
     },
     {
       "id": "ICN-02",
@@ -66,7 +70,8 @@
         107.14015
       ],
       "summary": "Selasar pejalan kaki ikonik dengan 99 pilar putih bergaya klasik yang masing-masing berukir kaligrafi 99 nama Allah (Asmaul Husna), menghubungkan pelataran Masjid Agung dengan zona Taman Alun-Alun Cianjur.",
-      "quiz_id": null
+      "quiz_id": null,
+      "photo_url": "/photos/ICN-02.jpg"
     },
     {
       "id": "ICN-03",
@@ -81,7 +86,8 @@
         107.14088
       ],
       "summary": "Instalasi panggung dengan replika Suling Sunda dan tempat duduk berbentuk alat musik petik Kecapi di Taman Alun-Alun. Menghormati seni tembang Sunda Cianjuran (Mamaos) yang lahir pada masa Bupati R.A.A. Kusumaningrat (Dalem Pancaniti, 1834-1862).",
-      "quiz_id": null
+      "quiz_id": null,
+      "photo_url": "/photos/ICN-03.jpg"
     },
     {
       "id": "ICN-04",
@@ -96,7 +102,8 @@
         107.14128
       ],
       "summary": "Replika Leuit (lumbung padi tradisional Sunda) berlantai batu alam sebagai simbol kejayaan Beras Pandanwangi Cianjur, bersanding dengan patung Ayam Pelung, ras ayam kokok panjang asli Cianjur yang dirintis H. Djarkasih (Mama Acih) di Bunikasih sejak 1850.",
-      "quiz_id": null
+      "quiz_id": null,
+      "photo_url": "/photos/ICN-04.jpg"
     },
     {
       "id": "ICN-05",
@@ -111,7 +118,8 @@
         107.14095
       ],
       "summary": "Bangunan amfiteater terbuka bergaya koloseum di atas lahan eks Pasar Induk Cianjur dengan patung pesilat di puncaknya. Melambangkan pilar budaya Maenpo, seni bela diri asli Cianjur aliran Cikalong (R. Djadjaperbata / H. Ibrahim, 1816-1906) dan aliran Sabandar (Mama Sabandar / Mohammad Kosim, 1800-1880).",
-      "quiz_id": null
+      "quiz_id": null,
+      "photo_url": "/photos/ICN-05.jpg"
     },
     {
       "id": "ICN-06",
@@ -126,7 +134,8 @@
         107.14115
       ],
       "summary": "Menara observasi di koridor utara Taman Alun-Alun dekat Gerbang Jalan Suroso untuk memandang lanskap ruang terbuka hijau seluas 4 hektar lebih, kubah Masjid Agung, dan siluet Gunung Gede Pangrango (akses tangga atas saat ini dibatasi demi keselamatan).",
-      "quiz_id": null
+      "quiz_id": null,
+      "photo_url": "/photos/ICN-06.jpg"
     },
     {
       "id": "ICN-07",
@@ -141,7 +150,8 @@
         107.14008
       ],
       "summary": "Lapangan utama berlapis rumput sintetis hijau yang dilengkapi area bermain anak ramah keluarga, jalur terapi refleksi batu kerikil, serta pepohonan rindang. Pengunjung wajib melepas alas kaki saat menginjak zona rumput sintetis.",
-      "quiz_id": null
+      "quiz_id": null,
+      "photo_url": "/photos/ICN-07.jpg"
     },
     {
       "id": "ICN-08",
@@ -156,7 +166,8 @@
         107.13932
       ],
       "summary": "Masjid bersejarah kebanggaan masyarakat Cianjur yang berdiri sejak tahun 1810 di atas tanah wakaf Nyi Raden Siti Bodedar, putri Bupati Cianjur ke-4 Kangjeng Dalem Sabiruddin (R.A.A. Wiratanudatar IV). Diperluas pada 1820 oleh Penghulu Gede R.H. Muhammad Hoesein, dibangun kembali secara gotong royong pada 1880 bersama R.H. Soelaeman pasca letusan Gunung Gede (1840 & 1879), serta mengalami 7 kali pemugaran hingga 1998 menjadi masjid raya megah seluas 2.500 m2 berdaya tampung 4.000 jamaah.",
-      "quiz_id": "MSN-01"
+      "quiz_id": "MSN-01",
+      "photo_url": "/photos/ICN-08.jpg"
     },
     {
       "id": "ICN-09",
@@ -171,7 +182,8 @@
         107.13956
       ],
       "summary": "Pusat pemerintahan Kabupaten Cianjur yang dibangun sekitar tahun 1780 pasca gempa bumi besar 1779, berakar dari sejarah Bupati pertama Raden Aria Wiratanudatar I (Raden Jayasasana). Berarsitektur Sunda-Eropa menghadap utara ke arah Alun-Alun, dilengkapi Taman Pendopo berelief Ayam Pelung serta mata air keramat Situs Pangguyangan Badak Putih (Banyu Cikahuripan).",
-      "quiz_id": null
+      "quiz_id": null,
+      "photo_url": "/photos/ICN-09.jpg"
     },
     {
       "id": "ICN-10",
@@ -186,7 +198,8 @@
         107.13962
       ],
       "summary": "Lonceng perunggu kolonial bertuliskan 'ANNO BATAVIA 1774' karya pandai besi Johannes di Batavia yang tergantung pada bangunan menara kecil bernama Linggih di gerbang utara kompleks Pendopo Cianjur. Ditemukan di bekas gudang tua kawasan Jl. HOS Cokroaminoto pada masa Bupati Cianjur ke-10 R.A.A. Prawiradiredja II (1862-1910), dahulu berfungsi sebagai penanda waktu dan tanda bahaya kota.",
-      "quiz_id": "MSN-02"
+      "quiz_id": "MSN-02",
+      "photo_url": "/photos/ICN-10.jpg"
     },
     {
       "id": "ICN-11",
@@ -201,7 +214,8 @@
         107.13908
       ],
       "summary": "Bangunan cagar budaya peninggalan kolonial Hindia Belanda di sudut barat daya Alun-Alun Cianjur yang berdiri sejak tahun 1880 dan masih berfungsi aktif melayani masyarakat hingga saat ini.",
-      "quiz_id": null
+      "quiz_id": null,
+      "photo_url": "/photos/ICN-11.jpg"
     },
     {
       "id": "ICN-12",
@@ -216,7 +230,8 @@
         107.143152
       ],
       "summary": "Rumah bangsawan bergaya Indische Empire karya arsitek Ir. van der Yen milik R.A.A. Prawiradiredja II (Bupati Cianjur ke-10) dan istrinya R.A. Tjitjih Wiarsih yang dibangun tahun 1886 di atas lahan 1.880 m2. Menjadi saksi sejarah perjuangan kemerdekaan tempat tokoh nasional Gatot Mangkoepradja menginisiasi pembentukan tentara sukarela PETA (Pembela Tanah Air) pada 1943-1945 serta pernah disinggahi Presiden Soekarno.",
-      "quiz_id": "MSN-05"
+      "quiz_id": "MSN-05",
+      "photo_url": "/photos/ICN-12.jpg"
     },
     {
       "id": "ICN-13",
@@ -231,7 +246,8 @@
         107.145326
       ],
       "summary": "Monumen penanda jati diri kultural Cianjur berupa Tugu Tauco di persimpangan Jl. HOS Cokroaminoto - Jl. Dr. Muwardi Bypass, Tugu Mamaos (Kecapi Suling) di Simpang Pasirhayam, serta Tugu Lampu Gentur di Bunderan Hypermart yang mengabadikan falsafah Tiga Pilar Budaya Cianjur (Ngaos, Mamaos, dan Maenpo).",
-      "quiz_id": null
+      "quiz_id": null,
+      "photo_url": "/photos/ICN-13.jpg"
     },
     {
       "id": "ICN-14",
@@ -246,7 +262,8 @@
         107.141603
       ],
       "summary": "Klenteng dan vihara bersejarah yang berdiri sejak tahun 1880 untuk menghormati Kongco Hok Tek Ceng Sin (Dewa Bumi dan Rezeki) di koridor niaga Jalan Mangunsarkoro No. 60 tepat di sebelah tenggara Taman Alun-Alun. Menjadi simbol akulturasi budaya dan toleransi masyarakat Cianjur lintas generasi.",
-      "quiz_id": null
+      "quiz_id": null,
+      "photo_url": "/photos/ICN-14.jpg"
     },
     {
       "id": "ICN-15",
@@ -261,7 +278,8 @@
         107.142642
       ],
       "summary": "Stasiun kereta api kolonial berkode CJ pada ketinggian +439 mdpl (+438,757 m) yang dibangun oleh Staatsspoorwegen (SS) Hindia Belanda dan dibuka resmi pada 10 Mei 1883. Berstatus bangunan Cagar Budaya (SK Menbudpar No. PM.58/PW.007/MKP/2010) dan kini melayani perjalanan Kereta Api Siliwangi relasi Sukabumi-Cianjur-Cipatat.",
-      "quiz_id": null
+      "quiz_id": null,
+      "photo_url": "/photos/ICN-15.jpg"
     },
     {
       "id": "ICN-16",
@@ -276,7 +294,8 @@
         107.141917
       ],
       "summary": "Pusat keramaian kota dan koridor pedestrian di sisi timur Taman Alun-Alun yang ditata menjadi Bomero City Walk dengan bangku taman, lampu klasik, dan bola batu granit. Berdekatan dengan Gedung Wisma Karya di Jl. Moch. Ali (dibangun organisasi Tjung Hwa Tjung Hwee tahun 1950-an), tempat penyanyi Alfian tampil pada 1962 hingga melahirkan lagu legendaris 'Semalam di Cianjur' karya Saidachmad.",
-      "quiz_id": null
+      "quiz_id": null,
+      "photo_url": "/photos/ICN-16.jpg"
     }
   ],
   "culinary_spots": [
@@ -309,7 +328,8 @@
         "Telur Kampung Mentah",
         "Sop Duren"
       ],
-      "history_note": "Dirintis tahun 1975 oleh Haji Aep dengan pikulan di depan Toko Sampurna Bojongmeron (beralih ke gerobak tahun 1982). Dimasak dari beras Pandanwangi Cianjur dengan kaldu yang meresap langsung ke dalam bubur tanpa kuah kuning cair, disajikan bersama pais (pepes) bawang daun usus ayam berbumbu kunyit dan karoket."
+      "history_note": "Dirintis tahun 1975 oleh Haji Aep dengan pikulan di depan Toko Sampurna Bojongmeron (beralih ke gerobak tahun 1982). Dimasak dari beras Pandanwangi Cianjur dengan kaldu yang meresap langsung ke dalam bubur tanpa kuah kuning cair, disajikan bersama pais (pepes) bawang daun usus ayam berbumbu kunyit dan karoket.",
+      "photo_url": "/photos/CUL-01.jpg"
     },
     {
       "id": "CUL-02",
@@ -338,7 +358,8 @@
         "Mie Aci (Mie Golosor) Kuah Tauco",
         "Tahu, Kentang & Telur Bumbu Tauco Cuka Lahang"
       ],
-      "history_note": "Geco (Tauge dan Tauco) warisan karuhun Cianjur yang dirintis kakeknya Noedji (era 1930-an/1947), diteruskan Abdurachman (Mang Endul), dan kini dijaga generasi ke-3 Iding Jaenudin (Mang Iding) dengan perpaduan gurih tauco, kecap manis, dan asam segar cuka lahang (nira aren)."
+      "history_note": "Geco (Tauge dan Tauco) warisan karuhun Cianjur yang dirintis kakeknya Noedji (era 1930-an/1947), diteruskan Abdurachman (Mang Endul), dan kini dijaga generasi ke-3 Iding Jaenudin (Mang Iding) dengan perpaduan gurih tauco, kecap manis, dan asam segar cuka lahang (nira aren).",
+      "photo_url": "/photos/CUL-02.jpg"
     },
     {
       "id": "CUL-03",
@@ -368,7 +389,8 @@
         "Nasi Uduk Hangat",
         "Ketan Bakar Sambal Oncom"
       ],
-      "history_note": "Berdiri sejak 1981 dan terhubung langsung dari koridor timur Jl. Suroso, warung legendaris ini menjual hingga 3.000 tusuk sate sapi marinasi rempah manis-gurih setiap hari bersama ketan bakar sambal oncom dan nasi uduk."
+      "history_note": "Berdiri sejak 1981 dan terhubung langsung dari koridor timur Jl. Suroso, warung legendaris ini menjual hingga 3.000 tusuk sate sapi marinasi rempah manis-gurih setiap hari bersama ketan bakar sambal oncom dan nasi uduk.",
+      "photo_url": "/photos/CUL-03.jpg"
     },
     {
       "id": "CUL-04",
@@ -397,7 +419,8 @@
         "Roti Susu Dingin",
         "Roti Gambang & Roti Popon (Sejak 1935)"
       ],
-      "history_note": "Berdiri sejak 1926 dan dahulu menjadi pemasok roti bagi tentara kolonial Belanda se-Jawa Barat. Kini dikelola generasi ke-6 (Hari Suwarna & Ema Rosmawati), tetap dipanggang menggunakan tungku bata berbahan bakar kayu karet tanpa pengawet (Tutup setiap hari Senin)."
+      "history_note": "Berdiri sejak 1926 dan dahulu menjadi pemasok roti bagi tentara kolonial Belanda se-Jawa Barat. Kini dikelola generasi ke-6 (Hari Suwarna & Ema Rosmawati), tetap dipanggang menggunakan tungku bata berbahan bakar kayu karet tanpa pengawet (Tutup setiap hari Senin).",
+      "photo_url": "/photos/CUL-04.jpg"
     },
     {
       "id": "CUL-05",
@@ -427,7 +450,8 @@
         "Bala-bala Bumbu Kacang (Rp19.000)",
         "Minuman Sari Pala & Sari Markisa (Rp17.600)"
       ],
-      "history_note": "Berdiri sejak 1880 oleh pasangan Tan Kei Hian (Babah Tasma) dan Tjoa Kim Nio (Ny. Tasma), kini dikelola generasi penerus keluarga di Jl. Kutai / Jl. HOS Cokroaminoto. Nama Cap Meong (Macan) lahir setelah ditemukan tapak kaki macan di dapur fermentasi kedelai."
+      "history_note": "Berdiri sejak 1880 oleh pasangan Tan Kei Hian (Babah Tasma) dan Tjoa Kim Nio (Ny. Tasma), kini dikelola generasi penerus keluarga di Jl. Kutai / Jl. HOS Cokroaminoto. Nama Cap Meong (Macan) lahir setelah ditemukan tapak kaki macan di dapur fermentasi kedelai.",
+      "photo_url": "/photos/CUL-05.jpg"
     },
     {
       "id": "CUL-06",
@@ -455,7 +479,8 @@
         "Tauco Cookies Original Manis-Gurih",
         "Kastangel Tauco & Choco Tauco Cookies"
       ],
-      "history_note": "Dirintis sejak 2015 oleh Yeti Hernawati di Jl. Mangunsarkoro Gg. Melati No. 1 sebagai pelopor inovasi oleh-oleh modern yang mengolah tauco legendaris Cianjur menjadi kue kering renyah bercita rasa manis-gurih unik."
+      "history_note": "Dirintis sejak 2015 oleh Yeti Hernawati di Jl. Mangunsarkoro Gg. Melati No. 1 sebagai pelopor inovasi oleh-oleh modern yang mengolah tauco legendaris Cianjur menjadi kue kering renyah bercita rasa manis-gurih unik.",
+      "photo_url": "/photos/CUL-06.jpg"
     },
     {
       "id": "CUL-07",
@@ -482,7 +507,8 @@
       "signature_menu": [
         "Rogan (Sup Roti, Dawegan/Kelapa Muda, Kacang Hijau, Kolang-Kaling & Susu Daun Pisang)"
       ],
-      "history_note": "Dirintis sejak 2010 oleh Empat Kurniawati di Jl. Selamet No. 27. Rogan merupakan akronim dari Roti dan Dawegan (kelapa muda) yang dikukus 20 menit dalam bungkus daun pisang beraroma daun pandan."
+      "history_note": "Dirintis sejak 2010 oleh Empat Kurniawati di Jl. Selamet No. 27. Rogan merupakan akronim dari Roti dan Dawegan (kelapa muda) yang dikukus 20 menit dalam bungkus daun pisang beraroma daun pandan.",
+      "photo_url": "/photos/CUL-07.jpg"
     },
     {
       "id": "CUL-08",
@@ -510,7 +536,8 @@
         "Laksa Ori + Ketupat (Rp10.000)",
         "Laksa Special Ketupat + Telor (Rp15.000)"
       ],
-      "history_note": "Sajian laksa khas Sunda Cianjur dengan kuah santan kuning kental kaya rempah, suwiran ayam, bihun, taoge, serta aroma daun kemangi dan oncom bakar yang khas (Senin-Sabtu, tutup hari Minggu)."
+      "history_note": "Sajian laksa khas Sunda Cianjur dengan kuah santan kuning kental kaya rempah, suwiran ayam, bihun, taoge, serta aroma daun kemangi dan oncom bakar yang khas (Senin-Sabtu, tutup hari Minggu).",
+      "photo_url": "/photos/CUL-08.jpg"
     },
     {
       "id": "CUL-09",
@@ -538,7 +565,8 @@
         "Bubur Ayam Cianjur Klasik",
         "Pais (Pepes) Daun Bawang Usus Ayam & Ati Ampela"
       ],
-      "history_note": "Dikelola oleh Mang Ade, putra dari Mang Endu yang dikenal sebagai pelopor pertama Bubur Ayam Cianjur sejak era 1950-an dengan ciri khas pais (pepes) daun bawang dan jeroan usus ayam."
+      "history_note": "Dikelola oleh Mang Ade, putra dari Mang Endu yang dikenal sebagai pelopor pertama Bubur Ayam Cianjur sejak era 1950-an dengan ciri khas pais (pepes) daun bawang dan jeroan usus ayam.",
+      "photo_url": "/photos/CUL-09.jpg"
     },
     {
       "id": "CUL-10",
@@ -566,7 +594,8 @@
         "Bubur Ayam 24 Jam",
         "Topping Risoles, Pais Usus & Kerupuk"
       ],
-      "history_note": "Pilihan utama kuliner malam dan dini hari yang buka 24 jam penuh bagi wisatawan yang tiba di Cianjur di luar jam makan normal."
+      "history_note": "Pilihan utama kuliner malam dan dini hari yang buka 24 jam penuh bagi wisatawan yang tiba di Cianjur di luar jam makan normal.",
+      "photo_url": "/photos/CUL-10.jpg"
     },
     {
       "id": "CUL-11",
@@ -595,7 +624,8 @@
         "Asinan Buah & Sayur Segar",
         "Manisan Kedondong & Salak Cianjur"
       ],
-      "history_note": "Pusat oleh-oleh manisan buah dan asinan legendaris Ny. Tan di koridor Jl. HOS Cokroaminoto yang terkenal dengan manisan pala, mangga, dan salak berkuah segar manis-asam."
+      "history_note": "Pusat oleh-oleh manisan buah dan asinan legendaris Ny. Tan di koridor Jl. HOS Cokroaminoto yang terkenal dengan manisan pala, mangga, dan salak berkuah segar manis-asam.",
+      "photo_url": "/photos/CUL-11.jpg"
     },
     {
       "id": "CUL-12",
@@ -624,7 +654,8 @@
         "Kopi Lokal Gunung Gede Cianjur",
         "Aneka Keripik & Camilan UMKM Cianjur"
       ],
-      "history_note": "Buah tangan kebanggaan agraris Cianjur berupa Beras Pandanwangi murni beraroma daun pandan alami dan bertekstur pulen yang dilindungi Sertifikat Indikasi Geografis (MPIG-Pandanwangi Cianjur)."
+      "history_note": "Buah tangan kebanggaan agraris Cianjur berupa Beras Pandanwangi murni beraroma daun pandan alami dan bertekstur pulen yang dilindungi Sertifikat Indikasi Geografis (MPIG-Pandanwangi Cianjur).",
+      "photo_url": "/photos/CUL-12.jpg"
     },
     {
       "id": "CUL-13",
@@ -653,7 +684,8 @@
         "Roti Manis & Roti Sobek Tungku Kayu (Dapur Tan Keng Cu)",
         "Manisan Buah & Oleh-Oleh Koridor Cokroaminoto"
       ],
-      "history_note": "Kuliner roti legendaris Cianjur yang bertahan sejak tahun 1935 (sebelum kemerdekaan RI) dan dijajakan berderet di sepanjang Jl. HOS Cokroaminoto. Ciri khasnya berupa 6 bulatan roti sobek bertekstur padat-lembut dengan taburan gula putih di atasnya dari dapur tungku kayu Tan Keng Cu."
+      "history_note": "Kuliner roti legendaris Cianjur yang bertahan sejak tahun 1935 (sebelum kemerdekaan RI) dan dijajakan berderet di sepanjang Jl. HOS Cokroaminoto. Ciri khasnya berupa 6 bulatan roti sobek bertekstur padat-lembut dengan taburan gula putih di atasnya dari dapur tungku kayu Tan Keng Cu.",
+      "photo_url": "/photos/CUL-13.jpg"
     }
   ],
   "hotels": [
@@ -674,7 +706,8 @@
         "WiFi",
         "AC",
         "Fasilitas Bisnis"
-      ]
+      ],
+      "photo_url": "/photos/HTL-01.jpg"
     },
     {
       "id": "HTL-02",
@@ -693,7 +726,8 @@
         "WiFi Gratis",
         "Parkir Mobil",
         "Jalan Kaki ke Alun-Alun"
-      ]
+      ],
+      "photo_url": "/photos/HTL-02.jpg"
     },
     {
       "id": "HTL-03",
@@ -714,7 +748,8 @@
         "Dekat Stasiun (59m)",
         "Lift & Ballroom",
         "Resepsionis 24 Jam"
-      ]
+      ],
+      "photo_url": "/photos/HTL-03.jpg"
     },
     {
       "id": "HTL-04",
@@ -733,7 +768,8 @@
         "TV",
         "Resepsionis",
         "Opsi Suite Keluarga"
-      ]
+      ],
+      "photo_url": "/photos/HTL-04.jpg"
     },
     {
       "id": "HTL-05",
@@ -752,7 +788,8 @@
         "Restoran",
         "Layanan Kamar",
         "Resepsionis 24 Jam"
-      ]
+      ],
+      "photo_url": "/photos/HTL-05.jpg"
     },
     {
       "id": "HTL-06",
@@ -771,7 +808,8 @@
         "Kebersihan Tinggi",
         "AC",
         "WiFi"
-      ]
+      ],
+      "photo_url": "/photos/HTL-06.jpg"
     },
     {
       "id": "HTL-07",
@@ -790,7 +828,8 @@
         "Restoran",
         "WiFi Gratis",
         "AC"
-      ]
+      ],
+      "photo_url": "/photos/HTL-07.jpg"
     },
     {
       "id": "HTL-08",
@@ -808,7 +847,8 @@
         "Check-out Ekspres",
         "Parkir Mobil",
         "Dekat Sentra Kuliner"
-      ]
+      ],
+      "photo_url": "/photos/HTL-08.jpg"
     },
     {
       "id": "HTL-09",
@@ -828,7 +868,8 @@
         "Gym & Spa",
         "Ballroom",
         "Restoran"
-      ]
+      ],
+      "photo_url": "/photos/HTL-09.jpg"
     },
     {
       "id": "HTL-10",
@@ -847,7 +888,8 @@
         "WiFi Gratis",
         "Parkir Gratis",
         "Resepsionis 24 Jam"
-      ]
+      ],
+      "photo_url": "/photos/HTL-10.jpg"
     },
     {
       "id": "HTL-11",
@@ -866,7 +908,8 @@
         "Sewa Mobil",
         "Layanan Pijat",
         "Parkir Luas"
-      ]
+      ],
+      "photo_url": "/photos/HTL-11.jpg"
     },
     {
       "id": "HTL-12",
@@ -884,7 +927,8 @@
         "Kolam Renang",
         "Ramah Disabilitas",
         "Fasilitas Bisnis"
-      ]
+      ],
+      "photo_url": "/photos/HTL-12.jpg"
     }
   ],
   "trash_bins": [
@@ -1155,7 +1199,8 @@
         "Wastafel Cuci Tangan",
         "Air Bersih"
       ],
-      "open_hours": "Mengikuti jam operasional Taman Alun-Alun"
+      "open_hours": "Mengikuti jam operasional Taman Alun-Alun",
+      "photo_url": "/photos/TLT-01.jpg"
     },
     {
       "id": "TLT-02",
@@ -1171,7 +1216,8 @@
         "Air Bersih",
         "Dekat Zona Mamaos"
       ],
-      "open_hours": "Mengikuti jam operasional Taman Alun-Alun"
+      "open_hours": "Mengikuti jam operasional Taman Alun-Alun",
+      "photo_url": "/photos/TLT-02.jpg"
     },
     {
       "id": "TLT-03",
@@ -1187,7 +1233,8 @@
         "Wastafel Cuci Tangan",
         "Dekat Pintu Masuk Utama Jl. Suroso"
       ],
-      "open_hours": "Mengikuti jam operasional Taman Alun-Alun"
+      "open_hours": "Mengikuti jam operasional Taman Alun-Alun",
+      "photo_url": "/photos/TLT-03.jpg"
     }
   ],
   "events": [
@@ -1203,7 +1250,7 @@
         107.141917
       ],
       "summary": "Agenda keramaian dan pameran rutin setiap Malam Minggu di sekitar Bunderan Alun-Alun Cianjur hingga pedestrian Bomero City Walk. Menampilkan pameran UMKM lokal, kriya kreatif, wisata kuliner malam, dan ruang berkumpul warga Cianjur.",
-      "photo_url": null
+      "photo_url": "/photos/EVT-01.jpg"
     },
     {
       "id": "EVT-02",
@@ -1217,7 +1264,7 @@
         107.141917
       ],
       "summary": "Keramaian pedestrian bergaya Malioboro di sisi timur Alun-Alun Cianjur. Deretan jajanan kaki lima UMKM, kopi malam, bangku taman klasik, bola batu granit, dan lampu jalan temaram di dekat Gedung Wisma Karya.",
-      "photo_url": null
+      "photo_url": "/photos/EVT-02.jpg"
     },
     {
       "id": "EVT-03",
@@ -1231,7 +1278,7 @@
         107.13932
       ],
       "summary": "Kegiatan majelis taklim, tadarus Al-Qur'an, dan tausiyah keagamaan yang menghidupkan tradisi Ngaos di jantung Kota Santri Cianjur di sekitar Masjid Agung dan Tugu Al-Qur'an Emas.",
-      "photo_url": null
+      "photo_url": "/photos/EVT-03.jpg"
     },
     {
       "id": "EVT-04",
@@ -1245,7 +1292,7 @@
         107.14008
       ],
       "summary": "Aktivitas jalan sehat pagi, terapi refleksi batu kerikil, bermain anak di hamparan rumput sintetis, serta bazar jajanan pagi dan produk UMKM lokal Cianjur.",
-      "photo_url": null
+      "photo_url": "/photos/EVT-04.jpg"
     }
   ],
   "routes": [
@@ -1412,42 +1459,48 @@
       "title": "Monumen Al-Qur'an Emas & Kolam Perahu Masjid Agung",
       "category": "Pilar Ngaos",
       "caption": "Ikon utama pelataran depan Masjid Agung Cianjur yang diresmikan pada 8 Februari 2019.",
-      "photo_url": null
+      "photo_url": null,
+      "image_url": "/photos/GAL-01.jpg"
     },
     {
       "id": "GAL-02",
       "title": "Selasar Lorong 99 Tiang Asmaul Husna",
       "category": "Spot Instagramable",
       "caption": "Deretan 99 pilar putih berukir kaligrafi Asmaul Husna yang menghubungkan Masjid Agung dengan Taman Alun-Alun.",
-      "photo_url": null
+      "photo_url": null,
+      "image_url": "/photos/GAL-02.jpg"
     },
     {
       "id": "GAL-03",
       "title": "Tribun Koloseum & Patung Pesilat Maenpo",
       "category": "Pilar Maenpo",
       "caption": "Amfiteater terbuka berkapasitas 800 penonton dengan siluet pesilat Maenpo Cikalong & Sabandar di puncaknya.",
-      "photo_url": null
+      "photo_url": null,
+      "image_url": "/photos/GAL-03.jpg"
     },
     {
       "id": "GAL-04",
       "title": "Panggung Suling, Kursi Kecapi & Leuit Ayam Pelung",
       "category": "Pilar Mamaos",
       "caption": "Ornamen alat musik Sunda Cianjuran berdampingan dengan lumbung padi tradisional dan patung Ayam Pelung.",
-      "photo_url": null
+      "photo_url": null,
+      "image_url": "/photos/GAL-04.jpg"
     },
     {
       "id": "GAL-05",
       "title": "Hamparan Rumput Sintetis & Taman Bermain Keluarga",
       "category": "Zona Rekreasi",
       "caption": "Lapangan hijau ramah anak tempat warga bersantai sore sambil menikmati pemandangan kubah Masjid Agung.",
-      "photo_url": null
+      "photo_url": null,
+      "image_url": "/photos/GAL-05.jpg"
     },
     {
       "id": "GAL-06",
       "title": "Suasana Sore & Malam di Bomero City Walk",
       "category": "Event & Kuliner Malam",
       "caption": "Koridor pedestrian Jl. Pasar Bojong Meron dengan bangku taman klasik, bola batu granit, dan jajanan malam.",
-      "photo_url": null
+      "photo_url": null,
+      "image_url": "/photos/GAL-06.jpg"
     }
   ]
 }
