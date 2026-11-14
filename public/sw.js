@@ -1,5 +1,5 @@
-const SHELL = 'shell-v7';
-const TILES = 'tiles-v2';
+const SHELL = 'shell-v8';
+const TILES = 'tiles-v3';
 const PHOTOS = 'photos-v2';
 const SHELL_URLS = [
   '/',
@@ -34,7 +34,6 @@ self.addEventListener('fetch', (e) => {
   if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
 
   if (
-    url.hostname.includes('cartocdn.com') ||
     url.hostname.includes('openstreetmap') ||
     url.hostname.includes('tile.')
   ) {

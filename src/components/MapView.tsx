@@ -810,9 +810,10 @@ export default function MapView() {
           attributionControl={false}
         >
           <TileLayer
+            key={useFallbackTiles ? 'osm-de-fallback' : 'osm-primary'}
             url={
               useFallbackTiles
-                ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
+                ? 'https://tile.openstreetmap.de/{z}/{x}/{y}.png'
                 : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
             }
             maxNativeZoom={19}
