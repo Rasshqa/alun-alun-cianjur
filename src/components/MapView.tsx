@@ -814,14 +814,15 @@ export default function MapView() {
             url={
               useFallbackTiles
                 ? 'https://tile.openstreetmap.de/{z}/{x}/{y}.png'
-                : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+                : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
             }
+            subdomains={['a', 'b', 'c']}
             maxNativeZoom={19}
             maxZoom={20}
             eventHandlers={{
               tileerror: () => {
                 tileErrorCountRef.current += 1;
-                if (tileErrorCountRef.current >= 3 && !useFallbackTiles) {
+                if (tileErrorCountRef.current >= 6 && !useFallbackTiles) {
                   setUseFallbackTiles(true);
                   setShowOverlay(true);
                 }

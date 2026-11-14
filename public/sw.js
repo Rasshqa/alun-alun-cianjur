@@ -1,5 +1,4 @@
-const SHELL = 'shell-v8';
-const TILES = 'tiles-v3';
+const SHELL = 'shell-v9';
 const PHOTOS = 'photos-v2';
 const SHELL_URLS = [
   '/',
@@ -10,7 +9,6 @@ const SHELL_URLS = [
   '/icon-512.png',
   '/alun-alun-overlay.svg',
 ];
-const TILE_MAX = 150;
 const PHOTO_MAX = 70;
 
 self.addEventListener('install', (e) => {
@@ -19,7 +17,7 @@ self.addEventListener('install', (e) => {
 });
 
 self.addEventListener('activate', (e) => {
-  const keep = new Set([SHELL, TILES, PHOTOS]);
+  const keep = new Set([SHELL, PHOTOS]);
   e.waitUntil(
     caches
       .keys()
@@ -31,17 +29,9 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
-  if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
+  if (url.origin !== self.location.origin) return;
 
-  if (
-    url.hostname.includes('openstreetmap') ||
-    url.hostname.includes('tile.')
-  ) {
-    e.respondWith(cacheFirst(e.request, TILES, TILE_MAX));
-    return;
-  }
-
-  if (url.origin === self.location.origin && url.pathname.startsWith('/photos/')) {
+  if (url.pathname.startsWith('/photos/')) {
     e.respondWith(cacheFirst(e.request, PHOTOS, PHOTO_MAX));
     return;
   }
