@@ -79,6 +79,14 @@ body {
     0 4px 10px -2px rgba(62, 39, 35, 0.06);
 }
 
+/* Crisp warm-ivory & gold contour glow so transparent SADAYA crest pops on dark surfaces with zero background box */
+.sadaya-crest-glow {
+  filter:
+    drop-shadow(0 0 1.2px rgba(255, 250, 240, 0.95))
+    drop-shadow(0 0 3px rgba(250, 246, 240, 0.65))
+    drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
+}
+
 @keyframes splashLogoReveal {
   0% {
     opacity: 0;

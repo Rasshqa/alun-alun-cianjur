@@ -62,8 +62,27 @@ export default function GuideView() {
     try {
       const raw = localStorage.getItem(ATTENDANCE_STORAGE_KEY);
       if (raw) {
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        const parsed: unknown = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const valid = parsed
+            .filter(
+              (item): item is Record<string, unknown> =>
+                Boolean(item) && typeof item === 'object' && !Array.isArray(item),
+            )
+            .slice(0, 20)
+            .map((item, idx) => ({
+              id: typeof item.id === 'string' ? item.id.slice(0, 40) : `ATT-${idx}`,
+              name: typeof item.name === 'string' ? item.name.slice(0, 60) : 'Pengunjung Alun-Alun',
+              origin: typeof item.origin === 'string' ? item.origin.slice(0, 60) : 'Cianjur',
+              purpose:
+                typeof item.purpose === 'string' ? item.purpose.slice(0, 120) : PURPOSE_OPTIONS[0],
+              groupSize:
+                typeof item.groupSize === 'string' ? item.groupSize.slice(0, 50) : GROUP_OPTIONS[2],
+              note: typeof item.note === 'string' ? item.note.slice(0, 240) : '',
+              timestamp: typeof item.timestamp === 'string' ? item.timestamp.slice(0, 30) : 'Hari Ini',
+            }));
+          if (valid.length > 0) return valid;
+        }
       }
     } catch {
       // ignore storage errors
@@ -88,15 +107,15 @@ export default function GuideView() {
 
   const handleAttendanceSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const cleanName = visitorName.trim() || 'Pengunjung Alun-Alun';
-    const cleanOrigin = visitorOrigin.trim() || 'Cianjur & Sekitarnya';
+    const cleanName = visitorName.trim().slice(0, 60) || 'Pengunjung Alun-Alun';
+    const cleanOrigin = visitorOrigin.trim().slice(0, 60) || 'Cianjur & Sekitarnya';
     const newEntry: AttendanceEntry = {
       id: `ATT-${Date.now()}`,
       name: cleanName,
       origin: cleanOrigin,
-      purpose: visitorPurpose,
-      groupSize: visitorGroup,
-      note: visitorNote.trim(),
+      purpose: PURPOSE_OPTIONS.includes(visitorPurpose) ? visitorPurpose : PURPOSE_OPTIONS[0],
+      groupSize: GROUP_OPTIONS.includes(visitorGroup) ? visitorGroup : GROUP_OPTIONS[2],
+      note: visitorNote.trim().slice(0, 240),
       timestamp: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB',
     };
     setEntries((prev) => [newEntry, ...prev.slice(0, 19)]);
@@ -183,12 +202,15 @@ export default function GuideView() {
                   url: '/sadaya-logo.png',
                 })
               }
-              className="w-40 sm:w-48 rounded-2xl bg-[#FAF6F0] px-3 py-2.5 border-2 border-gold-400/90 shrink-0 cursor-pointer hover:scale-[1.02] transition-transform shadow-md flex items-center justify-center"
+              className="w-40 sm:w-48 shrink-0 cursor-pointer hover:scale-[1.03] transition-transform flex items-center justify-center"
             >
               <img
                 src="/sadaya-logo.png"
                 alt="Logo SADAYA — Sarana Digital Wisata, Budaya, dan Lingkungan Asri"
-                className="w-full h-auto object-contain"
+                width={480}
+                height={311}
+                decoding="async"
+                className="w-full h-auto object-contain sadaya-crest-glow"
               />
             </div>
             <div className="space-y-2 text-left">
@@ -241,6 +263,7 @@ export default function GuideView() {
                 </label>
                 <input
                   type="text"
+                  maxLength={60}
                   value={visitorName}
                   onChange={(e) => setVisitorName(e.target.value)}
                   placeholder="Contoh: Kang Fauzan / Teh Siti"
@@ -254,6 +277,7 @@ export default function GuideView() {
                 </label>
                 <input
                   type="text"
+                  maxLength={60}
                   value={visitorOrigin}
                   onChange={(e) => setVisitorOrigin(e.target.value)}
                   placeholder="Contoh: Cianjur / Bandung / Jakarta"
@@ -298,6 +322,7 @@ export default function GuideView() {
               <div className="md:col-span-2 flex flex-col sm:flex-row gap-2.5 items-stretch sm:items-center">
                 <input
                   type="text"
+                  maxLength={240}
                   value={visitorNote}
                   onChange={(e) => setVisitorNote(e.target.value)}
                   placeholder="Kesan / pesan singkat kunjungan Anda (opsional)..."
@@ -398,7 +423,10 @@ export default function GuideView() {
                       <img
                         src={visualUrl}
                         alt={ev.title}
+                        width={800}
+                        height={500}
                         loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                       <span className="absolute top-2.5 right-2.5 bg-gold-500 text-earth-900 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
@@ -607,7 +635,10 @@ export default function GuideView() {
                       <img
                         src={toiletPhoto}
                         alt={t.name}
+                        width={800}
+                        height={500}
                         loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                       <span className="absolute top-2.5 left-2.5 bg-islam-700/95 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-xs">
@@ -715,7 +746,10 @@ export default function GuideView() {
                       <img
                         src={visualUrl}
                         alt={item.name}
+                        width={800}
+                        height={500}
                         loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
@@ -792,7 +826,10 @@ export default function GuideView() {
                     <img
                       src={visualUrl}
                       alt={g.title}
+                      width={800}
+                      height={500}
                       loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <span className="absolute bottom-2 right-2 bg-black/65 text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full">

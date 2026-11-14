@@ -1,3 +1,15 @@
+function getWibNow(): { day: number; hours: number; minutes: number } {
+  // Compute current time in WIB (UTC+07:00) for Cianjur regardless of device timezone
+  const now = new Date();
+  const utcMs = now.getTime() + now.getTimezoneOffset() * 60_000;
+  const wib = new Date(utcMs + 7 * 3_600_000);
+  return {
+    day: wib.getDay(),
+    hours: wib.getHours(),
+    minutes: wib.getMinutes(),
+  };
+}
+
 export function getOpenStatus(
   open_days: number[],
   open_time: string,
@@ -7,8 +19,7 @@ export function getOpenStatus(
     return { isOpen: true, label: 'BUKA 24 JAM' };
   }
 
-  const now = new Date();
-  const day = now.getDay();
+  const { day, hours, minutes } = getWibNow();
 
   if (!open_days.includes(day)) {
     if (day === 1 && !open_days.includes(1)) {
@@ -24,7 +35,7 @@ export function getOpenStatus(
 
   const [oh, om] = open_time.split(':').map(Number);
   const [ch, cm] = close_time.split(':').map(Number);
-  const mins = now.getHours() * 60 + now.getMinutes();
+  const mins = hours * 60 + minutes;
   const openMins = oh * 60 + om;
   const closeMins = ch * 60 + cm;
 

@@ -162,7 +162,10 @@ export default function HotelView() {
                 <img
                   src={visualUrl}
                   alt={hotel.name}
+                  width={800}
+                  height={500}
                   loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <span className="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">

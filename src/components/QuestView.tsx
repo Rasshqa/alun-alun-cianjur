@@ -71,12 +71,13 @@ export default function QuestView() {
 
   const completeMission = useCallback(
     (mission: (typeof missions)[0], extraPartial?: Partial<typeof questState>) => {
+      if (completed_missions.includes(mission.id)) return;
       setCelebratingId(mission.id);
       setTimeout(() => setCelebratingId((prev) => (prev === mission.id ? null : prev)), 1600);
       updateQuest({
-        total_xp: total_xp + mission.xp_reward,
-        completed_missions: [...completed_missions, mission.id],
-        unlocked_badges: [...unlocked_badges, mission.badge_name],
+        total_xp: Math.min(MAX_XP, total_xp + mission.xp_reward),
+        completed_missions: Array.from(new Set([...completed_missions, mission.id])),
+        unlocked_badges: Array.from(new Set([...unlocked_badges, mission.badge_name])),
         ...extraPartial,
       });
       showToast(`Misi "${mission.title}" selesai! +${mission.xp_reward} XP`);
@@ -182,7 +183,7 @@ export default function QuestView() {
     ctx.fillText('Diberikan kepada:', 540, 535);
 
     ctx.font = 'bold 56px sans-serif';
-    ctx.fillText(visitor_nickname || 'Pengunjung Santun', 540, 620);
+    ctx.fillText(visitor_nickname || 'Pengunjung Santun', 540, 620, 900);
 
     ctx.font = '36px sans-serif';
     ctx.fillStyle = '#E0CA7A';
@@ -222,8 +223,14 @@ export default function QuestView() {
       if (!blob) return;
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
+      const safeName =
+        (visitor_nickname || 'cianjur')
+          .toLowerCase()
+          .replace(/[^a-z0-9_-]+/g, '-')
+          .replace(/^-+|-+$/g, '')
+          .slice(0, 40) || 'cianjur';
       a.href = url;
-      a.download = `sertifikat-${visitor_nickname || 'cianjur'}.png`;
+      a.download = `sertifikat-${safeName}.png`;
       a.click();
       URL.revokeObjectURL(url);
     });
@@ -252,6 +259,7 @@ export default function QuestView() {
 
         <input
           type="text"
+          maxLength={50}
           value={visitor_nickname}
           onChange={(e) => updateQuest({ visitor_nickname: e.target.value })}
           placeholder="Ketik nama panggilan untuk Sertifikat Budaya..."
@@ -391,6 +399,7 @@ export default function QuestView() {
                   <div className={`flex gap-2 ${isShaking ? 'animate-shake' : ''}`}>
                     <input
                       type="text"
+                      maxLength={100}
                       value={answers[m.id] ?? ''}
                       onChange={(e) => setAnswers((p) => ({ ...p, [m.id]: e.target.value }))}
                       placeholder="Ketik jawaban..."

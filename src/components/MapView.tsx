@@ -872,7 +872,10 @@ export default function MapView() {
               <img
                 src={sheet.photoUrl}
                 alt={sheet.name}
+                width={800}
+                height={500}
                 loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
             </div>

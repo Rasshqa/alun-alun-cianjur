@@ -110,15 +110,17 @@ function SadayaSplashScreen({ onFinish }: { onFinish: () => void }) {
 
       {/* Center Logo & Editorial Identity */}
       <div className="relative z-10 flex flex-col items-center text-center max-w-md my-auto animate-splash-logo">
-        <div className="relative mb-5">
-          <div className="absolute -inset-3 rounded-full bg-gold-500/20 blur-xl" />
-          <div className="relative w-36 h-24 sm:w-44 sm:h-28 rounded-2xl bg-[#FAF6F0] px-3 py-2 flex items-center justify-center shadow-[0_14px_40px_rgba(0,0,0,0.45)] ring-2 ring-gold-400/80">
-            <img
-              src="/sadaya-logo.png"
-              alt="Logo SADAYA"
-              className="w-full h-full object-contain drop-shadow-xs"
-            />
-          </div>
+        <div className="relative mb-4 flex items-center justify-center">
+          <div className="pointer-events-none absolute -inset-4 rounded-full bg-[radial-gradient(circle,rgba(250,246,240,0.22)_0%,rgba(200,169,81,0.12)_45%,transparent_72%)] blur-md" />
+          <img
+            src="/sadaya-logo.png"
+            alt="Logo SADAYA"
+            width={480}
+            height={311}
+            fetchPriority="high"
+            decoding="async"
+            className="relative w-44 sm:w-52 h-auto object-contain sadaya-crest-glow"
+          />
         </div>
 
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-islam-700/90 border border-gold-400/50 text-gold-300 text-[10px] sm:text-xs font-bold tracking-wider uppercase mb-2.5 shadow-sm">
@@ -170,11 +172,15 @@ function TopHeader({ onOpenAbout }: { onOpenAbout: () => void }) {
           className="min-w-0 flex-1 flex items-center gap-2.5 text-left group"
           aria-label="Tentang SADAYA — Social Project Mojang Jajaka Kabupaten Cianjur"
         >
-          <div className="w-11 h-10 sm:w-13 sm:h-11 rounded-xl bg-[#FAF6F0] px-1.5 py-1 border border-gold-400/80 shrink-0 shadow-sm flex items-center justify-center group-hover:scale-105 transition-transform">
+          <div className="w-12 h-10 sm:w-14 sm:h-11 shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform">
             <img
               src="/sadaya-logo.png"
               alt="Logo SADAYA"
-              className="w-full h-full object-contain"
+              width={396}
+              height={258}
+              fetchPriority="high"
+              decoding="async"
+              className="w-full h-full object-contain sadaya-crest-glow"
             />
           </div>
           <div className="min-w-0 flex-1">
@@ -290,11 +296,14 @@ function SadayaAboutModal({
       >
         <div className="bg-sundanese-dark text-white p-3.5 sm:p-5 flex items-start justify-between gap-3 border-b border-gold-500/35 shrink-0">
           <div className="flex items-center gap-3 min-w-0 flex-1">
-            <div className="w-16 h-12 sm:w-22 sm:h-15 rounded-xl bg-[#FAF6F0] px-1.5 py-1 border border-gold-400/80 shrink-0 flex items-center justify-center shadow-sm">
+            <div className="w-18 h-12 sm:w-22 sm:h-14 shrink-0 flex items-center justify-center">
               <img
                 src="/sadaya-logo.png"
                 alt="Logo SADAYA"
-                className="w-full h-full object-contain"
+                width={396}
+                height={258}
+                decoding="async"
+                className="w-full h-full object-contain sadaya-crest-glow"
               />
             </div>
             <div className="min-w-0 flex-1">
