@@ -1,14 +1,104 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense, Component, type ReactNode, type ComponentType } from 'react';
 import { AppProvider, useApp, type TabId } from './context/AppContext';
 import data from './data/cianjur-data.json';
+import { SADAYA_LOGO_FALLBACK_SVG } from './utils/visuals';
 
-const MapView = lazy(() => import('./components/MapView'));
-const HeritageView = lazy(() => import('./components/HeritageView'));
-const CulinaryView = lazy(() => import('./components/CulinaryView'));
-const HotelView = lazy(() => import('./components/HotelView'));
-const GuideView = lazy(() => import('./components/GuideView'));
-const QuestView = lazy(() => import('./components/QuestView'));
-const AdminMapper = lazy(() => import('./components/AdminMapper'));
+function safeLazy<T extends ComponentType<unknown>>(
+  importer: () => Promise<{ default: T }>,
+  sectionLabel: string,
+) {
+  return lazy(async () => {
+    try {
+      return await importer();
+    } catch {
+      try {
+        await new Promise((r) => setTimeout(r, 350));
+        return await importer();
+      } catch {
+        const FallbackView = (() => (
+          <div className="p-6 my-6 mx-4 heritage-card rounded-2xl text-center space-y-3">
+            <h3 className="font-heritage text-base font-bold text-earth-900">
+              Gagal Memuat Modul {sectionLabel}
+            </h3>
+            <p className="text-xs text-earth-600 max-w-md mx-auto leading-relaxed">
+              Koneksi jaringan sedang tidak stabil atau berkas halaman diperbarui. Silakan muat ulang halaman untuk melanjutkan.
+            </p>
+            <button
+              type="button"
+              onClick={() => window.location.reload()}
+              className="px-4 py-2 rounded-xl bg-islam-700 hover:bg-islam-600 text-white text-xs font-semibold active:scale-95 transition-all"
+            >
+              Muat Ulang Halaman
+            </button>
+          </div>
+        )) as unknown as T;
+        return { default: FallbackView };
+      }
+    }
+  });
+}
+
+class ViewErrorBoundary extends Component<
+  { children: ReactNode; resetKey?: string; onResetToMap?: () => void },
+  { hasError: boolean }
+> {
+  state = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidUpdate(prevProps: { resetKey?: string }) {
+    if (this.state.hasError && prevProps.resetKey !== this.props.resetKey) {
+      this.setState({ hasError: false });
+    }
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="p-6 my-6 mx-4 heritage-card rounded-2xl text-center space-y-3">
+          <h3 className="font-heritage text-base font-bold text-earth-900">
+            Tampilan Sedang Dipulihkan
+          </h3>
+          <p className="text-xs text-earth-600 max-w-md mx-auto leading-relaxed">
+            Terjadi kendala teknis saat merender bagian ini. Data kunjungan dan progres misi Anda tetap aman.
+          </p>
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            <button
+              type="button"
+              onClick={() => this.setState({ hasError: false })}
+              className="px-4 py-2 rounded-xl bg-islam-700 hover:bg-islam-600 text-white text-xs font-semibold active:scale-95 transition-all"
+            >
+              Coba Lagi
+            </button>
+            {this.props.onResetToMap && (
+              <button
+                type="button"
+                onClick={() => {
+                  this.setState({ hasError: false });
+                  this.props.onResetToMap?.();
+                }}
+                className="px-4 py-2 rounded-xl bg-earth-800 hover:bg-earth-900 text-white text-xs font-semibold active:scale-95 transition-all"
+              >
+                Kembali ke Peta
+              </button>
+            )}
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+import MapView from './components/MapView';
+import HeritageView from './components/HeritageView';
+import CulinaryView from './components/CulinaryView';
+import HotelView from './components/HotelView';
+import GuideView from './components/GuideView';
+import QuestView from './components/QuestView';
+const AdminMapper = safeLazy(() => import('./components/AdminMapper'), 'Admin Mapper');
 
 const SPLASH_STORAGE_KEY = 'sadaya_splash_last_shown_at';
 const SPLASH_SESSION_KEY = 'sadaya_splash_session_seen';
@@ -119,6 +209,10 @@ function SadayaSplashScreen({ onFinish }: { onFinish: () => void }) {
             height={311}
             fetchPriority="high"
             decoding="async"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = SADAYA_LOGO_FALLBACK_SVG;
+            }}
             className="relative w-44 sm:w-52 h-auto object-contain sadaya-crest-glow"
           />
         </div>
@@ -176,10 +270,14 @@ function TopHeader({ onOpenAbout }: { onOpenAbout: () => void }) {
             <img
               src="/sadaya-logo.png"
               alt="Logo SADAYA"
-              width={396}
-              height={258}
+              width={480}
+              height={311}
               fetchPriority="high"
               decoding="async"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = SADAYA_LOGO_FALLBACK_SVG;
+              }}
               className="w-full h-full object-contain sadaya-crest-glow"
             />
           </div>
@@ -300,9 +398,13 @@ function SadayaAboutModal({
               <img
                 src="/sadaya-logo.png"
                 alt="Logo SADAYA"
-                width={396}
-                height={258}
+                width={480}
+                height={311}
                 decoding="async"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = SADAYA_LOGO_FALLBACK_SVG;
+                }}
                 className="w-full h-full object-contain sadaya-crest-glow"
               />
             </div>
@@ -466,15 +568,9 @@ function BottomNav() {
 }
 
 function TabContent() {
-  const { activeTab } = useApp();
+  const { activeTab, setActiveTab } = useApp();
   return (
-    <Suspense
-      fallback={
-        <div className="p-6 text-center text-earth-500 text-sm animate-pulse">
-          Memuat halaman...
-        </div>
-      }
-    >
+    <ViewErrorBoundary resetKey={activeTab} onResetToMap={() => setActiveTab('peta')}>
       <main key={activeTab} className="flex-1 flex flex-col min-w-0 min-h-0">
         {activeTab === 'peta' && <MapView />}
         {activeTab === 'sejarah' && <HeritageView />}
@@ -483,7 +579,7 @@ function TabContent() {
         {activeTab === 'panduan' && <GuideView />}
         {activeTab === 'misi' && <QuestView />}
       </main>
-    </Suspense>
+    </ViewErrorBoundary>
   );
 }
 
@@ -550,10 +646,12 @@ export default function App() {
     new URLSearchParams(window.location.search).get('mode') === 'admin' ||
     window.location.pathname === '/admin-mapper';
   return (
-    <AppProvider>
-      <Suspense fallback={<div className="p-4 text-center text-earth-500 text-sm">Memuat...</div>}>
-        {isAdmin ? <AdminMapper /> : <AppShell />}
-      </Suspense>
-    </AppProvider>
+    <ViewErrorBoundary>
+      <AppProvider>
+        <Suspense fallback={<div className="p-4 text-center text-earth-500 text-sm">Memuat...</div>}>
+          {isAdmin ? <AdminMapper /> : <AppShell />}
+        </Suspense>
+      </AppProvider>
+    </ViewErrorBoundary>
   );
 }

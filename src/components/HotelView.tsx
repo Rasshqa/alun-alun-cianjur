@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import data from '../data/cianjur-data.json';
 import { formatDistance, formatPrice } from '../utils/time';
 import { useApp } from '../context/AppContext';
-import { getVisualUrl } from '../utils/visuals';
+import { getVisualUrl, getFallbackVisualUrl } from '../utils/visuals';
 
 type SortKey = 'distance' | 'price' | 'rating';
 
@@ -166,6 +166,15 @@ export default function HotelView() {
                   height={500}
                   loading="lazy"
                   decoding="async"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = getFallbackVisualUrl({
+                      id: hotel.id,
+                      title: hotel.name,
+                      subtitle: `Rating ★ ${hotel.rating.toFixed(1)} · ${formatDistance(hotel.distance_m)}`,
+                      category: 'hotel',
+                    });
+                  }}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <span className="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">
@@ -260,6 +269,18 @@ export default function HotelView() {
             <img
               src={lightboxItem.url}
               alt={lightboxItem.title}
+              width={800}
+              height={500}
+              decoding="async"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = getFallbackVisualUrl({
+                  id: 'HTL-01',
+                  title: lightboxItem.title,
+                  subtitle: lightboxItem.sub,
+                  category: 'hotel',
+                });
+              }}
               className="w-full max-h-[65dvh] object-contain bg-earth-900 shrink-0"
             />
             <div className="p-4 flex items-start justify-between gap-3 overflow-y-auto">

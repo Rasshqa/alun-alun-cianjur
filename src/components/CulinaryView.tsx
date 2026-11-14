@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import data from '../data/cianjur-data.json';
 import { getOpenStatus, formatDistance } from '../utils/time';
 import { useApp } from '../context/AppContext';
-import { getVisualUrl } from '../utils/visuals';
+import { getVisualUrl, getFallbackVisualUrl } from '../utils/visuals';
 
 const SOUVENIR_IDS = new Set(['CUL-04', 'CUL-05', 'CUL-06', 'CUL-11', 'CUL-12', 'CUL-13']);
 type CulinaryTypeFilter = 'ALL' | 'SOUVENIR' | 'DINE';
@@ -167,6 +167,15 @@ export default function CulinaryView() {
                   height={500}
                   loading="lazy"
                   decoding="async"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = getFallbackVisualUrl({
+                      id: spot.id,
+                      title: spot.name,
+                      subtitle: spot.isSouvenir ? 'Oleh-Oleh Khas Cianjur' : 'Kuliner Legendaris',
+                      category: spot.isSouvenir ? 'souvenir' : 'culinary',
+                    });
+                  }}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <span className="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">
@@ -269,6 +278,18 @@ export default function CulinaryView() {
             <img
               src={lightboxItem.url}
               alt={lightboxItem.title}
+              width={800}
+              height={500}
+              decoding="async"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = getFallbackVisualUrl({
+                  id: 'CUL-01',
+                  title: lightboxItem.title,
+                  subtitle: lightboxItem.sub,
+                  category: 'culinary',
+                });
+              }}
               className="w-full max-h-[65dvh] object-contain bg-earth-900 shrink-0"
             />
             <div className="p-4 flex items-start justify-between gap-3 overflow-y-auto">

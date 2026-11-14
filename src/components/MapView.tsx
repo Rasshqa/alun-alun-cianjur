@@ -14,6 +14,7 @@ import data from '../data/cianjur-data.json';
 import { useApp } from '../context/AppContext';
 import { haversine } from '../utils/haversine';
 import { formatDistance, formatPrice, getOpenStatus } from '../utils/time';
+import { getFallbackVisualUrl } from '../utils/visuals';
 
 type Category = 'all' | 'trash' | 'toilet' | 'heritage' | 'culinary' | 'hotel' | 'gate';
 type ViewScope = 'alun-alun' | 'city';
@@ -317,6 +318,9 @@ export default function MapView() {
   const [gpsLoading, setGpsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [speakingId, setSpeakingId] = useState<string | null>(null);
+  const [sheetAudioNotice, setSheetAudioNotice] = useState<string | null>(null);
+  const [useFallbackTiles, setUseFallbackTiles] = useState(false);
+  const tileErrorCountRef = useRef(0);
   const mapRef = useRef<L.Map | null>(null);
 
   const center = useMemo<[number, number]>(
@@ -459,86 +463,152 @@ export default function MapView() {
 
   const toggleSheetAudio = useCallback(
     (id: string, script?: string) => {
-      if (!script || !('speechSynthesis' in window)) return;
+      if (!script) return;
+      if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
+        setSheetAudioNotice(
+          'Suara otomatis tidak didukung di perangkat ini — silakan baca narasi sejarah di atas.',
+        );
+        return;
+      }
       if (speakingId === id) {
         window.speechSynthesis.cancel();
         setSpeakingId(null);
         return;
       }
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(script);
-      u.lang = 'id-ID';
-      u.rate = 0.95;
-      u.onend = () => setSpeakingId(null);
-      u.onerror = () => setSpeakingId(null);
-      setSpeakingId(id);
-      window.speechSynthesis.speak(u);
+      try {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(script);
+        u.lang = 'id-ID';
+        u.rate = 0.95;
+        u.onend = () => setSpeakingId(null);
+        u.onerror = () => {
+          setSpeakingId(null);
+          setSheetAudioNotice(
+            'Pemutaran suara terkendala di perangkat ini — silakan baca narasi sejarah di atas.',
+          );
+        };
+        setSheetAudioNotice(null);
+        setSpeakingId(id);
+        window.speechSynthesis.speak(u);
+      } catch {
+        setSpeakingId(null);
+        setSheetAudioNotice(
+          'Pemutaran suara terkendala di perangkat ini — silakan baca narasi sejarah di atas.',
+        );
+      }
     },
     [speakingId],
   );
 
+  const applyCenterBinFallback = useCallback(() => {
+    setGpsLoading(false);
+    const fallbackBin = data.trash_bins[0];
+    const centerCoords = data.app_config.center_coords as [number, number];
+    const to = fallbackBin.coords as [number, number];
+    const dist = haversine(centerCoords[0], centerCoords[1], to[0], to[1]);
+    setFilter('trash');
+    setRouteLine([centerCoords, to]);
+    setSheet({
+      id: fallbackBin.id,
+      name: fallbackBin.cluster_name,
+      category: 'trash',
+      categoryLabel: 'Tong Sampah Terdekat (Estimasi Pusat)',
+      categoryColor: COLORS.trash,
+      subLabel: fallbackBin.bin_type,
+      detail: `${fallbackBin.landmark_hint} (GPS tidak aktif, menampilkan dari titik pusat Alun-Alun)`,
+      distance: dist,
+      coords: to,
+    });
+    mapRef.current?.flyTo(to, 18, { duration: 0.9 });
+  }, []);
+
   const findNearestBin = useCallback(() => {
     setGpsLoading(true);
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const { latitude: lat, longitude: lng } = pos.coords;
-        let best: (typeof data.trash_bins)[number] | null = null;
-        let bestDist = Infinity;
+    if (!('geolocation' in navigator)) {
+      applyCenterBinFallback();
+      return;
+    }
 
-        for (const bin of data.trash_bins) {
-          const d = haversine(lat, lng, bin.coords[0], bin.coords[1]);
-          if (d < bestDist) {
-            bestDist = d;
-            best = bin;
+    let settled = false;
+    const finishWithFallback = () => {
+      if (settled) return;
+      settled = true;
+      applyCenterBinFallback();
+    };
+
+    const guardTimer = window.setTimeout(finishWithFallback, 3600);
+
+    const runGeolocation = () => {
+      try {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            if (settled) return;
+            settled = true;
+            window.clearTimeout(guardTimer);
+            const { latitude: lat, longitude: lng } = pos.coords;
+            let best: (typeof data.trash_bins)[number] | null = null;
+            let bestDist = Infinity;
+
+            for (const bin of data.trash_bins) {
+              const d = haversine(lat, lng, bin.coords[0], bin.coords[1]);
+              if (d < bestDist) {
+                bestDist = d;
+                best = bin;
+              }
+            }
+
+            if (best) {
+              const from: [number, number] = [lat, lng];
+              const to = best.coords as [number, number];
+              setUserPos(from);
+              setRouteLine([from, to]);
+              setFilter('trash');
+              setSheet({
+                id: best.id,
+                name: best.cluster_name,
+                category: 'trash',
+                categoryLabel: 'Tong Sampah Terdekat',
+                categoryColor: COLORS.trash,
+                subLabel: best.bin_type,
+                detail: `${best.landmark_hint} (${formatDistance(bestDist)} dari posisimu)`,
+                distance: bestDist,
+                coords: to,
+              });
+              mapRef.current?.flyTo(to, 19, { duration: 0.9 });
+            }
+
+            setGpsLoading(false);
+          },
+          () => {
+            window.clearTimeout(guardTimer);
+            finishWithFallback();
+          },
+          { enableHighAccuracy: false, timeout: 3200, maximumAge: 60000 },
+        );
+      } catch {
+        window.clearTimeout(guardTimer);
+        finishWithFallback();
+      }
+    };
+
+    if ('permissions' in navigator && typeof navigator.permissions?.query === 'function') {
+      navigator.permissions
+        .query({ name: 'geolocation' })
+        .then((status) => {
+          if (status.state === 'denied') {
+            window.clearTimeout(guardTimer);
+            finishWithFallback();
+          } else {
+            runGeolocation();
           }
-        }
-
-        if (best) {
-          const from: [number, number] = [lat, lng];
-          const to = best.coords as [number, number];
-          setUserPos(from);
-          setRouteLine([from, to]);
-          setFilter('trash');
-          setSheet({
-            id: best.id,
-            name: best.cluster_name,
-            category: 'trash',
-            categoryLabel: 'Tong Sampah Terdekat',
-            categoryColor: COLORS.trash,
-            subLabel: best.bin_type,
-            detail: `${best.landmark_hint} (${formatDistance(bestDist)} dari posisimu)`,
-            distance: bestDist,
-            coords: to,
-          });
-          mapRef.current?.flyTo(to, 19, { duration: 0.9 });
-        }
-
-        setGpsLoading(false);
-      },
-      () => {
-        setGpsLoading(false);
-        const fallbackBin = data.trash_bins[0];
-        const centerCoords = data.app_config.center_coords as [number, number];
-        const to = fallbackBin.coords as [number, number];
-        const dist = haversine(centerCoords[0], centerCoords[1], to[0], to[1]);
-        setFilter('trash');
-        setRouteLine([centerCoords, to]);
-        setSheet({
-          id: fallbackBin.id,
-          name: fallbackBin.cluster_name,
-          category: 'trash',
-          categoryLabel: 'Tong Sampah Terdekat (Estimasi Pusat)',
-          categoryColor: COLORS.trash,
-          subLabel: fallbackBin.bin_type,
-          detail: `${fallbackBin.landmark_hint} (GPS tidak aktif, menampilkan dari titik pusat Alun-Alun)`,
-          distance: dist,
-          coords: to,
+        })
+        .catch(() => {
+          runGeolocation();
         });
-        mapRef.current?.flyTo(to, 18, { duration: 0.9 });
-      },
-      { enableHighAccuracy: true, timeout: 8000 },
-    );
-  }, []);
+    } else {
+      runGeolocation();
+    }
+  }, [applyCenterBinFallback]);
 
   const dismissSheet = useCallback(() => {
     if ('speechSynthesis' in window) {
@@ -619,6 +689,21 @@ export default function MapView() {
             </button>
           )}
         </div>
+
+        {searchQuery.trim().length > 0 && searchResults.length === 0 && (
+          <div className="absolute left-3 right-3 sm:left-4 sm:right-4 top-12 bg-white rounded-2xl shadow-xl border border-earth-200 px-3.5 py-3 flex items-center justify-between gap-2 z-30 animate-view-enter">
+            <span className="text-xs text-earth-600 truncate">
+              Tidak ditemukan lokasi untuk &ldquo;{searchQuery.trim()}&rdquo;
+            </span>
+            <button
+              type="button"
+              onClick={() => setSearchQuery('')}
+              className="shrink-0 px-2.5 py-1 rounded-lg bg-earth-100 hover:bg-earth-200 text-earth-800 text-[11px] font-semibold"
+            >
+              Reset
+            </button>
+          </div>
+        )}
 
         {searchResults.length > 0 && (
           <div className="absolute left-3 right-3 sm:left-4 sm:right-4 top-12 bg-white rounded-2xl shadow-xl border border-earth-200 divide-y divide-earth-100 max-h-60 overflow-y-auto z-30 animate-view-enter">
@@ -725,9 +810,22 @@ export default function MapView() {
           attributionControl={false}
         >
           <TileLayer
-            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+            url={
+              useFallbackTiles
+                ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
+                : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+            }
             maxNativeZoom={19}
             maxZoom={20}
+            eventHandlers={{
+              tileerror: () => {
+                tileErrorCountRef.current += 1;
+                if (tileErrorCountRef.current >= 3 && !useFallbackTiles) {
+                  setUseFallbackTiles(true);
+                  setShowOverlay(true);
+                }
+              },
+            }}
           />
 
           {showOverlay && (
@@ -876,8 +974,23 @@ export default function MapView() {
                 height={500}
                 loading="lazy"
                 decoding="async"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = getFallbackVisualUrl({
+                    id: sheet.id,
+                    title: sheet.name,
+                    subtitle: sheet.categoryLabel,
+                    category: sheet.category,
+                  });
+                }}
                 className="w-full h-full object-cover"
               />
+            </div>
+          )}
+
+          {sheetAudioNotice && (
+            <div className="mb-2.5 bg-gold-300/20 border border-gold-500/35 text-earth-800 rounded-xl px-3 py-2 text-[11px] font-medium">
+              {sheetAudioNotice}
             </div>
           )}
           <div className="flex items-start justify-between gap-3 mb-2">

@@ -1,4 +1,4 @@
-const SHELL = 'shell-v6';
+const SHELL = 'shell-v7';
 const TILES = 'tiles-v2';
 const PHOTOS = 'photos-v2';
 const SHELL_URLS = [
@@ -53,13 +53,17 @@ self.addEventListener('fetch', (e) => {
 async function cacheFirst(req, name, maxEntries) {
   const cached = await caches.match(req);
   if (cached) return cached;
-  const res = await fetch(req);
-  if (res.ok) {
-    const cache = await caches.open(name);
-    await cache.put(req, res.clone());
-    await trimCache(cache, maxEntries);
+  try {
+    const res = await fetch(req);
+    if (res.ok) {
+      const cache = await caches.open(name);
+      await cache.put(req, res.clone());
+      await trimCache(cache, maxEntries);
+    }
+    return res;
+  } catch {
+    return new Response('Offline', { status: 503, statusText: 'Offline' });
   }
-  return res;
 }
 
 async function networkFirst(req, name) {
@@ -73,6 +77,10 @@ async function networkFirst(req, name) {
   } catch {
     const cached = await cache.match(req);
     if (cached) return cached;
+    if (req.mode === 'navigate' || req.destination === 'document') {
+      const rootCached = (await cache.match('/')) || (await cache.match('/index.html'));
+      if (rootCached) return rootCached;
+    }
     return new Response('Offline', { status: 503, statusText: 'Offline' });
   }
 }

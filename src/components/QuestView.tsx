@@ -99,38 +99,76 @@ export default function QuestView() {
   };
 
   const handleGpsCheckin = (mission: (typeof missions)[0]) => {
-    if (!navigator.geolocation) {
+    if (!('geolocation' in navigator)) {
       setGpsFallback(true);
+      showToast('GPS tidak tersedia. Gunakan pilihan klaster tong sampah manual.');
       return;
     }
     setGpsLoading(true);
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        setGpsLoading(false);
-        const { latitude, longitude, accuracy } = pos.coords;
-        const threshold = accuracy > 30 ? 50 : 35;
-        const nearBin = trash_bins.find(
-          (bin) => haversine(latitude, longitude, bin.coords[0], bin.coords[1]) <= threshold,
+    let settled = false;
+    const finishFallback = () => {
+      if (settled) return;
+      settled = true;
+      setGpsLoading(false);
+      setGpsFallback(true);
+      showToast('GPS tidak tersedia. Gunakan pilihan klaster tong sampah manual.');
+    };
+    const guardTimer = window.setTimeout(finishFallback, 3600);
+
+    const runGeo = () => {
+      try {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            if (settled) return;
+            settled = true;
+            window.clearTimeout(guardTimer);
+            setGpsLoading(false);
+            const { latitude, longitude, accuracy } = pos.coords;
+            const threshold = accuracy > 30 ? 50 : 35;
+            const nearBin = trash_bins.find(
+              (bin) => haversine(latitude, longitude, bin.coords[0], bin.coords[1]) <= threshold,
+            );
+            if (nearBin) {
+              completeMission(mission, {
+                trash_checkins_count: questState.trash_checkins_count + 1,
+                last_trash_bin_id: nearBin.id,
+              });
+            } else {
+              setGpsFallback(true);
+              showToast(
+                `Kamu belum berada di dekat tong sampah (radius ${threshold}m). Pilih klaster manual di bawah.`,
+              );
+            }
+          },
+          () => {
+            window.clearTimeout(guardTimer);
+            finishFallback();
+          },
+          { enableHighAccuracy: false, timeout: 3200, maximumAge: 60000 },
         );
-        if (nearBin) {
-          completeMission(mission, {
-            trash_checkins_count: questState.trash_checkins_count + 1,
-            last_trash_bin_id: nearBin.id,
-          });
-        } else {
-          setGpsFallback(true);
-          showToast(
-            `Kamu belum berada di dekat tong sampah (radius ${threshold}m). Pilih klaster manual di bawah.`,
-          );
-        }
-      },
-      () => {
-        setGpsLoading(false);
-        setGpsFallback(true);
-        showToast('GPS tidak tersedia. Gunakan pilihan klaster tong sampah manual.');
-      },
-      { enableHighAccuracy: true, timeout: 10000 },
-    );
+      } catch {
+        window.clearTimeout(guardTimer);
+        finishFallback();
+      }
+    };
+
+    if ('permissions' in navigator && typeof navigator.permissions?.query === 'function') {
+      navigator.permissions
+        .query({ name: 'geolocation' })
+        .then((status) => {
+          if (status.state === 'denied') {
+            window.clearTimeout(guardTimer);
+            finishFallback();
+          } else {
+            runGeo();
+          }
+        })
+        .catch(() => {
+          runGeo();
+        });
+    } else {
+      runGeo();
+    }
   };
 
   const handleManualCheckin = (mission: (typeof missions)[0]) => {
@@ -219,21 +257,35 @@ export default function QuestView() {
     updateQuest({ certificate_claimed: true });
     const canvas = canvasRef.current;
     if (!canvas) return;
-    canvas.toBlob((blob) => {
-      if (!blob) return;
-      const url = URL.createObjectURL(blob);
+    const safeName =
+      (visitor_nickname || 'cianjur')
+        .toLowerCase()
+        .replace(/[^a-z0-9_-]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 40) || 'cianjur';
+    const triggerDownload = (href: string, revokeAfter = false) => {
       const a = document.createElement('a');
-      const safeName =
-        (visitor_nickname || 'cianjur')
-          .toLowerCase()
-          .replace(/[^a-z0-9_-]+/g, '-')
-          .replace(/^-+|-+$/g, '')
-          .slice(0, 40) || 'cianjur';
-      a.href = url;
+      a.href = href;
       a.download = `sertifikat-${safeName}.png`;
+      document.body.appendChild(a);
       a.click();
-      URL.revokeObjectURL(url);
-    });
+      document.body.removeChild(a);
+      if (revokeAfter) {
+        setTimeout(() => URL.revokeObjectURL(href), 1500);
+      }
+      showToast('Sertifikat Budaya berhasil diunduh!');
+    };
+    try {
+      canvas.toBlob((blob) => {
+        if (blob) {
+          triggerDownload(URL.createObjectURL(blob), true);
+        } else {
+          triggerDownload(canvas.toDataURL('image/png'));
+        }
+      });
+    } catch {
+      triggerDownload(canvas.toDataURL('image/png'));
+    }
   };
 
   const pct = Math.min(100, Math.round((total_xp / MAX_XP) * 100));

@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import data from '../data/cianjur-data.json';
 import { useApp } from '../context/AppContext';
 import { formatDistance } from '../utils/time';
-import { getVisualUrl } from '../utils/visuals';
+import { getVisualUrl, getFallbackVisualUrl } from '../utils/visuals';
 
 type HeritageIcon = (typeof data.heritage_icons)[number];
 type ZoneFilter = 'ALL' | 'INTERNAL' | 'EXTERNAL';
@@ -40,8 +40,6 @@ const ZONE_BADGE: Record<string, { label: string; cls: string }> = {
   EXTERNAL: { label: 'Sekitar Kota', cls: 'bg-earth-100 text-earth-600 border border-earth-300' },
 };
 
-const speechSupported = typeof window !== 'undefined' && 'speechSynthesis' in window;
-
 export default function HeritageView() {
   const { setActiveTab, setMapFocus } = useApp();
   const [zone, setZone] = useState<ZoneFilter>('ALL');
@@ -49,36 +47,68 @@ export default function HeritageView() {
   const [search, setSearch] = useState('');
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [speakingId, setSpeakingId] = useState<string | null>(null);
-  const [lightboxItem, setLightboxItem] = useState<{ title: string; sub: string; url: string } | null>(null);
-  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const [audioFallbackId, setAudioFallbackId] = useState<string | null>(null);
+  const [lightboxItem, setLightboxItem] = useState<{
+    title: string;
+    sub: string;
+    url: string;
+  } | null>(null);
 
-  useEffect(() => {
-    return () => {
-      if (speechSupported) window.speechSynthesis.cancel();
-    };
-  }, []);
+  const speechSupported =
+    typeof window !== 'undefined' &&
+    'speechSynthesis' in window &&
+    typeof SpeechSynthesisUtterance !== 'undefined';
 
   const stopAudio = () => {
-    if (speechSupported) window.speechSynthesis.cancel();
-    utteranceRef.current = null;
+    if (speechSupported) {
+      window.speechSynthesis.cancel();
+    }
     setSpeakingId(null);
   };
 
+  useEffect(() => {
+    return () => {
+      if (speechSupported) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, [speechSupported]);
+
   const toggleAudio = (icon: HeritageIcon) => {
-    if (!speechSupported) return;
+    if (!speechSupported) {
+      setAudioFallbackId(icon.id);
+      setExpandedId(icon.id);
+      return;
+    }
+
     if (speakingId === icon.id) {
       stopAudio();
       return;
     }
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(`${icon.name}. ${icon.summary}`);
-    u.lang = 'id-ID';
-    u.rate = 0.95;
-    u.onend = () => setSpeakingId(null);
-    u.onerror = () => setSpeakingId(null);
-    utteranceRef.current = u;
-    setSpeakingId(icon.id);
-    window.speechSynthesis.speak(u);
+
+    try {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(`${icon.name}. ${icon.summary}`);
+      utterance.lang = 'id-ID';
+      utterance.rate = 0.95;
+
+      utterance.onend = () => {
+        setSpeakingId(null);
+      };
+      utterance.onerror = () => {
+        setSpeakingId(null);
+        setAudioFallbackId(icon.id);
+        setExpandedId(icon.id);
+      };
+
+      setAudioFallbackId(null);
+      setSpeakingId(icon.id);
+      window.speechSynthesis.speak(utterance);
+    } catch {
+      setSpeakingId(null);
+      setAudioFallbackId(icon.id);
+      setExpandedId(icon.id);
+    }
   };
 
   const handleCardToggle = (id: string) => {
@@ -231,7 +261,16 @@ export default function HeritageView() {
                   height={500}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = getFallbackVisualUrl({
+                      id: icon.id,
+                      title: icon.name,
+                      subtitle: `${PILAR_DISPLAY[icon.pilar_tag] ?? icon.pilar_tag} · ${icon.year_built}`,
+                      category: icon.pilar_tag,
+                    });
+                  }}
+                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
                 />
                 <span className="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">
                   Perbesar Foto
@@ -291,35 +330,39 @@ export default function HeritageView() {
                     {icon.summary}
                   </p>
 
-                  {speechSupported && (
-                    <button
-                      type="button"
-                      onClick={() => toggleAudio(icon)}
-                      className={`w-full flex items-center justify-center gap-2 min-h-10 py-2 px-3 rounded-xl text-xs font-semibold transition-all active:scale-[0.98] ${
-                        isSpeaking
-                          ? 'bg-earth-800 text-white'
-                          : 'bg-earth-100 text-earth-800 hover:bg-earth-200'
-                      }`}
-                    >
-                      {isSpeaking ? (
-                        <>
-                          <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
-                          </span>
-                          Hentikan Audio
-                        </>
-                      ) : (
-                        <>
-                          <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 shrink-0">
-                            <path d="M10 3.75a.75.75 0 00-1.264-.546L4.703 7H3.167a.75.75 0 00-.7.48A6.985 6.985 0 002 10c0 .887.165 1.737.468 2.52.111.29.39.48.7.48h1.535l4.033 3.796A.75.75 0 0010 16.25V3.75zM15.95 5.05a.75.75 0 00-1.06 1.061 5.5 5.5 0 010 7.778.75.75 0 001.06 1.06 7 7 0 000-9.899z" />
-                            <path d="M13.829 7.172a.75.75 0 00-1.061 1.06 2.5 2.5 0 010 3.536.75.75 0 001.06 1.06 4 4 0 000-5.656z" />
-                          </svg>
-                          Dengarkan Sejarah
-                        </>
-                      )}
-                    </button>
+                  {audioFallbackId === icon.id && (
+                    <div className="bg-gold-300/20 border border-gold-500/35 text-earth-800 rounded-xl px-3 py-2 text-[11px] font-medium">
+                      Suara otomatis tidak tersedia di perangkat ini — silakan baca narasi sejarah di atas.
+                    </div>
                   )}
+
+                  <button
+                    type="button"
+                    onClick={() => toggleAudio(icon)}
+                    className={`w-full flex items-center justify-center gap-2 min-h-10 py-2 px-3 rounded-xl text-xs font-semibold transition-all active:scale-[0.98] ${
+                      isSpeaking
+                        ? 'bg-earth-800 text-white'
+                        : 'bg-earth-100 text-earth-800 hover:bg-earth-200'
+                    }`}
+                  >
+                    {isSpeaking ? (
+                      <>
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
+                        </span>
+                        Hentikan Audio
+                      </>
+                    ) : (
+                      <>
+                        <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 shrink-0">
+                          <path d="M10 3.75a.75.75 0 00-1.264-.546L4.703 7H3.167a.75.75 0 00-.7.48A6.985 6.985 0 002 10c0 .887.165 1.737.468 2.52.111.29.39.48.7.48h1.535l4.033 3.796A.75.75 0 0010 16.25V3.75zM15.95 5.05a.75.75 0 00-1.06 1.061 5.5 5.5 0 010 7.778.75.75 0 001.06 1.06 7 7 0 000-9.899z" />
+                          <path d="M13.829 7.172a.75.75 0 00-1.061 1.06 2.5 2.5 0 010 3.536.75.75 0 001.06 1.06 4 4 0 000-5.656z" />
+                        </svg>
+                        Dengarkan Sejarah
+                      </>
+                    )}
+                  </button>
 
                   <div className="flex flex-wrap gap-2">
                     <button
@@ -368,6 +411,18 @@ export default function HeritageView() {
             <img
               src={lightboxItem.url}
               alt={lightboxItem.title}
+              width={800}
+              height={500}
+              decoding="async"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = getFallbackVisualUrl({
+                  id: 'ICN-01',
+                  title: lightboxItem.title,
+                  subtitle: lightboxItem.sub,
+                  category: 'heritage',
+                });
+              }}
               className="w-full max-h-[65dvh] object-contain bg-earth-900 shrink-0"
             />
             <div className="p-4 flex items-start justify-between gap-3 overflow-y-auto">

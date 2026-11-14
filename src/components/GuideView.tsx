@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import data from '../data/cianjur-data.json';
 import { useApp } from '../context/AppContext';
-import { getVisualUrl } from '../utils/visuals';
+import { getVisualUrl, getFallbackVisualUrl, SADAYA_LOGO_FALLBACK_SVG } from '../utils/visuals';
 import { formatDistance } from '../utils/time';
 
 type GuideSection = 'all' | 'sadaya' | 'hadir' | 'event' | 'rute' | 'toilet' | 'aturan' | 'oleh2' | 'galeri';
@@ -206,11 +206,15 @@ export default function GuideView() {
             >
               <img
                 src="/sadaya-logo.png"
-                alt="Logo SADAYA — Sarana Digital Wisata, Budaya, dan Lingkungan Asri"
+                alt="Logo SADAYA"
                 width={480}
                 height={311}
                 decoding="async"
-                className="w-full h-auto object-contain sadaya-crest-glow"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = SADAYA_LOGO_FALLBACK_SVG;
+                }}
+                className="w-full h-full object-contain sadaya-crest-glow"
               />
             </div>
             <div className="space-y-2 text-left">
@@ -427,6 +431,15 @@ export default function GuideView() {
                         height={500}
                         loading="lazy"
                         decoding="async"
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = getFallbackVisualUrl({
+                            id: ev.id,
+                            title: ev.title,
+                            subtitle: ev.badge,
+                            category: ev.id === 'EVT-01' || ev.id === 'EVT-02' ? 'bomero' : 'event',
+                          });
+                        }}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                       <span className="absolute top-2.5 right-2.5 bg-gold-500 text-earth-900 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
@@ -639,6 +652,15 @@ export default function GuideView() {
                         height={500}
                         loading="lazy"
                         decoding="async"
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = getFallbackVisualUrl({
+                            id: t.id,
+                            title: t.name,
+                            subtitle: t.open_hours,
+                            category: 'toilet',
+                          });
+                        }}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                       <span className="absolute top-2.5 left-2.5 bg-islam-700/95 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-xs">
@@ -750,6 +772,15 @@ export default function GuideView() {
                         height={500}
                         loading="lazy"
                         decoding="async"
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = getFallbackVisualUrl({
+                            id: item.id,
+                            title: item.name,
+                            subtitle: 'Oleh-Oleh Khas Cianjur',
+                            category: 'souvenir',
+                          });
+                        }}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
@@ -830,6 +861,15 @@ export default function GuideView() {
                       height={500}
                       loading="lazy"
                       decoding="async"
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = getFallbackVisualUrl({
+                          id: g.id,
+                          title: g.title,
+                          subtitle: g.category,
+                          category: g.title,
+                        });
+                      }}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <span className="absolute bottom-2 right-2 bg-black/65 text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full">
@@ -916,6 +956,21 @@ export default function GuideView() {
             <img
               src={lightboxItem.url}
               alt={lightboxItem.title}
+              width={800}
+              height={500}
+              decoding="async"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src =
+                  lightboxItem.url === '/sadaya-logo.png'
+                    ? SADAYA_LOGO_FALLBACK_SVG
+                    : getFallbackVisualUrl({
+                        id: 'GAL-01',
+                        title: lightboxItem.title,
+                        subtitle: lightboxItem.sub,
+                        category: 'park',
+                      });
+              }}
               className="w-full max-h-[65dvh] object-contain bg-earth-900 shrink-0"
             />
             <div className="p-4 flex items-start justify-between gap-3 overflow-y-auto">

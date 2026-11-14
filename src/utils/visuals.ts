@@ -181,19 +181,27 @@ function escapeXml(raw: string): string {
     .replace(/'/g, '&apos;');
 }
 
-export function getVisualUrl(opts: {
+export const SADAYA_LOGO_FALLBACK_SVG = `data:image/svg+xml;utf8,${encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 311" width="480" height="311">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#1B5E20"/>
+        <stop offset="100%" stop-color="#3E2723"/>
+      </linearGradient>
+    </defs>
+    <rect x="20" y="16" width="440" height="279" rx="28" fill="url(#g)" stroke="#C8A951" stroke-width="6"/>
+    <text x="240" y="148" text-anchor="middle" fill="#E0CA7A" font-family="Georgia, serif" font-size="54" font-weight="700">SADAYA</text>
+    <text x="240" y="195" text-anchor="middle" fill="#FAF6F0" font-family="system-ui, sans-serif" font-size="20" font-weight="600">Alun-Alun Kabupaten Cianjur</text>
+    <text x="240" y="232" text-anchor="middle" fill="#C8A951" font-family="system-ui, sans-serif" font-size="15" font-weight="600">Ngaos · Mamaos · Maenpo</text>
+  </svg>`,
+)}`;
+
+export function getFallbackVisualUrl(opts: {
   id: string;
   title: string;
   subtitle?: string;
   category?: string;
-  photoUrl?: string | null;
 }): string {
-  if (opts.photoUrl && opts.photoUrl.trim().length > 0) {
-    return opts.photoUrl;
-  }
-  if (/^(ICN-\d{2}|CUL-\d{2}|HTL-\d{2}|EVT-\d{2}|GAL-\d{2}|TLT-\d{2}|suroso|masjid-selatan|masjid-utara)$/.test(opts.id)) {
-    return `/photos/${opts.id}.jpg`;
-  }
   const theme = pickTheme(opts.id, opts.title, opts.category);
   const p = PALETTES[theme];
   const art = renderForegroundArt(theme, p.accent);
@@ -220,4 +228,20 @@ export function getVisualUrl(opts: {
   </svg>`;
 
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+export function getVisualUrl(opts: {
+  id: string;
+  title: string;
+  subtitle?: string;
+  category?: string;
+  photoUrl?: string | null;
+}): string {
+  if (opts.photoUrl && opts.photoUrl.trim().length > 0) {
+    return opts.photoUrl;
+  }
+  if (/^(ICN-\d{2}|CUL-\d{2}|HTL-\d{2}|EVT-\d{2}|GAL-\d{2}|TLT-\d{2}|suroso|masjid-selatan|masjid-utara)$/.test(opts.id)) {
+    return `/photos/${opts.id}.jpg`;
+  }
+  return getFallbackVisualUrl(opts);
 }
