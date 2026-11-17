@@ -482,7 +482,7 @@ export default function MapView() {
       if (!script) return;
       if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
         setSheetAudioNotice(
-          'Suara otomatis tidak didukung di perangkat ini — silakan baca narasi sejarah di atas.',
+          'Suara otomatis tidak didukung di perangkat ini: silakan baca narasi sejarah di atas.',
         );
         return;
       }
@@ -500,7 +500,7 @@ export default function MapView() {
         u.onerror = () => {
           setSpeakingId(null);
           setSheetAudioNotice(
-            'Pemutaran suara terkendala di perangkat ini — silakan baca narasi sejarah di atas.',
+            'Pemutaran suara terkendala di perangkat ini: silakan baca narasi sejarah di atas.',
           );
         };
         setSheetAudioNotice(null);
@@ -509,7 +509,7 @@ export default function MapView() {
       } catch {
         setSpeakingId(null);
         setSheetAudioNotice(
-          'Pemutaran suara terkendala di perangkat ini — silakan baca narasi sejarah di atas.',
+          'Pemutaran suara terkendala di perangkat ini: silakan baca narasi sejarah di atas.',
         );
       }
     },
@@ -792,9 +792,9 @@ export default function MapView() {
                 handleSelectSearchResult(dekranasdaMarker);
               }
             }}
-            className="shrink-0 min-h-8 px-3 rounded-full text-xs font-semibold border transition-all active:scale-95 bg-amber-50 text-amber-900 border-amber-300 hover:bg-amber-100 flex items-center gap-1 shadow-2xs"
+            className="shrink-0 min-h-8 px-3 rounded-full text-xs font-semibold border transition-all active:scale-95 bg-amber-50 text-amber-900 border-amber-300 hover:bg-amber-100 flex items-center gap-1.5 shadow-2xs"
           >
-            <span>🏛️</span>
+            <span className="w-2 h-2 rounded-full bg-amber-600" />
             <span>Dekranasda (50m)</span>
           </button>
         </div>
@@ -891,7 +891,7 @@ export default function MapView() {
               >
                 <Tooltip direction="top" offset={[0, -14]} opacity={0.95}>
                   <span className="text-xs font-semibold">
-                    {isDekranasda ? '🏛️ ' + m.sheet.name : m.sheet.name}
+                    {m.sheet.name}
                   </span>
                 </Tooltip>
               </Marker>

@@ -137,7 +137,7 @@ export default function HotelView() {
           const visualUrl = getVisualUrl({
             id: hotel.id,
             title: hotel.name,
-            subtitle: `Rating ★ ${hotel.rating.toFixed(1)} · ${formatDistance(hotel.distance_m)}`,
+            subtitle: `Rating ${hotel.rating.toFixed(1)}/5 · ${formatDistance(hotel.distance_m)}`,
             category: 'hotel',
             photoUrl: hotel.photo_url,
           });
@@ -171,7 +171,7 @@ export default function HotelView() {
                     e.currentTarget.src = getFallbackVisualUrl({
                       id: hotel.id,
                       title: hotel.name,
-                      subtitle: `Rating ★ ${hotel.rating.toFixed(1)} · ${formatDistance(hotel.distance_m)}`,
+                      subtitle: `Rating ${hotel.rating.toFixed(1)}/5 · ${formatDistance(hotel.distance_m)}`,
                       category: 'hotel',
                     });
                   }}
@@ -197,8 +197,8 @@ export default function HotelView() {
                     </div>
                   </div>
 
-                  <span className="shrink-0 bg-gold-400/25 text-earth-900 font-bold text-xs px-2.5 py-0.5 rounded-lg">
-                    ★ {hotel.rating.toFixed(1)}
+                  <span className="shrink-0 bg-gold-400/25 text-earth-900 font-bold text-xs px-2.5 py-0.5 rounded-lg tabular-nums">
+                    Score {hotel.rating.toFixed(1)}
                   </span>
                 </div>
 

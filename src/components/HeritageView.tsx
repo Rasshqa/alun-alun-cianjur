@@ -337,7 +337,7 @@ export default function HeritageView() {
 
                   {audioFallbackId === icon.id && (
                     <div className="bg-gold-300/20 border border-gold-500/35 text-earth-800 rounded-xl px-3 py-2 text-[11px] font-medium">
-                      Suara otomatis tidak tersedia di perangkat ini — silakan baca narasi sejarah di atas.
+                      Suara otomatis tidak tersedia di perangkat ini: silakan baca narasi sejarah di atas.
                     </div>
                   )}
 

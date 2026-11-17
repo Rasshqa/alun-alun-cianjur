@@ -270,7 +270,7 @@ function TopHeader({
           type="button"
           onClick={onOpenAbout}
           className="min-w-0 flex-1 flex items-center gap-2.5 text-left group"
-          aria-label="Tentang SADAYA — Social Project Mojang Jajaka Kabupaten Cianjur"
+          aria-label="Tentang SADAYA: Social Project Mojang Jajaka Kabupaten Cianjur"
         >
           <div className="w-12 h-10 sm:w-14 sm:h-11 shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform">
             <img
@@ -308,11 +308,12 @@ function TopHeader({
           <button
             type="button"
             onClick={onOpenMitra}
-            className="min-h-10 px-2.5 sm:px-3 py-1.5 rounded-xl bg-earth-800/90 hover:bg-earth-700 active:scale-95 text-gold-300 text-[11px] sm:text-xs font-semibold border border-gold-500/40 transition-all duration-200 shadow-xs flex items-center gap-1"
-            aria-label="Lihat Mitra & Sponsor Resmi SADAYA"
+            className="min-h-10 px-2.5 sm:px-3 py-1.5 rounded-xl bg-earth-800/90 hover:bg-earth-700 active:scale-95 text-gold-300 text-[11px] sm:text-xs font-semibold border border-gold-500/40 transition-all duration-200 shadow-xs flex items-center gap-1.5"
+            aria-label="Lihat Mitra dan Sponsor Resmi SADAYA"
           >
-            <span>🤝</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-gold-400" />
             <span className="hidden sm:inline">Mitra &amp; Sponsor</span>
+            <span className="sm:hidden">Mitra</span>
           </button>
 
           <button
@@ -361,7 +362,7 @@ function SadayaIntroBanner({
               Social Project Mojang Jajaka Kab. Cianjur
             </span>
             <span className="text-[11px] sm:text-xs font-bold text-gold-300 truncate">
-              SADAYA — Sarana Digital Wisata, Budaya & Lingkungan Asri
+              SADAYA: Sarana Digital Wisata, Budaya & Lingkungan Asri
             </span>
           </div>
           <p className="hidden sm:block text-[11px] text-earth-200 mt-0.5 leading-snug truncate">
@@ -373,9 +374,9 @@ function SadayaIntroBanner({
           <button
             type="button"
             onClick={onOpenMitra}
-            className="px-2.5 py-1 rounded-lg bg-gold-500 hover:bg-gold-400 text-earth-900 text-[11px] font-bold border border-gold-400 transition-all whitespace-nowrap active:scale-95 flex items-center gap-1 shadow-2xs"
+            className="px-2.5 py-1 rounded-lg bg-gold-500 hover:bg-gold-400 text-earth-900 text-[11px] font-bold border border-gold-400 transition-all whitespace-nowrap active:scale-95 flex items-center gap-1.5 shadow-2xs"
           >
-            <span>🤝</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-earth-900" />
             <span>Mitra Resmi</span>
           </button>
           <button
@@ -427,7 +428,7 @@ function SponsorRibbon({ onOpenMitra }: { onOpenMitra: () => void }) {
           onClick={onOpenMitra}
           className="text-[10px] font-bold text-gold-300 hover:text-gold-200 shrink-0 underline ml-1 cursor-pointer whitespace-nowrap"
         >
-          Lihat Profil →
+          Lihat Profil
         </button>
       </div>
     </div>
@@ -443,6 +444,14 @@ function SadayaAboutModal({
   onGoToGuide: () => void;
   onOpenMitra: () => void;
 }) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
   return (
     <div
       className="fixed inset-0 z-[2000] bg-black/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 animate-view-enter"
@@ -489,7 +498,7 @@ function SadayaAboutModal({
           <button
             type="button"
             onClick={onClose}
-            className="w-7 h-7 rounded-full bg-earth-800 hover:bg-earth-700 text-earth-200 text-sm flex items-center justify-center shrink-0"
+            className="w-7 h-7 rounded-full bg-earth-800 hover:bg-earth-700 text-earth-200 text-sm flex items-center justify-center shrink-0 focus:outline-none focus:ring-2 focus:ring-gold-400"
             aria-label="Tutup dialog Tentang SADAYA"
           >
             ×
@@ -518,8 +527,8 @@ function SadayaAboutModal({
           {/* Mitra & Sponsor Acknowledgment */}
           <div className="bg-earth-100/90 rounded-xl p-3 border border-earth-200/90 space-y-1.5 text-xs">
             <div className="flex items-center justify-between gap-2">
-              <span className="font-bold text-earth-900 flex items-center gap-1">
-                <span>🤝</span>
+              <span className="font-bold text-earth-900 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-islam-700" />
                 <span>Mitra &amp; Sponsor Resmi SADAYA</span>
               </span>
               <button
@@ -530,10 +539,10 @@ function SadayaAboutModal({
                 }}
                 className="text-[11px] font-bold text-islam-700 hover:underline"
               >
-                Lihat Semua →
+                Lihat Semua Mitra
               </button>
             </div>
-            <p className="text-[11px] text-earth-600 leading-snug">
+            <p className="text-[11px] text-earth-700 leading-snug">
               Didukung oleh <strong>BPR Cianjur</strong>, <strong>PT Sultan Putra Assamil</strong>, <strong>Di Makeupin Ajeng</strong>, <strong>Dekranasda Kab. Cianjur</strong>, serta mitra kuliner <strong>Mochi Mommi</strong>, <strong>Bubur Sampurna</strong>, &amp; <strong>Tauco Cap Meong</strong>.
             </p>
           </div>
@@ -542,7 +551,7 @@ function SadayaAboutModal({
             <button
               type="button"
               onClick={onGoToGuide}
-              className="flex-1 min-w-[140px] py-2.5 px-3.5 rounded-xl bg-islam-700 hover:bg-islam-600 text-white text-xs font-semibold active:scale-95 transition-all"
+              className="flex-1 min-w-[140px] py-2.5 px-3.5 rounded-xl bg-islam-700 hover:bg-islam-600 text-white text-xs font-semibold active:scale-95 transition-all text-center"
             >
               Isi Kehadiran &amp; Panduan
             </button>
@@ -569,6 +578,14 @@ function SadayaMitraModal({
   onGoToMapDekranasda: () => void;
   onGoToCulinary: () => void;
 }) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
   return (
     <div
       className="fixed inset-0 z-[2000] bg-black/80 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 animate-view-enter"
@@ -595,147 +612,227 @@ function SadayaMitraModal({
               Mitra &amp; Sponsor Resmi SADAYA
             </h2>
             <p className="text-[11px] sm:text-xs text-earth-200 mt-0.5">
-              Sinergi Lembaga Keuangan, Pelaku Bisnis, UMKM Kuliner, dan Kerajinan Daerah
+              Sinergi Lembaga Keuangan, Pelaku Bisnis, UMKM Kuliner, dan Kerajinan Daerah Alun-Alun Cianjur
             </p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="w-7 h-7 rounded-full bg-earth-800 hover:bg-earth-700 text-earth-200 text-sm flex items-center justify-center shrink-0"
+            className="w-7 h-7 rounded-full bg-earth-800 hover:bg-earth-700 text-earth-200 text-sm flex items-center justify-center shrink-0 focus:outline-none focus:ring-2 focus:ring-gold-400"
             aria-label="Tutup dialog Mitra"
           >
             ×
           </button>
         </div>
 
-        <div className="p-4 sm:p-5 space-y-4 text-xs sm:text-sm text-earth-800 leading-relaxed overflow-y-auto">
-          {/* Mitra Perbankan */}
-          <div className="heritage-card rounded-xl p-3.5 space-y-2 border-l-4 border-l-sky-600 bg-white">
-            <div className="flex items-center justify-between gap-2 flex-wrap">
-              <div className="flex items-center gap-2">
-                <span className="text-base">🏛️</span>
-                <span className="font-bold text-earth-900 text-sm">
-                  Mitra Perbankan: BPR Cianjur
+        <div className="p-4 sm:p-5 space-y-3 text-xs sm:text-sm text-earth-800 leading-relaxed overflow-y-auto">
+          {/* Unified Partner Cards without category silos */}
+          <div className="space-y-3">
+            {/* PT BPR Cianjur Jabar (Perseroda) */}
+            <div className="bg-white rounded-xl p-3.5 border border-earth-200/90 shadow-2xs space-y-2">
+              <div className="flex items-center justify-between gap-2 flex-wrap">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-14 h-11 bg-earth-50 rounded-lg p-1 flex items-center justify-center shrink-0 border border-earth-200">
+                    <img
+                      src="/sponsors/bpr-cianjur.png"
+                      alt="Logo BPR Cianjur"
+                      width={60}
+                      height={40}
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-earth-900 text-sm">
+                      PT BPR Cianjur Jabar (Perseroda)
+                    </h3>
+                    <span className="text-[10px] text-earth-600 font-medium">
+                      BUMD Lembaga Keuangan Daerah
+                    </span>
+                  </div>
+                </div>
+                <span className="text-[10px] bg-sky-100 text-sky-900 font-bold px-2 py-0.5 rounded-md">
+                  OJK &amp; LPS
                 </span>
               </div>
-              <span className="text-[10px] bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded-md">
-                BUMD Daerah · OJK &amp; LPS
-              </span>
-            </div>
-            <p className="text-xs text-earth-600 leading-relaxed">
-              PT BPR Cianjur Jabar (Perseroda) menyediakan produk simpanan (Tabungan SIUNIK berbasis NIK KTP, Deposito Berjangka) serta kredit modal usaha bagi UMKM lokal dan pick-up service jemput setoran.
-            </p>
-            <div className="flex flex-wrap gap-2 pt-1 text-[11px]">
-              <a
-                href="https://www.instagram.com/infobprcianjur"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-2.5 py-1 rounded-lg bg-pink-50 text-pink-700 border border-pink-200 font-semibold"
-              >
-                📸 Instagram: @infobprcianjur
-              </a>
-              <a
-                href="https://bprcianjur.co.id"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-2.5 py-1 rounded-lg bg-earth-100 text-earth-800 font-semibold"
-              >
-                🌐 bprcianjur.co.id
-              </a>
-            </div>
-          </div>
-
-          {/* Mitra Bisnis dan Jasa */}
-          <div className="heritage-card rounded-xl p-3.5 space-y-2 border-l-4 border-l-amber-600 bg-white">
-            <div className="flex items-center gap-2">
-              <span className="text-base">💼</span>
-              <span className="font-bold text-earth-900 text-sm">
-                Mitra Bisnis dan Jasa
-              </span>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-              <div className="bg-earth-50 rounded-lg p-2.5 border border-earth-200/70 space-y-1">
-                <div className="font-bold text-earth-900">PT Sultan Putra Assamil</div>
-                <p className="text-[11px] text-earth-600">
-                  Jasa transportasi darat sewa armada bus pariwisata eksekutif, paket tur domestik-mancanegara, dan general contractor &amp; supplier.
-                </p>
+              <p className="text-xs text-earth-700 leading-relaxed">
+                Menyediakan produk simpanan (Tabungan SIUNIK berbasis NIK e-KTP, Deposito Berjangka) serta penyaluran kredit modal usaha bagi UMKM lokal dan fasilitas jemput setoran ke nasabah.
+              </p>
+              <div className="flex flex-wrap gap-2 pt-1 text-[11px]">
+                <a
+                  href="https://www.instagram.com/infobprcianjur"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 rounded-lg bg-pink-50 hover:bg-pink-100 text-pink-800 border border-pink-200 font-semibold transition-all active:scale-95"
+                >
+                  Instagram: @infobprcianjur
+                </a>
+                <a
+                  href="https://bprcianjur.co.id"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 rounded-lg bg-earth-100 hover:bg-earth-200 text-earth-800 border border-earth-200 font-semibold transition-all active:scale-95"
+                >
+                  Situs: bprcianjur.co.id
+                </a>
               </div>
-              <div className="bg-pink-50/50 rounded-lg p-2.5 border border-pink-200/60 space-y-1">
-                <div className="font-bold text-earth-900">Di Makeupin Ajeng</div>
-                <p className="text-[11px] text-earth-600">
-                  Professional Makeup Artist (MUA) untuk wedding adat Sunda/modern, wisuda, lamaran, dan photoshoot.
-                </p>
+            </div>
+
+            {/* PT Sultan Putra Assamil */}
+            <div className="bg-white rounded-xl p-3.5 border border-earth-200/90 shadow-2xs space-y-2">
+              <div className="flex items-center justify-between gap-2 flex-wrap">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-14 h-11 bg-[#172554] rounded-lg p-1 flex items-center justify-center shrink-0 border border-blue-900">
+                    <img
+                      src="/sponsors/sultan-putra-assamil.png"
+                      alt="Logo PT Sultan Putra Assamil"
+                      width={60}
+                      height={40}
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-earth-900 text-sm">
+                      PT Sultan Putra Assamil
+                    </h3>
+                    <span className="text-[10px] text-earth-600 font-medium">
+                      Biro Perjalanan &amp; Bus Pariwisata
+                    </span>
+                  </div>
+                </div>
+                <span className="text-[10px] bg-blue-100 text-blue-900 font-bold px-2 py-0.5 rounded-md">
+                  Transportasi &amp; Wisata
+                </span>
+              </div>
+              <p className="text-xs text-earth-700 leading-relaxed">
+                Jasa transportasi darat sewa armada bus pariwisata eksekutif nyaman dan aman, paket tour domestik hingga mancanegara, serta kontraktor umum berbasis di Cianjur.
+              </p>
+              <div className="text-[11px] text-earth-600">
+                Wilayah Operasional: Cianjur, Jawa Barat, hingga rute mancanegara.
+              </div>
+            </div>
+
+            {/* Di Makeupin Ajeng */}
+            <div className="bg-white rounded-xl p-3.5 border border-earth-200/90 shadow-2xs space-y-2">
+              <div className="flex items-center justify-between gap-2 flex-wrap">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-14 h-11 bg-[#FCE7F3] rounded-lg p-1 flex items-center justify-center shrink-0 border border-pink-200">
+                    <img
+                      src="/sponsors/dimakeupin-ajeng.png"
+                      alt="Logo Di Makeupin Ajeng"
+                      width={60}
+                      height={40}
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-earth-900 text-sm">
+                      Di Makeupin Ajeng
+                    </h3>
+                    <span className="text-[10px] text-earth-600 font-medium">
+                      Professional Makeup Artist (MUA)
+                    </span>
+                  </div>
+                </div>
+                <span className="text-[10px] bg-pink-100 text-pink-900 font-bold px-2 py-0.5 rounded-md">
+                  Tata Rias
+                </span>
+              </div>
+              <p className="text-xs text-earth-700 leading-relaxed">
+                Tata rias profesional di Cianjur untuk wedding adat Sunda siger/modern, wisuda, lamaran, prewedding, photoshoot, dan tata rias Mojang Jajaka.
+              </p>
+              <div className="pt-0.5 text-[11px]">
                 <a
                   href="https://www.instagram.com/dimakeupinajeng"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[10px] text-pink-700 font-bold block pt-0.5"
+                  className="inline-flex px-2.5 py-1 rounded-lg bg-pink-50 hover:bg-pink-100 text-pink-800 border border-pink-200 font-semibold transition-all active:scale-95"
                 >
-                  📸 @dimakeupinajeng
+                  Instagram: @dimakeupinajeng
                 </a>
               </div>
             </div>
-          </div>
 
-          {/* Rekomendasi Kuliner dan Oleh-Oleh */}
-          <div className="heritage-card rounded-xl p-3.5 space-y-2 border-l-4 border-l-islam-600 bg-white">
-            <div className="flex items-center justify-between gap-2 flex-wrap">
-              <div className="flex items-center gap-2">
-                <span className="text-base">🍴</span>
-                <span className="font-bold text-earth-900 text-sm">
-                  Rekomendasi Kuliner &amp; Oleh-Oleh (Mitra Utama)
+            {/* Dekranasda Kabupaten Cianjur */}
+            <div className="bg-white rounded-xl p-3.5 border border-earth-200/90 shadow-2xs space-y-2">
+              <div className="flex items-center justify-between gap-2 flex-wrap">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-14 h-11 bg-earth-50 rounded-lg p-1 flex items-center justify-center shrink-0 border border-earth-200">
+                    <img
+                      src="/sponsors/dekranasda.png"
+                      alt="Logo Dekranasda Kabupaten Cianjur"
+                      width={60}
+                      height={60}
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-earth-900 text-sm">
+                      Dekranasda Kabupaten Cianjur
+                    </h3>
+                    <span className="text-[10px] text-earth-600 font-medium">
+                      Dewan Kerajinan Nasional Daerah
+                    </span>
+                  </div>
+                </div>
+                <span className="text-[10px] bg-red-100 text-red-900 font-bold px-2 py-0.5 rounded-md">
+                  Pusat Kriya &amp; UMKM
                 </span>
               </div>
-              <button
-                type="button"
-                onClick={onGoToCulinary}
-                className="text-[11px] font-bold text-islam-700 hover:underline"
-              >
-                Lihat di Tab Kuliner →
-              </button>
+              <p className="text-xs text-earth-700 leading-relaxed">
+                Pembinaan perajin kriya dan promosi produk unggulan: Batik Khas Cianjur (Hayam Pelung &amp; 3 Pilar), Anyaman Bambu Tradisional, dan Lampion Kaca Patri Gentur.
+              </p>
+              <div className="bg-amber-50/80 rounded-lg p-2.5 border border-amber-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                <div className="text-[11px] text-earth-800">
+                  <span className="font-bold text-amber-950">Lokasi: </span>
+                  Kompleks Pendopo Kab. Cianjur, Jl. Siti Jenab No. 31 (50m seberang selatan Alun-Alun).
+                </div>
+                <button
+                  type="button"
+                  onClick={onGoToMapDekranasda}
+                  className="shrink-0 px-3 py-1.5 rounded-lg bg-earth-800 hover:bg-earth-900 text-gold-300 text-xs font-bold active:scale-95 transition-all"
+                >
+                  Buka Titik di Peta
+                </button>
+              </div>
             </div>
-            <div className="text-xs text-earth-700 flex flex-wrap gap-2">
-              <span className="bg-earth-100 px-2.5 py-1 rounded-md font-semibold">
-                ⭐ Mochi Mommi (Mochi Khas Cianjur Sejak 2012)
-              </span>
-              <span className="bg-earth-100 px-2.5 py-1 rounded-md font-semibold">
-                ⭐ Bubur Ayam Sampurna (Bojongmeron 1975)
-              </span>
-              <span className="bg-earth-100 px-2.5 py-1 rounded-md font-semibold">
-                ⭐ Tauco Cap Meong (Sejak 1880)
-              </span>
-            </div>
-          </div>
 
-          {/* Mitra Kerajinan dan UMKM */}
-          <div className="heritage-card rounded-xl p-3.5 space-y-2.5 border-l-4 border-l-red-600 bg-white">
-            <div className="flex items-center justify-between gap-2 flex-wrap">
-              <div className="flex items-center gap-2">
-                <span className="text-base">🏪</span>
-                <span className="font-bold text-earth-900 text-sm">
-                  Mitra Kerajinan dan UMKM: Dekranasda
+            {/* Mitra Kuliner Prioritas */}
+            <div className="bg-white rounded-xl p-3.5 border border-earth-200/90 shadow-2xs space-y-2">
+              <div className="flex items-center justify-between gap-2 flex-wrap">
+                <h3 className="font-bold text-earth-900 text-sm">
+                  Mitra Resmi Kuliner &amp; Oleh-Oleh Prioritas
+                </h3>
+                <button
+                  type="button"
+                  onClick={onGoToCulinary}
+                  className="text-[11px] font-bold text-islam-700 hover:underline"
+                >
+                  Buka Tab Kuliner
+                </button>
+              </div>
+              <div className="text-xs text-earth-700 flex flex-wrap gap-2">
+                <span className="bg-earth-100 px-2.5 py-1 rounded-md font-semibold text-earth-800">
+                  Mochi Mommi (Mochi Khas Cianjur Sejak 2012)
+                </span>
+                <span className="bg-earth-100 px-2.5 py-1 rounded-md font-semibold text-earth-800">
+                  Bubur Ayam Sampurna (Bojongmeron 1975)
+                </span>
+                <span className="bg-earth-100 px-2.5 py-1 rounded-md font-semibold text-earth-800">
+                  Tauco Cap Meong (Sejak 1880)
                 </span>
               </div>
-              <span className="text-[10px] bg-red-100 text-red-800 font-bold px-2 py-0.5 rounded-md">
-                Pusat Kriya &amp; UMKM
-              </span>
-            </div>
-            <p className="text-xs text-earth-600 leading-relaxed">
-              Dewan Kerajinan Nasional Daerah Kabupaten Cianjur membina dan mempromosikan seni kerajinan lokal: Batik khas Cianjur (Hayam Pelung, 3 Pilar), Anyaman Bambu tradisional, dan Lampion Kaca Patri Gentur.
-            </p>
-            <div className="bg-amber-50/80 rounded-lg p-2.5 border border-amber-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-              <div className="text-[11px] text-earth-800">
-                <span className="font-bold text-amber-950">📍 Lokasi: </span>
-                Kompleks Pendopo Kabupaten Cianjur, Jl. Siti Jenab No. 31 (50 meter di seberang selatan Alun-Alun).
-              </div>
-              <button
-                type="button"
-                onClick={onGoToMapDekranasda}
-                className="shrink-0 px-3 py-1.5 rounded-lg bg-earth-800 hover:bg-earth-900 text-gold-300 text-xs font-bold active:scale-95 transition-all flex items-center gap-1"
-              >
-                <span>📍</span>
-                <span>Buka di Peta</span>
-              </button>
             </div>
           </div>
 
@@ -746,6 +843,234 @@ function SadayaMitraModal({
               className="py-2 px-5 rounded-xl bg-earth-800 hover:bg-earth-900 text-white text-xs font-semibold active:scale-95 transition-all"
             >
               Tutup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FirstVisitSponsorPopup({
+  onClose,
+  onOpenFullMitra,
+}: {
+  onClose: () => void;
+  onOpenFullMitra: () => void;
+}) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[2100] bg-black/80 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 animate-view-enter"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="first-visit-sponsor-title"
+    >
+      <div
+        className="bg-[#FAF6F0] rounded-2xl max-w-xl w-full max-h-[90dvh] flex flex-col overflow-hidden shadow-2xl border border-gold-500/50"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="bg-sundanese-dark text-white p-4 sm:p-5 flex items-start justify-between gap-3 border-b border-gold-500/35 shrink-0">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="inline-block bg-gold-500 text-earth-900 text-[10px] font-bold px-2 py-0.5 rounded-md leading-tight">
+                Mitra Resmi SADAYA
+              </span>
+              <span className="text-[11px] text-gold-300 font-semibold">
+                Mojang Jajaka Kab. Cianjur · Swaranusa
+              </span>
+            </div>
+            <h2
+              id="first-visit-sponsor-title"
+              className="font-heritage text-base sm:text-xl font-bold text-gold-300 leading-tight"
+            >
+              Selamat Datang di Portal SADAYA
+            </h2>
+            <p className="text-[11px] sm:text-xs text-earth-200 leading-snug">
+              Sarana Digital Wisata, Budaya, dan Lingkungan Asri Alun-Alun Cianjur didukung oleh mitra terpercaya:
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-7 h-7 rounded-full bg-earth-800 hover:bg-earth-700 text-earth-200 text-sm flex items-center justify-center shrink-0 focus:outline-none focus:ring-2 focus:ring-gold-400"
+            aria-label="Tutup sambutan mitra"
+          >
+            ×
+          </button>
+        </div>
+
+        <div className="p-4 sm:p-5 space-y-3.5 text-xs sm:text-sm text-earth-800 leading-relaxed overflow-y-auto">
+          <p className="text-xs text-earth-700">
+            Apresiasi dan kehormatan kami kepada mitra resmi yang berkolaborasi mendukung pelayanan publik, pariwisata, dan pelestarian budaya Cianjur:
+          </p>
+
+          <div className="space-y-2.5">
+            {/* BPR Cianjur */}
+            <div className="bg-white rounded-xl p-3 border border-earth-200/90 flex items-center gap-3 shadow-2xs">
+              <div className="w-16 h-12 bg-earth-50 rounded-lg p-1.5 flex items-center justify-center shrink-0 border border-earth-200">
+                <img
+                  src="/sponsors/bpr-cianjur.png"
+                  alt="Logo BPR Cianjur"
+                  width={80}
+                  height={50}
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <h3 className="font-bold text-earth-900 text-xs sm:text-sm">
+                    PT BPR Cianjur Jabar (Perseroda)
+                  </h3>
+                  <span className="text-[9px] bg-sky-100 text-sky-900 font-bold px-1.5 py-0.2 rounded">
+                    BUMD Perbankan
+                  </span>
+                </div>
+                <p className="text-[11px] text-earth-600 line-clamp-2 mt-0.5">
+                  Layanan simpanan terpercaya (SIUNIK KTP &amp; Deposito) dan kredit permodalan usaha bagi masyarakat serta UMKM Cianjur.
+                </p>
+              </div>
+            </div>
+
+            {/* PT Sultan Putra Assamil */}
+            <div className="bg-white rounded-xl p-3 border border-earth-200/90 flex items-center gap-3 shadow-2xs">
+              <div className="w-16 h-12 bg-[#172554] rounded-lg p-1.5 flex items-center justify-center shrink-0 border border-blue-900">
+                <img
+                  src="/sponsors/sultan-putra-assamil.png"
+                  alt="Logo PT Sultan Putra Assamil"
+                  width={80}
+                  height={50}
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <h3 className="font-bold text-earth-900 text-xs sm:text-sm">
+                    PT Sultan Putra Assamil
+                  </h3>
+                  <span className="text-[9px] bg-blue-100 text-blue-900 font-bold px-1.5 py-0.2 rounded">
+                    Transportasi &amp; Wisata
+                  </span>
+                </div>
+                <p className="text-[11px] text-earth-600 line-clamp-2 mt-0.5">
+                  Jasa transportasi armada bus pariwisata eksekutif, paket tur domestik-mancanegara, dan kontraktor umum berbasis di Cianjur.
+                </p>
+              </div>
+            </div>
+
+            {/* Di Makeupin Ajeng */}
+            <div className="bg-white rounded-xl p-3 border border-earth-200/90 flex items-center gap-3 shadow-2xs">
+              <div className="w-16 h-12 bg-[#FCE7F3] rounded-lg p-1.5 flex items-center justify-center shrink-0 border border-pink-200">
+                <img
+                  src="/sponsors/dimakeupin-ajeng.png"
+                  alt="Logo Di Makeupin Ajeng"
+                  width={80}
+                  height={50}
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <h3 className="font-bold text-earth-900 text-xs sm:text-sm">
+                    Di Makeupin Ajeng
+                  </h3>
+                  <span className="text-[9px] bg-pink-100 text-pink-900 font-bold px-1.5 py-0.2 rounded">
+                    Professional MUA
+                  </span>
+                </div>
+                <p className="text-[11px] text-earth-600 line-clamp-2 mt-0.5">
+                  Jasa tata rias profesional di Cianjur untuk wedding adat Sunda/modern, wisuda, lamaran, prewedding, dan photoshoot.
+                </p>
+              </div>
+            </div>
+
+            {/* Dekranasda Kabupaten Cianjur */}
+            <div className="bg-white rounded-xl p-3 border border-earth-200/90 flex items-center gap-3 shadow-2xs">
+              <div className="w-16 h-12 bg-earth-50 rounded-lg p-1.5 flex items-center justify-center shrink-0 border border-earth-200">
+                <img
+                  src="/sponsors/dekranasda.png"
+                  alt="Logo Dekranasda Kabupaten Cianjur"
+                  width={60}
+                  height={60}
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <h3 className="font-bold text-earth-900 text-xs sm:text-sm">
+                    Dekranasda Kabupaten Cianjur
+                  </h3>
+                  <span className="text-[9px] bg-red-100 text-red-900 font-bold px-1.5 py-0.2 rounded">
+                    Pusat Kriya &amp; UMKM
+                  </span>
+                </div>
+                <p className="text-[11px] text-earth-600 line-clamp-2 mt-0.5">
+                  Lembaga pembina perajin kriya Batik Cianjur, Anyaman Bambu, dan Lampion Gentur di Kompleks Pendopo (50m dari Alun-Alun).
+                </p>
+              </div>
+            </div>
+
+            {/* Kuliner & Oleh-Oleh Prioritas */}
+            <div className="bg-white rounded-xl p-3 border border-earth-200/90 space-y-1.5 shadow-2xs">
+              <div className="flex items-center justify-between gap-1">
+                <h3 className="font-bold text-earth-900 text-xs">
+                  Mitra Resmi Kuliner &amp; Oleh-Oleh Prioritas
+                </h3>
+                <span className="text-[9px] bg-gold-100 text-earth-900 font-bold px-1.5 py-0.2 rounded">
+                  Kuliner Legendaris
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-1.5 text-[11px] text-earth-800">
+                <span className="bg-earth-100 px-2 py-0.5 rounded-md font-medium">
+                  Mochi Mommi (Sejak 2012)
+                </span>
+                <span className="bg-earth-100 px-2 py-0.5 rounded-md font-medium">
+                  Bubur Ayam Sampurna (1975)
+                </span>
+                <span className="bg-earth-100 px-2 py-0.5 rounded-md font-medium">
+                  Tauco Cap Meong (Sejak 1880)
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-2 flex flex-col sm:flex-row gap-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex-1 py-2.5 px-4 rounded-xl bg-earth-800 hover:bg-earth-900 text-gold-300 text-xs font-bold active:scale-95 transition-all text-center focus:outline-none focus:ring-2 focus:ring-gold-400"
+            >
+              Jelajahi Portal SADAYA
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                onClose();
+                onOpenFullMitra();
+              }}
+              className="py-2.5 px-4 rounded-xl bg-earth-100 hover:bg-earth-200 text-earth-900 text-xs font-semibold active:scale-95 transition-all text-center focus:outline-none focus:ring-2 focus:ring-earth-400"
+            >
+              Lihat Profil Lengkap Mitra
             </button>
           </div>
         </div>
@@ -869,6 +1194,24 @@ function AppShell() {
   const [showIntroBanner, setShowIntroBanner] = useState(true);
   const [showAboutModal, setShowAboutModal] = useState(false);
   const [showMitraModal, setShowMitraModal] = useState(false);
+  const [showFirstVisitPopup, setShowFirstVisitPopup] = useState(false);
+
+  useEffect(() => {
+    if (!showSplash) {
+      const hasSeen = sessionStorage.getItem('sadaya_first_visit_sponsor_seen');
+      if (!hasSeen) {
+        const timer = setTimeout(() => {
+          setShowFirstVisitPopup(true);
+        }, 350);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [showSplash]);
+
+  const handleCloseFirstVisitPopup = () => {
+    setShowFirstVisitPopup(false);
+    sessionStorage.setItem('sadaya_first_visit_sponsor_seen', 'true');
+  };
 
   useEffect(() => {
     const rawGate = new URLSearchParams(window.location.search).get('gate');
@@ -913,6 +1256,16 @@ function AppShell() {
         <TabContent />
         <BottomNav />
       </div>
+
+      {showFirstVisitPopup && (
+        <FirstVisitSponsorPopup
+          onClose={handleCloseFirstVisitPopup}
+          onOpenFullMitra={() => {
+            handleCloseFirstVisitPopup();
+            setShowMitraModal(true);
+          }}
+        />
+      )}
 
       {showAboutModal && (
         <SadayaAboutModal

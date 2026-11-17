@@ -127,14 +127,14 @@ export default function CulinaryView() {
         </div>
       </div>
 
-      {/* ⭐ REKOMENDASI UTAMA MITRA KULINER & OLEH-OLEH SADAYA */}
+      {/* REKOMENDASI UTAMA MITRA KULINER & OLEH-OLEH SADAYA */}
       {!search && typeFilter === 'ALL' && (
         <div className="bg-gradient-to-br from-earth-900 via-earth-800 to-sundanese-dark text-white rounded-2xl p-4 sm:p-5 border border-gold-500/40 shadow-md space-y-3 animate-view-enter">
           <div className="flex items-center justify-between gap-2 flex-wrap">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-gold-400 animate-pulse" />
               <span className="text-xs font-bold uppercase tracking-wider text-gold-300">
-                ⭐ Rekomendasi Utama Mitra Kuliner &amp; Oleh-Oleh
+                Rekomendasi Utama: Mitra Kuliner &amp; Oleh-Oleh
               </span>
             </div>
             <span className="text-[10px] bg-gold-500 text-earth-900 font-bold px-2.5 py-0.5 rounded-full">
@@ -266,8 +266,8 @@ export default function CulinaryView() {
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5 flex-wrap mb-1">
                       {(spot as { is_featured_partner?: boolean }).is_featured_partner && (
-                        <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-gold-400/35 text-earth-900 border border-gold-500/60 px-2 py-0.5 rounded-full shadow-2xs">
-                          <span>⭐</span>
+                        <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-gold-400/35 text-earth-900 border border-gold-500/60 px-2 py-0.5 rounded-full shadow-2xs">
+                          <span className="w-1.5 h-1.5 rounded-full bg-gold-600" />
                           <span>Mitra Resmi</span>
                         </span>
                       )}

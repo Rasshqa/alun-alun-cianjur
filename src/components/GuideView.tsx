@@ -166,7 +166,7 @@ export default function GuideView() {
           {[
             { id: 'all' as GuideSection, label: 'Semua Info' },
             { id: 'sadaya' as GuideSection, label: 'Tentang SADAYA' },
-            { id: 'mitra' as GuideSection, label: '🤝 Mitra & Sponsor' },
+            { id: 'mitra' as GuideSection, label: 'Mitra & Sponsor' },
             { id: 'hadir' as GuideSection, label: 'Kehadiran (Opsional)' },
             { id: 'event' as GuideSection, label: 'Event Malam Minggu' },
             { id: 'rute' as GuideSection, label: 'Panduan Stasiun & Rute' },
@@ -191,14 +191,14 @@ export default function GuideView() {
         </div>
       </div>
 
-      {/* PROFIL SADAYA — SOCIAL PROJECT MOJANG JAJAKA KABUPATEN CIANJUR */}
+      {/* PROFIL SADAYA: SOCIAL PROJECT MOJANG JAJAKA KABUPATEN CIANJUR */}
       {(section === 'all' || section === 'sadaya') && (
         <section className="animate-view-enter">
           <div className="bg-sundanese-dark text-white rounded-2xl border border-gold-500/40 p-4 sm:p-5 shadow-md flex flex-col md:flex-row items-center gap-4">
             <div
               onClick={() =>
                 setLightboxItem({
-                  title: 'SADAYA — Sarana Digital Wisata, Budaya, dan Lingkungan Asri',
+                  title: 'SADAYA: Sarana Digital Wisata, Budaya, dan Lingkungan Asri',
                   sub: 'Social Project Mojang Jajaka Kabupaten Cianjur (Kelompok 6 Swaranusa)',
                   url: '/sadaya-logo.png',
                 })
@@ -238,7 +238,7 @@ export default function GuideView() {
         </section>
       )}
 
-      {/* MITRA & SPONSOR RESMI SADAYA — KONSEP PENEMPATAN MITRA TERSTRUKTUR */}
+      {/* MITRA & SPONSOR RESMI SADAYA: SINERGI RESMI SELURUH MITRA */}
       {(section === 'all' || section === 'mitra') && (
         <section className="space-y-4 animate-view-enter">
           {/* Main Sponsor Header Banner */}
@@ -257,45 +257,27 @@ export default function GuideView() {
               </span>
             </div>
             <h3 className="font-heritage text-base sm:text-xl font-bold text-gold-300">
-              Mitra &amp; Sponsor Pendukung Portal Pintar SADAYA
+              Mitra &amp; Sponsor Resmi SADAYA
             </h3>
             <p className="text-xs sm:text-sm text-earth-100 leading-relaxed max-w-3xl">
-              Terima kasih kepada seluruh mitra perbankan, pelaku bisnis, UMKM kuliner legendaris, dan lembaga kerajinan daerah yang telah bersinergi mendukung kelancaran inisiatif digital Mojang Jajaka Kabupaten Cianjur (Kelompok 6 Swaranusa).
+              Apresiasi dan sinergi terpercaya bersama seluruh mitra resmi yang mendukung kelancaran inisiatif digital Mojang Jajaka Kabupaten Cianjur (Kelompok 6 Swaranusa) untuk pariwisata, kriya, kuliner, dan budaya Alun-Alun Cianjur.
             </p>
           </div>
 
-          <div className="space-y-4">
-            {/* 1. MITRA PERBANKAN */}
-            <div className="heritage-card rounded-2xl p-4 sm:p-5 space-y-3.5 border-l-4 border-l-sky-600">
-              <div className="flex items-center justify-between gap-2 flex-wrap">
-                <div className="flex items-center gap-2">
-                  <span className="w-7 h-7 rounded-lg bg-sky-100 text-sky-800 flex items-center justify-center text-sm font-bold">
-                    🏛️
-                  </span>
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-sky-700">
-                      Kategori 1 · Mitra Perbankan
-                    </span>
-                    <h4 className="font-heritage text-base sm:text-lg font-bold text-earth-900 leading-snug">
-                      Profil dan Informasi Layanan Perbankan Daerah
-                    </h4>
-                  </div>
-                </div>
-                <span className="text-[10px] font-semibold bg-sky-50 text-sky-800 border border-sky-200 px-2.5 py-0.5 rounded-full">
-                  BUMD Kab. Cianjur
-                </span>
-              </div>
-
-              <div className="bg-white rounded-xl border border-earth-200/90 p-4 flex flex-col md:flex-row gap-4 items-start">
+          {/* Unified Partner Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* 1. PT BPR Cianjur Jabar (Perseroda) */}
+            <div className="bg-white rounded-2xl border border-earth-200/90 p-4 sm:p-5 flex flex-col justify-between space-y-3.5 shadow-2xs hover:border-gold-500/50 transition-colors">
+              <div className="space-y-3">
                 <div
                   onClick={() =>
                     setLightboxItem({
                       title: 'PT BPR Cianjur Jabar (Perseroda)',
-                      sub: 'Mitra Perbankan Resmi SADAYA — BUMD Kabupaten Cianjur',
+                      sub: 'Mitra Resmi SADAYA: BUMD Lembaga Keuangan Kabupaten Cianjur',
                       url: '/sponsors/bpr-cianjur.png',
                     })
                   }
-                  className="w-full md:w-56 h-28 bg-white border border-earth-200 rounded-xl p-3 flex items-center justify-center shrink-0 cursor-pointer hover:border-gold-500 transition-colors shadow-2xs group"
+                  className="w-full h-32 bg-earth-50/70 border border-earth-200/80 rounded-xl p-3 flex items-center justify-center cursor-pointer hover:border-gold-500 transition-colors group"
                 >
                   <img
                     src="/sponsors/bpr-cianjur.png"
@@ -304,340 +286,199 @@ export default function GuideView() {
                     height={150}
                     loading="lazy"
                     decoding="async"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
                     className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform"
                   />
                 </div>
 
-                <div className="space-y-2 min-w-0 flex-1">
+                <div className="space-y-1.5">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h5 className="font-bold text-earth-900 text-base">
-                      BPR Cianjur (PT BPR Cianjur Jabar - Perseroda)
-                    </h5>
-                    <span className="text-[10px] bg-islam-50 text-islam-700 border border-islam-300 font-bold px-2 py-0.2 rounded-md">
-                      OJK &amp; LPS
+                    <h4 className="font-bold text-earth-900 text-base">
+                      PT BPR Cianjur Jabar (Perseroda)
+                    </h4>
+                    <span className="text-[10px] bg-sky-100 text-sky-900 border border-sky-300 font-bold px-2 py-0.5 rounded-md">
+                      BUMD Perbankan · OJK &amp; LPS
                     </span>
                   </div>
                   <p className="text-xs text-earth-700 leading-relaxed">
-                    Merupakan lembaga keuangan dan perbankan milik daerah (BUMD) Pemerintah Kabupaten Cianjur yang bergerak di bidang layanan keuangan terpercaya bagi masyarakat dan pelaku UMKM lokal. Berizin serta diawasi oleh Otoritas Jasa Keuangan (OJK) dan simpanan nasabah dijamin oleh Lembaga Penjamin Simpanan (LPS).
+                    Lembaga keuangan perbankan milik Pemerintah Kabupaten Cianjur yang melayani simpanan aman (Tabungan SIUNIK berbasis NIK e-KTP, Tabungan TAMASA, Deposito Berjangka) serta penyaluran kredit permodalan usaha bagi masyarakat dan UMKM lokal.
                   </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-xs text-earth-800">
-                    <div className="bg-earth-50 rounded-lg p-2.5 border border-earth-200/70">
-                      <div className="font-bold text-sky-900 mb-0.5">💰 Simpanan &amp; Deposito</div>
-                      <p className="text-[11px] text-earth-600">
-                        Tabungan SIUNIK (berbasis NIK KTP), Tabungan TAMASA, TASIS PLUS, dan Deposito Berjangka dengan suku bunga menarik &amp; aman.
-                      </p>
-                    </div>
-                    <div className="bg-earth-50 rounded-lg p-2.5 border border-earth-200/70">
-                      <div className="font-bold text-sky-900 mb-0.5">🤝 Pinjaman &amp; Pick-up Service</div>
-                      <p className="text-[11px] text-earth-600">
-                        Penyaluran kredit modal kerja usaha produktif bagi UMKM tatar Cianjur serta fasilitas jemput setoran ke rumah nasabah.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2 pt-2">
-                    <a
-                      href="https://www.instagram.com/infobprcianjur"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-pink-50 hover:bg-pink-100 text-pink-700 border border-pink-200 text-xs font-semibold transition-all active:scale-95"
-                    >
-                      <span>📸 Instagram: @infobprcianjur</span>
-                    </a>
-                    <a
-                      href="https://bprcianjur.co.id"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-earth-100 hover:bg-earth-200 text-earth-800 text-xs font-semibold transition-all active:scale-95"
-                    >
-                      <span>🌐 Website Resmi: bprcianjur.co.id</span>
-                    </a>
-                  </div>
+                </div>
+
+                <div className="bg-earth-50 rounded-xl p-3 border border-earth-200/70 space-y-1 text-xs text-earth-800">
+                  <div className="font-bold text-earth-900">Layanan Unggulan:</div>
+                  <ul className="list-disc pl-4 space-y-1 text-earth-700 text-[11px]">
+                    <li>
+                      <strong>Simpanan &amp; Deposito:</strong> SIUNIK, TAMASA, TASIS PLUS, dan Deposito suku bunga kompetitif.
+                    </li>
+                    <li>
+                      <strong>Kredit Modal Usaha:</strong> Solusi pembiayaan UMKM serta Pick-up Service setoran jemput bola ke lokasi nasabah.
+                    </li>
+                  </ul>
                 </div>
               </div>
-            </div>
 
-            {/* 2. MITRA BISNIS DAN JASA */}
-            <div className="heritage-card rounded-2xl p-4 sm:p-5 space-y-3.5 border-l-4 border-l-amber-600">
-              <div className="flex items-center justify-between gap-2 flex-wrap">
-                <div className="flex items-center gap-2">
-                  <span className="w-7 h-7 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center text-sm font-bold">
-                    💼
-                  </span>
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700">
-                      Kategori 2 · Mitra Bisnis dan Jasa
-                    </span>
-                    <h4 className="font-heritage text-base sm:text-lg font-bold text-earth-900 leading-snug">
-                      Profil Perusahaan dan Layanan Usaha Profesional
-                    </h4>
-                  </div>
-                </div>
-                <span className="text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-0.5 rounded-full">
-                  2 Mitra Usaha
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3.5">
-                {/* PT Sultan Putra Assamil */}
-                <div className="bg-white rounded-xl border border-earth-200/90 p-4 flex flex-col justify-between space-y-3 shadow-2xs">
-                  <div className="space-y-3">
-                    <div
-                      onClick={() =>
-                        setLightboxItem({
-                          title: 'PT Sultan Putra Assamil',
-                          sub: 'Mitra Bisnis dan Jasa — Biro Perjalanan Wisata & Transportasi Darat',
-                          url: '/sponsors/sultan-putra-assamil.png',
-                        })
-                      }
-                      className="w-full h-32 bg-[#172554] rounded-xl p-3 flex items-center justify-center cursor-pointer hover:opacity-95 transition-opacity"
-                    >
-                      <img
-                        src="/sponsors/sultan-putra-assamil.png"
-                        alt="Logo PT Sultan Putra Assamil"
-                        width={400}
-                        height={180}
-                        loading="lazy"
-                        decoding="async"
-                        className="max-h-full max-w-full object-contain"
-                      />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <h5 className="font-bold text-earth-900 text-base">
-                          PT Sultan Putra Assamil
-                        </h5>
-                        <span className="text-[10px] bg-blue-50 text-blue-800 border border-blue-200 font-bold px-2 py-0.2 rounded-md">
-                          Tour &amp; Travel
-                        </span>
-                      </div>
-                      <p className="text-xs text-earth-700 mt-1 leading-relaxed">
-                        Perusahaan yang bergerak di bidang jasa transportasi darat dan biro perjalanan wisata (tour &amp; travel), serta general kontraktor &amp; supplier di Cianjur.
-                      </p>
-                    </div>
-
-                    <div className="bg-earth-50 rounded-xl p-3 border border-earth-200/70 space-y-1.5 text-xs text-earth-800">
-                      <div className="font-bold text-earth-900">Layanan Unggulan:</div>
-                      <ul className="list-disc pl-4 space-y-1 text-earth-700 text-[11px]">
-                        <li>
-                          <strong>Sewa Bus Pariwisata:</strong> Armada bus eksekutif nyaman, aman, dan berfasilitas lengkap untuk kunjungan kerja, study tour, gathering, maupun ziarah.
-                        </li>
-                        <li>
-                          <strong>Paket Tour Domestik &amp; Mancanegara:</strong> Pengelolaan itinerary terencana dan profesional dengan harga bersahabat.
-                        </li>
-                        <li>
-                          <strong>General Contractor &amp; Supplier:</strong> Dukungan material dan pekerjaan sipil handal di tatar Jawa Barat.
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="pt-1">
-                    <span className="inline-block text-[11px] text-earth-600 font-medium">
-                      📍 Wilayah Operasional: Cianjur &amp; Destinasi Nasional
-                    </span>
-                  </div>
-                </div>
-
-                {/* Di Makeupin Ajeng */}
-                <div className="bg-white rounded-xl border border-earth-200/90 p-4 flex flex-col justify-between space-y-3 shadow-2xs">
-                  <div className="space-y-3">
-                    <div
-                      onClick={() =>
-                        setLightboxItem({
-                          title: 'Di Makeupin Ajeng',
-                          sub: 'Mitra Bisnis dan Jasa — Professional Makeup Artist (MUA) Cianjur',
-                          url: '/sponsors/dimakeupin-ajeng.png',
-                        })
-                      }
-                      className="w-full h-32 bg-[#FCE7F3] rounded-xl p-3 flex items-center justify-center cursor-pointer hover:opacity-95 transition-opacity"
-                    >
-                      <img
-                        src="/sponsors/dimakeupin-ajeng.png"
-                        alt="Logo Di Makeupin Ajeng"
-                        width={400}
-                        height={180}
-                        loading="lazy"
-                        decoding="async"
-                        className="max-h-full max-w-full object-contain"
-                      />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <h5 className="font-bold text-earth-900 text-base">
-                          Di Makeupin Ajeng
-                        </h5>
-                        <span className="text-[10px] bg-pink-100 text-pink-800 border border-pink-300 font-bold px-2 py-0.2 rounded-md">
-                          Professional MUA
-                        </span>
-                      </div>
-                      <p className="text-xs text-earth-700 mt-1 leading-relaxed">
-                        Usaha penyedia jasa tata rias profesional (Makeup Artist / MUA) di Cianjur yang melayani kebutuhan rias wajah untuk berbagai momen istimewa agar tampil anggun, memukau, dan percaya diri.
-                      </p>
-                    </div>
-
-                    <div className="bg-pink-50/60 rounded-xl p-3 border border-pink-200/60 space-y-1.5 text-xs text-earth-800">
-                      <div className="font-bold text-pink-950">Layanan Tata Rias:</div>
-                      <ul className="list-disc pl-4 space-y-1 text-earth-700 text-[11px]">
-                        <li>
-                          <strong>Wedding Makeup:</strong> Akad nikah dan resepsi adat Sunda siger, modern, hijab, maupun busana internasional.
-                        </li>
-                        <li>
-                          <strong>Wisuda &amp; Lamaran (Engagement):</strong> Riasan fresh, flawless, tahan lama, dan menonjolkan kecantikan alami.
-                        </li>
-                        <li>
-                          <strong>Prewedding &amp; Photoshoot:</strong> Sesi foto studio, outdoor, serta tata rias panggung acara resmi dan Mojang Jajaka.
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="pt-1 flex items-center justify-between gap-2 flex-wrap">
-                    <a
-                      href="https://www.instagram.com/dimakeupinajeng"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-pink-50 hover:bg-pink-100 text-pink-700 border border-pink-200 text-xs font-semibold transition-all active:scale-95"
-                    >
-                      <span>📸 Instagram: @dimakeupinajeng</span>
-                    </a>
-                    <span className="text-[11px] text-earth-500 font-medium">📍 Berbasis di Cianjur</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 3. REKOMENDASI KULINER DAN OLEH-OLEH */}
-            <div className="heritage-card rounded-2xl p-4 sm:p-5 space-y-3.5 border-l-4 border-l-islam-600">
-              <div className="flex items-center justify-between gap-2 flex-wrap">
-                <div className="flex items-center gap-2">
-                  <span className="w-7 h-7 rounded-lg bg-islam-100 text-islam-800 flex items-center justify-center text-sm font-bold">
-                    🍴
-                  </span>
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-islam-700">
-                      Kategori 3 · Rekomendasi Kuliner dan Oleh-Oleh
-                    </span>
-                    <h4 className="font-heritage text-base sm:text-lg font-bold text-earth-900 leading-snug">
-                      Referensi Kuliner dan Produk Unggulan Cianjur (Mitra Prioritas)
-                    </h4>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setActiveTab('kuliner')}
-                  className="text-xs font-bold text-islam-700 hover:text-islam-800 underline active:scale-95"
+              <div className="pt-2 border-t border-earth-100 flex flex-wrap gap-2 text-xs">
+                <a
+                  href="https://www.instagram.com/infobprcianjur"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded-lg bg-pink-50 hover:bg-pink-100 text-pink-800 border border-pink-200 font-semibold transition-all active:scale-95"
                 >
-                  Buka Katalog Lengkap →
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-                {/* Mochi Mommi */}
-                <div className="bg-white rounded-xl border border-earth-200/90 p-4 flex flex-col justify-between space-y-2.5 shadow-2xs">
-                  <div>
-                    <span className="text-[10px] font-bold bg-gold-400/30 text-earth-900 border border-gold-500/50 px-2 py-0.5 rounded-full inline-block mb-1.5">
-                      ⭐ Mitra Resmi
-                    </span>
-                    <h5 className="font-bold text-earth-900 text-sm sm:text-base">
-                      Mochi Mommi (Mochi Khas Cianjur)
-                    </h5>
-                    <p className="text-xs text-earth-600 mt-1 leading-relaxed">
-                      Dirintis sejak 2012 oleh Ibu Yani Nurmayani (Momi). Pelopor kue mochi lembut kenyal khas Cianjur dengan ragam varian rasa (Original, Wijen, Susu, Pandan, Keju Super, Rainbow, Matcha).
-                    </p>
-                  </div>
-                  <div className="pt-2 border-t border-earth-100 flex items-center justify-between text-xs">
-                    <span className="text-earth-500 font-medium">Rp15.000 – Rp35.000</span>
-                    <button
-                      type="button"
-                      onClick={() => showPointOnMap([-6.81885, 107.14385], 'culinary')}
-                      className="text-islam-700 hover:text-islam-600 font-bold"
-                    >
-                      Peta (480m) →
-                    </button>
-                  </div>
-                </div>
-
-                {/* Bubur Sampurna */}
-                <div className="bg-white rounded-xl border border-earth-200/90 p-4 flex flex-col justify-between space-y-2.5 shadow-2xs">
-                  <div>
-                    <span className="text-[10px] font-bold bg-gold-400/30 text-earth-900 border border-gold-500/50 px-2 py-0.5 rounded-full inline-block mb-1.5">
-                      ⭐ Mitra Resmi
-                    </span>
-                    <h5 className="font-bold text-earth-900 text-sm sm:text-base">
-                      Bubur Ayam Sampurna (Bojongmeron)
-                    </h5>
-                    <p className="text-xs text-earth-600 mt-1 leading-relaxed">
-                      Kuliner legendaris Cianjur sejak 1975 di Bojongmeron. Beras Pandanwangi asli dengan kaldu gurih meresap, pais usus ayam kunyit, ati ampela spesial, dan karoket renyah.
-                    </p>
-                  </div>
-                  <div className="pt-2 border-t border-earth-100 flex items-center justify-between text-xs">
-                    <span className="text-earth-500 font-medium">Buka 06:00 – 21:30</span>
-                    <button
-                      type="button"
-                      onClick={() => showPointOnMap([-6.821366, 107.142329], 'culinary')}
-                      className="text-islam-700 hover:text-islam-600 font-bold"
-                    >
-                      Peta (259m) →
-                    </button>
-                  </div>
-                </div>
-
-                {/* Tauco Cap Meong */}
-                <div className="bg-white rounded-xl border border-earth-200/90 p-4 flex flex-col justify-between space-y-2.5 shadow-2xs">
-                  <div>
-                    <span className="text-[10px] font-bold bg-gold-400/30 text-earth-900 border border-gold-500/50 px-2 py-0.5 rounded-full inline-block mb-1.5">
-                      ⭐ Mitra Resmi
-                    </span>
-                    <h5 className="font-bold text-earth-900 text-sm sm:text-base">
-                      Pusat Tauco Cap Meong &amp; Kedai Geco
-                    </h5>
-                    <p className="text-xs text-earth-600 mt-1 leading-relaxed">
-                      Warisan kuliner tertua Cianjur sejak 1880 (Babah Tasma &amp; Ny. Tasma). Fermentasi kedelai alami guci tanah liat, aroma khas, tauco botol legendaris, serta sajian Geco autentik.
-                    </p>
-                  </div>
-                  <div className="pt-2 border-t border-earth-100 flex items-center justify-between text-xs">
-                    <span className="text-earth-500 font-medium">Jl. Cokroaminoto No. 160</span>
-                    <button
-                      type="button"
-                      onClick={() => showPointOnMap([-6.818657, 107.142727], 'culinary')}
-                      className="text-islam-700 hover:text-islam-600 font-bold"
-                    >
-                      Peta (406m) →
-                    </button>
-                  </div>
-                </div>
+                  Instagram: @infobprcianjur
+                </a>
+                <a
+                  href="https://bprcianjur.co.id"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded-lg bg-earth-100 hover:bg-earth-200 text-earth-800 border border-earth-200 font-semibold transition-all active:scale-95"
+                >
+                  Situs: bprcianjur.co.id
+                </a>
               </div>
             </div>
 
-            {/* 4. MITRA KERAJINAN DAN UMKM */}
-            <div className="heritage-card rounded-2xl p-4 sm:p-5 space-y-3.5 border-l-4 border-l-red-600">
-              <div className="flex items-center justify-between gap-2 flex-wrap">
-                <div className="flex items-center gap-2">
-                  <span className="w-7 h-7 rounded-lg bg-red-100 text-red-800 flex items-center justify-center text-sm font-bold">
-                    🏪
-                  </span>
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-red-700">
-                      Kategori 4 · Mitra Kerajinan dan UMKM
-                    </span>
-                    <h4 className="font-heritage text-base sm:text-lg font-bold text-earth-900 leading-snug">
-                      Informasi Kerajinan, Produk Seni Lokal, dan Lokasi Titik Mitra
-                    </h4>
-                  </div>
+            {/* 2. PT Sultan Putra Assamil */}
+            <div className="bg-white rounded-2xl border border-earth-200/90 p-4 sm:p-5 flex flex-col justify-between space-y-3.5 shadow-2xs hover:border-gold-500/50 transition-colors">
+              <div className="space-y-3">
+                <div
+                  onClick={() =>
+                    setLightboxItem({
+                      title: 'PT Sultan Putra Assamil',
+                      sub: 'Mitra Resmi SADAYA: Biro Perjalanan Wisata & Transportasi Bus Pariwisata',
+                      url: '/sponsors/sultan-putra-assamil.png',
+                    })
+                  }
+                  className="w-full h-32 bg-[#172554] rounded-xl p-3 flex items-center justify-center cursor-pointer hover:opacity-95 transition-opacity group"
+                >
+                  <img
+                    src="/sponsors/sultan-putra-assamil.png"
+                    alt="Logo PT Sultan Putra Assamil"
+                    width={400}
+                    height={180}
+                    loading="lazy"
+                    decoding="async"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform"
+                  />
                 </div>
-                <span className="text-[10px] font-semibold bg-red-50 text-red-800 border border-red-200 px-2.5 py-0.5 rounded-full">
-                  Pusat Kriya Tatar Cianjur
-                </span>
+
+                <div className="space-y-1.5">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h4 className="font-bold text-earth-900 text-base">
+                      PT Sultan Putra Assamil
+                    </h4>
+                    <span className="text-[10px] bg-blue-100 text-blue-900 border border-blue-300 font-bold px-2 py-0.5 rounded-md">
+                      Transportasi &amp; Wisata
+                    </span>
+                  </div>
+                  <p className="text-xs text-earth-700 leading-relaxed">
+                    Perusahaan terkemuka di Cianjur yang bergerak di bidang jasa transportasi darat armada bus pariwisata, biro tour &amp; travel, serta general contractor dan supplier.
+                  </p>
+                </div>
+
+                <div className="bg-earth-50 rounded-xl p-3 border border-earth-200/70 space-y-1 text-xs text-earth-800">
+                  <div className="font-bold text-earth-900">Layanan Unggulan:</div>
+                  <ul className="list-disc pl-4 space-y-1 text-earth-700 text-[11px]">
+                    <li>
+                      <strong>Armada Bus Pariwisata:</strong> Bus eksekutif nyaman, AC, bersih, dan aman untuk study tour, ziarah, dan dinas.
+                    </li>
+                    <li>
+                      <strong>Paket Wisata Terpadu:</strong> Perjalanan wisata domestik hingga mancanegara dengan itinerary terencana profesional.
+                    </li>
+                  </ul>
+                </div>
               </div>
 
-              <div className="bg-white rounded-xl border border-earth-200/90 p-4 flex flex-col md:flex-row gap-4 items-start shadow-2xs">
+              <div className="pt-2 border-t border-earth-100 flex items-center justify-between text-xs text-earth-700">
+                <span className="font-medium text-[11px]">Basis Operasional: Cianjur, Jawa Barat</span>
+                <span className="text-[11px] font-semibold text-earth-800">Rute Nasional &amp; Internasional</span>
+              </div>
+            </div>
+
+            {/* 3. Di Makeupin Ajeng */}
+            <div className="bg-white rounded-2xl border border-earth-200/90 p-4 sm:p-5 flex flex-col justify-between space-y-3.5 shadow-2xs hover:border-gold-500/50 transition-colors">
+              <div className="space-y-3">
+                <div
+                  onClick={() =>
+                    setLightboxItem({
+                      title: 'Di Makeupin Ajeng',
+                      sub: 'Mitra Resmi SADAYA: Professional Makeup Artist (MUA) Cianjur',
+                      url: '/sponsors/dimakeupin-ajeng.png',
+                    })
+                  }
+                  className="w-full h-32 bg-[#FCE7F3] rounded-xl p-3 flex items-center justify-center cursor-pointer hover:opacity-95 transition-opacity group"
+                >
+                  <img
+                    src="/sponsors/dimakeupin-ajeng.png"
+                    alt="Logo Di Makeupin Ajeng"
+                    width={400}
+                    height={180}
+                    loading="lazy"
+                    decoding="async"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h4 className="font-bold text-earth-900 text-base">
+                      Di Makeupin Ajeng
+                    </h4>
+                    <span className="text-[10px] bg-pink-100 text-pink-900 border border-pink-300 font-bold px-2 py-0.5 rounded-md">
+                      Tata Rias Profesional / MUA
+                    </span>
+                  </div>
+                  <p className="text-xs text-earth-700 leading-relaxed">
+                    Penyedia jasa tata rias profesional di Cianjur dengan sentuhan riasan flawless, anggun, elegan, dan tahan lama untuk mempercantik momen spesial Anda.
+                  </p>
+                </div>
+
+                <div className="bg-pink-50/60 rounded-xl p-3 border border-pink-200/60 space-y-1 text-xs text-earth-800">
+                  <div className="font-bold text-pink-950">Layanan Tata Rias:</div>
+                  <ul className="list-disc pl-4 space-y-1 text-earth-700 text-[11px]">
+                    <li>
+                      <strong>Wedding Makeup:</strong> Akad dan resepsi adat Sunda siger, modern, hijab, dan gaun internasional.
+                    </li>
+                    <li>
+                      <strong>Wisuda, Lamaran &amp; Photoshoot:</strong> Riasan fresh menonjolkan kecantikan alami untuk wisuda, engagement, dan panggung Mojang Jajaka.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="pt-2 border-t border-earth-100 flex items-center justify-between gap-2 flex-wrap text-xs">
+                <a
+                  href="https://www.instagram.com/dimakeupinajeng"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded-lg bg-pink-50 hover:bg-pink-100 text-pink-800 border border-pink-200 font-semibold transition-all active:scale-95"
+                >
+                  Instagram: @dimakeupinajeng
+                </a>
+                <span className="text-[11px] text-earth-700 font-medium">Berbasis di Cianjur</span>
+              </div>
+            </div>
+
+            {/* 4. Dekranasda Kabupaten Cianjur */}
+            <div className="bg-white rounded-2xl border border-earth-200/90 p-4 sm:p-5 flex flex-col justify-between space-y-3.5 shadow-2xs hover:border-gold-500/50 transition-colors">
+              <div className="space-y-3">
                 <div
                   onClick={() =>
                     setLightboxItem({
                       title: 'Dekranasda Kabupaten Cianjur',
-                      sub: 'Dewan Kerajinan Nasional Daerah — Kompleks Pendopo Cianjur',
+                      sub: 'Mitra Resmi SADAYA: Dewan Kerajinan Nasional Daerah Kompleks Pendopo',
                       url: '/sponsors/dekranasda.png',
                     })
                   }
-                  className="w-full md:w-56 h-36 bg-white border border-earth-200 rounded-xl p-3 flex items-center justify-center shrink-0 cursor-pointer hover:border-gold-500 transition-colors shadow-2xs group"
+                  className="w-full h-32 bg-earth-50/70 border border-earth-200/80 rounded-xl p-3 flex items-center justify-center cursor-pointer hover:border-gold-500 transition-colors group"
                 >
                   <img
                     src="/sponsors/dekranasda.png"
@@ -646,60 +487,154 @@ export default function GuideView() {
                     height={300}
                     loading="lazy"
                     decoding="async"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
                     className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform"
                   />
                 </div>
 
-                <div className="space-y-2.5 min-w-0 flex-1">
-                  <div>
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h5 className="font-bold text-earth-900 text-base">
-                        Dekranasda (Dewan Kerajinan Nasional Daerah) Kabupaten Cianjur
-                      </h5>
-                      <span className="text-[10px] bg-red-100 text-red-800 font-bold px-2 py-0.2 rounded-md border border-red-300">
-                        Mitra Kriya Resmi
-                      </span>
-                    </div>
-                    <p className="text-xs text-earth-700 mt-1 leading-relaxed">
-                      Organisasi nirlaba yang berfokus pada pembinaan, pelestarian, pengembangan mutu, serta promosi produk-produk seni kerajinan lokal khas Cianjur dan pemberdayaan pelaku UMKM kreatif di seluruh wilayah Kabupaten Cianjur.
-                    </p>
+                <div className="space-y-1.5">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h4 className="font-bold text-earth-900 text-base">
+                      Dekranasda Kabupaten Cianjur
+                    </h4>
+                    <span className="text-[10px] bg-red-100 text-red-900 border border-red-300 font-bold px-2 py-0.5 rounded-md">
+                      Pusat Kriya &amp; UMKM Daerah
+                    </span>
                   </div>
+                  <p className="text-xs text-earth-700 leading-relaxed">
+                    Dewan Kerajinan Nasional Daerah Kabupaten Cianjur membina perajin lokal dan mempromosikan produk kriya unggulan: Batik Khas Cianjur (Hayam Pelung &amp; 3 Pilar), Anyaman Bambu Tradisional, dan Lampion Gentur kaca patri kuningan.
+                  </p>
+                </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
-                    <div className="bg-earth-50 rounded-lg p-2.5 border border-earth-200/70">
-                      <div className="font-bold text-earth-900 text-[11px] mb-0.5">🎨 Batik Khas Cianjur</div>
-                      <p className="text-[10px] text-earth-600 leading-snug">
-                        Motif Hayam Pelung, 3 Pilar Budaya (Ngaos, Mamaos, Maenpo), dan Bulir Padi Pandanwangi.
-                      </p>
-                    </div>
-                    <div className="bg-earth-50 rounded-lg p-2.5 border border-earth-200/70">
-                      <div className="font-bold text-earth-900 text-[11px] mb-0.5">🎋 Anyaman Bambu</div>
-                      <p className="text-[10px] text-earth-600 leading-snug">
-                        Anyaman alami kriya bambu dekoratif &amp; fungsional karya perajin tradisional pedesaan Cianjur.
-                      </p>
-                    </div>
-                    <div className="bg-earth-50 rounded-lg p-2.5 border border-earth-200/70">
-                      <div className="font-bold text-earth-900 text-[11px] mb-0.5">🏮 Lampion Gentur</div>
-                      <p className="text-[10px] text-earth-600 leading-snug">
-                        Kerajinan lampion kaca patri dan kuningan legendaris dari Desa Gentur yang telah mendunia.
-                      </p>
-                    </div>
-                  </div>
+                <div className="bg-earth-50 rounded-xl p-3 border border-earth-200/70 space-y-1 text-xs text-earth-800">
+                  <div className="font-bold text-earth-900">Kriya Unggulan Daerah:</div>
+                  <ul className="list-disc pl-4 space-y-1 text-earth-700 text-[11px]">
+                    <li>
+                      <strong>Batik Khas Cianjur:</strong> Motif Hayam Pelung, Ngaos-Mamaos-Maenpo, dan Padi Pandanwangi.
+                    </li>
+                    <li>
+                      <strong>Lampion Gentur &amp; Anyaman:</strong> Kaca patri kuningan legendaris serta kriya bambu artistik.
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
-                  <div className="bg-amber-50/70 border border-amber-200/80 rounded-xl p-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                    <div className="text-xs text-earth-800">
-                      <span className="font-bold text-amber-950">📍 Lokasi Galeri &amp; Titik Kemitraan: </span>
-                      Kompleks Pendopo Kabupaten Cianjur, Jl. Siti Jenab No. 31 (Tepat di seberang selatan Alun-Alun Cianjur, jarak ±50 meter).
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => showPointOnMap([-6.82205, 107.13965], 'heritage')}
-                      className="shrink-0 px-4 py-2 rounded-xl bg-earth-800 hover:bg-earth-900 text-gold-300 text-xs font-bold shadow-xs active:scale-95 transition-all flex items-center gap-1.5"
-                    >
-                      <span>📍</span>
-                      <span>Buka Titik Lokasi di Peta</span>
-                    </button>
-                  </div>
+              <div className="pt-2 border-t border-earth-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
+                <span className="text-[11px] text-earth-700 font-medium">
+                  Pendopo Jl. Siti Jenab No. 31 (50m selatan Alun-Alun)
+                </span>
+                <button
+                  type="button"
+                  onClick={() => showPointOnMap([-6.82205, 107.13965], 'heritage')}
+                  className="px-3.5 py-1.5 rounded-lg bg-earth-800 hover:bg-earth-900 text-gold-300 text-xs font-bold shadow-xs active:scale-95 transition-all"
+                >
+                  Buka Titik Lokasi di Peta
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* 5. Rekomendasi Utama Kuliner & Oleh-Oleh (Mitra Resmi) */}
+          <div className="heritage-card rounded-2xl p-4 sm:p-5 space-y-3.5 border-l-4 border-l-islam-600 bg-white shadow-2xs">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-islam-800 bg-islam-50 border border-islam-200 px-2 py-0.5 rounded-md inline-block mb-1">
+                  Kuliner Legendaris
+                </span>
+                <h4 className="font-heritage text-base sm:text-lg font-bold text-earth-900 leading-snug">
+                  Mitra Resmi Kuliner &amp; Oleh-Oleh Khas Cianjur
+                </h4>
+              </div>
+              <button
+                type="button"
+                onClick={() => setActiveTab('kuliner')}
+                className="text-xs font-bold text-islam-700 hover:text-islam-800 underline active:scale-95"
+              >
+                Buka Katalog Lengkap
+              </button>
+            </div>
+            <p className="text-xs text-earth-700 leading-relaxed">
+              Tiga warisan kuliner legendaris Cianjur yang diprioritaskan bagi para wisatawan dan warga untuk menikmati cita rasa otentik:
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+              {/* Mochi Mommi */}
+              <div className="bg-earth-50/60 rounded-xl border border-earth-200/90 p-3.5 flex flex-col justify-between space-y-2.5">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-gold-400/30 text-earth-900 border border-gold-500/50 px-2 py-0.5 rounded-full mb-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gold-600" />
+                    <span>Mitra Resmi</span>
+                  </span>
+                  <h5 className="font-bold text-earth-900 text-sm sm:text-base">
+                    Mochi Mommi (Mochi Khas Cianjur)
+                  </h5>
+                  <p className="text-xs text-earth-700 mt-1 leading-relaxed">
+                    Pelopor kue mochi aneka rasa legendaris sejak 2012 oleh Ibu Yani Nurmayani (Momi). Pilihan rasa Original, Wijen, Susu, Pandan, Keju Super, Rainbow, Matcha, dan Durian.
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-earth-200/70 flex items-center justify-between text-xs">
+                  <span className="text-earth-700 font-medium">Rp15.000 - Rp35.000</span>
+                  <button
+                    type="button"
+                    onClick={() => showPointOnMap([-6.81885, 107.14385], 'culinary')}
+                    className="text-islam-700 hover:text-islam-600 font-bold"
+                  >
+                    Lihat di Peta (480m)
+                  </button>
+                </div>
+              </div>
+
+              {/* Bubur Sampurna */}
+              <div className="bg-earth-50/60 rounded-xl border border-earth-200/90 p-3.5 flex flex-col justify-between space-y-2.5">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-gold-400/30 text-earth-900 border border-gold-500/50 px-2 py-0.5 rounded-full mb-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gold-600" />
+                    <span>Mitra Resmi</span>
+                  </span>
+                  <h5 className="font-bold text-earth-900 text-sm sm:text-base">
+                    Bubur Ayam Sampurna (Bojongmeron)
+                  </h5>
+                  <p className="text-xs text-earth-700 mt-1 leading-relaxed">
+                    Kuliner legendaris sejak 1975 berbahan beras Pandanwangi asli dengan kaldu gurih kuning, pais usus ayam bumbu kunyit, ati ampela spesial, dan karoket renyah.
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-earth-200/70 flex items-center justify-between text-xs">
+                  <span className="text-earth-700 font-medium">Buka 06:00 - 21:30</span>
+                  <button
+                    type="button"
+                    onClick={() => showPointOnMap([-6.821366, 107.142329], 'culinary')}
+                    className="text-islam-700 hover:text-islam-600 font-bold"
+                  >
+                    Lihat di Peta (259m)
+                  </button>
+                </div>
+              </div>
+
+              {/* Tauco Cap Meong */}
+              <div className="bg-earth-50/60 rounded-xl border border-earth-200/90 p-3.5 flex flex-col justify-between space-y-2.5">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-gold-400/30 text-earth-900 border border-gold-500/50 px-2 py-0.5 rounded-full mb-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gold-600" />
+                    <span>Mitra Resmi</span>
+                  </span>
+                  <h5 className="font-bold text-earth-900 text-sm sm:text-base">
+                    Pusat Tauco Cap Meong &amp; Kedai Geco
+                  </h5>
+                  <p className="text-xs text-earth-700 mt-1 leading-relaxed">
+                    Warisan kuliner tertua Cianjur sejak 1880 karya Babah Tasma &amp; Ny. Tasma dengan fermentasi alami kedelai dalam guci tanah liat tradisional serta sajian Geco autentik.
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-earth-200/70 flex items-center justify-between text-xs">
+                  <span className="text-earth-700 font-medium">Jl. Cokroaminoto No. 160</span>
+                  <button
+                    type="button"
+                    onClick={() => showPointOnMap([-6.818657, 107.142727], 'culinary')}
+                    className="text-islam-700 hover:text-islam-600 font-bold"
+                  >
+                    Lihat di Peta (406m)
+                  </button>
                 </div>
               </div>
             </div>
@@ -967,7 +902,7 @@ export default function GuideView() {
             </p>
           </div>
 
-          {/* Ringkasan Cepat: Berapa Lama dari Stasiun ke Alun-Alun? — Consistent earth/gold theme */}
+          {/* Ringkasan Cepat: Berapa Lama dari Stasiun ke Alun-Alun? : Consistent earth/gold theme */}
           <div className="bg-earth-900 text-white rounded-2xl p-4 space-y-2.5 border border-earth-800">
             <div className="flex items-center justify-between gap-2 flex-wrap">
               <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400">
@@ -1317,7 +1252,7 @@ export default function GuideView() {
                   onClick={() =>
                     setLightboxItem({
                       title: g.title,
-                      sub: `${g.category} — ${g.caption}`,
+                      sub: `${g.category} : ${g.caption}`,
                       url: visualUrl,
                     })
                   }
