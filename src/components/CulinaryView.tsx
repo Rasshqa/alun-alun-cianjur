@@ -4,7 +4,7 @@ import { getOpenStatus, formatDistance } from '../utils/time';
 import { useApp } from '../context/AppContext';
 import { getVisualUrl, getFallbackVisualUrl } from '../utils/visuals';
 
-const SOUVENIR_IDS = new Set(['CUL-04', 'CUL-05', 'CUL-06', 'CUL-11', 'CUL-12', 'CUL-13']);
+const SOUVENIR_IDS = new Set(['CUL-04', 'CUL-05', 'CUL-06', 'CUL-11', 'CUL-12', 'CUL-13', 'CUL-14']);
 type CulinaryTypeFilter = 'ALL' | 'SOUVENIR' | 'DINE';
 
 export default function CulinaryView() {
@@ -14,6 +14,16 @@ export default function CulinaryView() {
   const [search, setSearch] = useState('');
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [lightboxItem, setLightboxItem] = useState<{ title: string; sub: string; url: string } | null>(null);
+
+  const featuredPartners = useMemo(() => {
+    return data.culinary_spots
+      .filter((s) => (s as { is_featured_partner?: boolean }).is_featured_partner)
+      .map((spot) => ({
+        ...spot,
+        isSouvenir: SOUVENIR_IDS.has(spot.id),
+        status: getOpenStatus(spot.open_days, spot.open_time, spot.close_time),
+      }));
+  }, []);
 
   const spots = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -39,6 +49,11 @@ export default function CulinaryView() {
     });
 
     return [...filtered].sort((a, b) => {
+      const aPartner = Boolean((a as { is_featured_partner?: boolean }).is_featured_partner);
+      const bPartner = Boolean((b as { is_featured_partner?: boolean }).is_featured_partner);
+      if (aPartner !== bPartner) {
+        return aPartner ? -1 : 1;
+      }
       if (onlyOpen && a.status.isOpen !== b.status.isOpen) {
         return a.status.isOpen ? -1 : 1;
       }
@@ -111,6 +126,69 @@ export default function CulinaryView() {
           </button>
         </div>
       </div>
+
+      {/* ⭐ REKOMENDASI UTAMA MITRA KULINER & OLEH-OLEH SADAYA */}
+      {!search && typeFilter === 'ALL' && (
+        <div className="bg-gradient-to-br from-earth-900 via-earth-800 to-sundanese-dark text-white rounded-2xl p-4 sm:p-5 border border-gold-500/40 shadow-md space-y-3 animate-view-enter">
+          <div className="flex items-center justify-between gap-2 flex-wrap">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-gold-400 animate-pulse" />
+              <span className="text-xs font-bold uppercase tracking-wider text-gold-300">
+                ⭐ Rekomendasi Utama Mitra Kuliner &amp; Oleh-Oleh
+              </span>
+            </div>
+            <span className="text-[10px] bg-gold-500 text-earth-900 font-bold px-2.5 py-0.5 rounded-full">
+              Prioritas Mitra SADAYA
+            </span>
+          </div>
+          <p className="text-xs text-earth-100 leading-relaxed">
+            Tiga kuliner dan oleh-oleh legendaris pilihan yang menjadi mitra resmi SADAYA Alun-Alun Cianjur. Prioritas utama rekomendasi cita rasa khas tatar Cianjur untuk para wisatawan dan warga:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+            {featuredPartners.map((p) => (
+              <div
+                key={p.id}
+                onClick={() => setExpandedId(p.id)}
+                className="bg-earth-800/80 hover:bg-earth-700/80 border border-gold-500/35 rounded-xl p-3 cursor-pointer transition-all hover:scale-[1.02] flex flex-col justify-between space-y-2"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="text-[10px] font-bold text-gold-400">
+                      {p.isSouvenir ? 'Oleh-Oleh Khas' : 'Kuliner Legendaris'}
+                    </span>
+                    <span
+                      className={`text-[9px] font-semibold px-2 py-0.2 rounded-full ${
+                        p.status.isOpen ? 'bg-islam-700 text-gold-200' : 'bg-red-900/80 text-red-200'
+                      }`}
+                    >
+                      {p.status.isOpen ? 'Buka' : 'Tutup'}
+                    </span>
+                  </div>
+                  <h4 className="font-bold text-white text-xs sm:text-sm mt-1 leading-snug">
+                    {p.name}
+                  </h4>
+                  <p className="text-[11px] text-earth-300 mt-1 line-clamp-2">
+                    {p.signature_menu.slice(0, 2).join(' · ')}
+                  </p>
+                </div>
+                <div className="flex items-center justify-between pt-1 border-t border-earth-700/60 text-[10px] text-earth-300">
+                  <span>{formatDistance(p.distance_m)}</span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleShowOnMap(p.coords);
+                    }}
+                    className="text-gold-300 hover:text-gold-200 font-semibold"
+                  >
+                    Peta →
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {spots.length === 0 && (
         <div className="heritage-card rounded-2xl p-6 text-center space-y-2 animate-view-enter">
@@ -186,11 +264,19 @@ export default function CulinaryView() {
               <div className="p-4">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0 flex-1">
-                    {spot.isSouvenir && (
-                      <span className="inline-block mb-1 text-[10px] font-bold bg-gold-300/35 text-earth-900 border border-gold-500/40 px-2 py-0.5 rounded-full">
-                        Rekomendasi Oleh-Oleh
-                      </span>
-                    )}
+                    <div className="flex items-center gap-1.5 flex-wrap mb-1">
+                      {(spot as { is_featured_partner?: boolean }).is_featured_partner && (
+                        <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-gold-400/35 text-earth-900 border border-gold-500/60 px-2 py-0.5 rounded-full shadow-2xs">
+                          <span>⭐</span>
+                          <span>Mitra Resmi</span>
+                        </span>
+                      )}
+                      {spot.isSouvenir && (
+                        <span className="inline-block text-[10px] font-bold bg-earth-100 text-earth-800 border border-earth-300 px-2 py-0.5 rounded-full">
+                          Oleh-Oleh
+                        </span>
+                      )}
+                    </div>
                     <h3 className="font-semibold text-earth-900 text-base leading-snug break-words">
                       {spot.name}
                     </h3>

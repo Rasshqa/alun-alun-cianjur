@@ -296,6 +296,23 @@
       "summary": "Pusat keramaian kota dan koridor pedestrian di sisi timur Taman Alun-Alun yang ditata menjadi Bomero City Walk dengan bangku taman, lampu klasik, dan bola batu granit. Berdekatan dengan Gedung Wisma Karya di Jl. Moch. Ali (dibangun organisasi Tjung Hwa Tjung Hwee tahun 1950-an), tempat penyanyi Alfian tampil pada 1962 hingga melahirkan lagu legendaris 'Semalam di Cianjur' karya Saidachmad.",
       "quiz_id": null,
       "photo_url": "/photos/ICN-16.jpg"
+    },
+    {
+      "id": "ICN-17",
+      "name": "Galeri Dekranasda Kabupaten Cianjur (Pusat Kerajinan & UMKM)",
+      "zone": "INTERNAL",
+      "pilar_tag": "HERITAGE",
+      "year_built": "Pusat Kemitraan UMKM",
+      "address": "Kompleks Pendopo Kabupaten Cianjur, Jl. Siti Jenab No. 31, Kel. Pamoyanan, Kec. Cianjur (Seberang Selatan Alun-Alun)",
+      "distance_m": 50,
+      "coords": [
+        -6.82205,
+        107.13965
+      ],
+      "summary": "Pusat promosi, pembinaan, dan etalase galeri produk seni kerajinan khas Tatar Cianjur di bawah naungan Dewan Kerajinan Nasional Daerah (Dekranasda) Kabupaten Cianjur. Menampilkan produk kriya unggulan daerah seperti Batik Cianjur (motif Hayam Pelung, Ngaos-Mamaos-Maenpo, dan Pandanwangi), Anyaman Bambu tradisional, Lampion Kaca Patri Gentur berkelas internasional, serta ragam produk kreatif UMKM binaan.",
+      "quiz_id": null,
+      "photo_url": "/sponsors/dekranasda.png",
+      "is_sponsor": true
     }
   ],
   "culinary_spots": [
@@ -329,7 +346,8 @@
         "Sop Duren"
       ],
       "history_note": "Dirintis tahun 1975 oleh Haji Aep dengan pikulan di depan Toko Sampurna Bojongmeron (beralih ke gerobak tahun 1982). Dimasak dari beras Pandanwangi Cianjur dengan kaldu yang meresap langsung ke dalam bubur tanpa kuah kuning cair, disajikan bersama pais (pepes) bawang daun usus ayam berbumbu kunyit dan karoket.",
-      "photo_url": "/photos/CUL-01.jpg"
+      "photo_url": "/photos/CUL-01.jpg",
+      "is_featured_partner": true
     },
     {
       "id": "CUL-02",
@@ -451,7 +469,8 @@
         "Minuman Sari Pala & Sari Markisa (Rp17.600)"
       ],
       "history_note": "Berdiri sejak 1880 oleh pasangan Tan Kei Hian (Babah Tasma) dan Tjoa Kim Nio (Ny. Tasma), kini dikelola generasi penerus keluarga di Jl. Kutai / Jl. HOS Cokroaminoto. Nama Cap Meong (Macan) lahir setelah ditemukan tapak kaki macan di dapur fermentasi kedelai.",
-      "photo_url": "/photos/CUL-05.jpg"
+      "photo_url": "/photos/CUL-05.jpg",
+      "is_featured_partner": true
     },
     {
       "id": "CUL-06",
@@ -686,6 +705,39 @@
       ],
       "history_note": "Kuliner roti legendaris Cianjur yang bertahan sejak tahun 1935 (sebelum kemerdekaan RI) dan dijajakan berderet di sepanjang Jl. HOS Cokroaminoto. Ciri khasnya berupa 6 bulatan roti sobek bertekstur padat-lembut dengan taburan gula putih di atasnya dari dapur tungku kayu Tan Keng Cu.",
       "photo_url": "/photos/CUL-13.jpg"
+    },
+    {
+      "id": "CUL-14",
+      "name": "Mochi Momi (Pusat Oleh-Oleh Khas Cianjur)",
+      "address": "Perumahan Pesona Cianjur Indah, Jl. Rafflesia Blok AA No. 8, Pamoyanan, Cianjur",
+      "distance_m": 480,
+      "coords": [
+        -6.81885,
+        107.14385
+      ],
+      "price_range": "Rp15.000 - Rp35.000",
+      "min_price": 15000,
+      "open_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "open_time": "08:00",
+      "close_time": "20:30",
+      "signature_menu": [
+        "Mochi Aneka Rasa (Original, Wijen, Pandan)",
+        "Mochi Susu & Keju Super",
+        "Mochi Rainbow & Strawberry",
+        "Mochi Durian & Matcha",
+        "Paket Cinderamata Mochi Khas Cianjur"
+      ],
+      "history_note": "Didirikan oleh Ibu Yani Nurmayani (akrab disapa Momi) sejak tahun 2012, menjadi pelopor kue mochi aneka rasa khas Cianjur yang bertekstur lembut, kenyal, dan inovatif dengan puluhan varian rasa favorit wisatawan.",
+      "photo_url": "/photos/CUL-14.jpg",
+      "is_featured_partner": true
     }
   ],
   "hotels": [
@@ -1501,6 +1553,90 @@
       "caption": "Koridor pedestrian Jl. Pasar Bojong Meron dengan bangku taman klasik, bola batu granit, dan jajanan malam.",
       "photo_url": null,
       "image_url": "/photos/GAL-06.jpg"
+    }
+  ],
+  "sponsors": [
+    {
+      "id": "SP-01",
+      "name": "PT BPR Cianjur Jabar (Perseroda)",
+      "short_name": "BPR Cianjur",
+      "category": "Mitra Perbankan",
+      "category_badge": "BUMD Keuangan Daerah",
+      "category_desc": "Profil dan Informasi Layanan Perbankan BUMD",
+      "logo_url": "/sponsors/bpr-cianjur.png",
+      "instagram": "@infobprcianjur",
+      "website": "https://bprcianjur.co.id",
+      "phone": "(0263) 264016",
+      "address": "Jl. Cilaku No. 5 / Kantor Kas Pusat Cianjur, Jawa Barat",
+      "tagline": "Bank Perekonomian Rakyat Milik Daerah Kabupaten Cianjur",
+      "description": "Lembaga keuangan perbankan BUMD milik Pemerintah Daerah Kabupaten Cianjur yang melayani simpanan (Tabungan SIUNIK berbasis NIK KTP, Tabungan TAMASA, TASIS PLUS, dan Deposito Berjangka dengan bunga kompetitif) serta penyaluran kredit permodalan usaha bagi masyarakat dan pelaku UMKM lokal Cianjur. Dilengkapi fasilitas penjemputan setoran (Pick-up Service). Berizin & diawasi OJK serta dijamin LPS.",
+      "highlights": [
+        "Tabungan SIUNIK berbasis NIK e-KTP",
+        "Kredit Modal Usaha & KELAPA+ untuk UMKM Lokal",
+        "Deposito Berjangka Bunga Menarik & Dijamin LPS",
+        "Layanan Jemput Setoran Nasabah (Pick-up Service)"
+      ]
+    },
+    {
+      "id": "SP-02",
+      "name": "PT Sultan Putra Assamil",
+      "short_name": "PT Sultan Putra Assamil",
+      "category": "Mitra Bisnis dan Jasa",
+      "category_badge": "Transportasi & Tour Travel",
+      "category_desc": "Biro Perjalanan Wisata, Transportasi Darat & Kontraktor",
+      "logo_url": "/sponsors/sultan-putra-assamil.png",
+      "address": "Cianjur, Jawa Barat",
+      "tagline": "Armada Bus Pariwisata Nyaman, Biro Tour & Travel, General Contractor & Supplier",
+      "description": "Perusahaan jasa transportasi darat dan biro perjalanan wisata (tour & travel) terpercaya di Cianjur. Menyediakan penyewaan armada bus pariwisata eksekutif yang nyaman, ber-AC, bersih, dan aman untuk berbagai kebutuhan perjalanan (kunjungan kerja dinas, study tour sekolah, wisata keluarga, rombongan ziarah religi), sekaligus melayani paket wisata domestik hingga mancanegara dengan itinerary terencana profesional.",
+      "highlights": [
+        "Armada Bus Pariwisata Eksekutif Nyaman & Aman",
+        "Paket Perjalanan Wisata Domestik & Mancanegara",
+        "Pengelolaan Rombongan Study Tour, Ziarah & Gathering",
+        "Jasa General Contractor & Supplier Terpercaya"
+      ]
+    },
+    {
+      "id": "SP-03",
+      "name": "Di Makeupin Ajeng",
+      "short_name": "Di Makeupin Ajeng",
+      "category": "Mitra Bisnis dan Jasa",
+      "category_badge": "Professional MUA",
+      "category_desc": "Jasa Tata Rias Wajah Profesional Cianjur",
+      "logo_url": "/sponsors/dimakeupin-ajeng.png",
+      "instagram": "@dimakeupinajeng",
+      "address": "Cianjur, Jawa Barat",
+      "tagline": "Professional Makeup Artist for Wedding, Graduation, Engagement & Special Events",
+      "description": "Usaha penyedia jasa tata rias profesional (Makeup Artist / MUA) di Cianjur yang melayani kebutuhan rias wajah untuk momen-momen istimewa seperti pernikahan (akad & resepsi adat Sunda, modern, maupun hijab), wisuda, lamaran / pertunangan, prewedding, photoshoot, serta riasan acara resmi dan panggung budaya / Mojang Jajaka dengan hasil flawless, elegan, dan tahan lama.",
+      "highlights": [
+        "Wedding Makeup (Akad & Resepsi Adat Sunda/Modern)",
+        "Rias Wisuda, Lamaran / Engagement & Prewedding",
+        "Photoshoot & Rias Panggung Event Budaya",
+        "Riasan Flawless, Elegan & Tahan Lama"
+      ]
+    },
+    {
+      "id": "SP-04",
+      "name": "Dekranasda Kabupaten Cianjur",
+      "short_name": "Dekranasda Cianjur",
+      "category": "Mitra Kerajinan dan UMKM",
+      "category_badge": "Pusat Kriya & UMKM",
+      "category_desc": "Dewan Kerajinan Nasional Daerah Kabupaten Cianjur",
+      "logo_url": "/sponsors/dekranasda.png",
+      "coords": [
+        -6.82205,
+        107.13965
+      ],
+      "address": "Kompleks Pendopo Kabupaten Cianjur, Jl. Siti Jenab No. 31, Kel. Pamoyanan, Kec. Cianjur (Seberang Selatan Alun-Alun)",
+      "distance_m": 50,
+      "tagline": "Pusat Pembinaan Seni Kerajinan Khas Cianjur & Pemberdayaan Pelaku UMKM",
+      "description": "Organisasi nirlaba yang berfokus pada pembinaan, pelestarian, dan promosi produk seni kerajinan lokal khas Kabupaten Cianjur serta pemberdayaan UMKM daerah. Menaungi mahakarya kriya daerah seperti Batik Cianjur (motif Hayam Pelung, Ngaos-Mamaos-Maenpo, Bulir Padi Pandanwangi), Anyaman Bambu tradisional, Lampion Kaca Patri Gentur berkelas internasional, serta souvenir khas tatar Santri.",
+      "highlights": [
+        "Batik Khas Cianjur (Hayam Pelung, 3 Pilar Budaya)",
+        "Anyaman Bambu Alami Tradisional Tatar Sunda",
+        "Lampion Kaca Patri Gentur Mendunia",
+        "Pemberdayaan & Galeri Etalase UMKM Kreatif"
+      ],
+      "map_marker_id": "ICN-17"
     }
   ]
 }

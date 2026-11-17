@@ -291,6 +291,11 @@ export default function HeritageView() {
                     >
                       {PILAR_DISPLAY[icon.pilar_tag] ?? icon.pilar_tag}
                     </span>
+                    {(icon as { is_sponsor?: boolean }).is_sponsor && (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 shadow-2xs">
+                        Mitra Kriya Resmi
+                      </span>
+                    )}
                     <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${zb.cls}`}>
                       {zb.label}
                     </span>

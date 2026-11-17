@@ -108,6 +108,21 @@ const activeIcons: Record<Exclude<Category, 'all'>, L.DivIcon> = {
   gate: makeIcon('gate', true),
 };
 
+function makeDekranasdaIcon(active = false) {
+  const size = 32;
+  const activeCls = active ? 'marker-pin-active' : '';
+  const border = active ? '3px solid #FEF08A' : '2.5px solid #FEF08A';
+  return L.divIcon({
+    className: '',
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+    html: `<div class="${activeCls}" style="width:${size}px;height:${size}px;border-radius:9999px;background:#B45309;border:${border};box-shadow:0 3px 8px rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;color:#ffffff;font-weight:800;font-size:10px;font-family:system-ui,sans-serif;letter-spacing:-0.2px;transition:transform 0.2s ease">DK</div>`,
+  });
+}
+
+const defaultDekranasdaIcon = makeDekranasdaIcon(false);
+const activeDekranasdaIcon = makeDekranasdaIcon(true);
+
 interface MarkerItem {
   id: string;
   coords: [number, number];
@@ -166,19 +181,20 @@ function buildMarkers(): MarkerItem[] {
   for (const h of data.heritage_icons) {
     const coords = h.coords as [number, number];
     const inDenah = h.zone === 'INTERNAL' || isInsideOverlayBounds(coords);
+    const isDekranasda = h.id === 'ICN-17' || (h as { is_sponsor?: boolean }).is_sponsor;
     items.push({
       id: h.id,
       coords,
       category: 'heritage',
       isInternal: inDenah,
-      searchKeywords: `${h.name} ${h.pilar_tag} ${h.address ?? ''} ${h.summary} sejarah`.toLowerCase(),
+      searchKeywords: `${h.name} ${h.pilar_tag} ${h.address ?? ''} ${h.summary} sejarah dekranasda kerajinan umkm batik cianjur lampion gentur anyaman bambu`.toLowerCase(),
       sheet: {
         id: h.id,
         name: h.name,
         category: 'heritage',
-        categoryLabel: `Sejarah · ${PILAR_LABEL[h.pilar_tag] ?? h.pilar_tag}`,
-        categoryColor: COLORS.heritage,
-        subLabel: `Tahun ${h.year_built}${h.address ? ` · ${h.address}` : ' · Area Dalam Alun-Alun'}`,
+        categoryLabel: isDekranasda ? 'Mitra Kerajinan & UMKM · Dekranasda' : `Sejarah · ${PILAR_LABEL[h.pilar_tag] ?? h.pilar_tag}`,
+        categoryColor: isDekranasda ? '#B45309' : COLORS.heritage,
+        subLabel: isDekranasda ? 'Kompleks Pendopo Kabupaten · Jl. Siti Jenab No. 31' : `Tahun ${h.year_built}${h.address ? ` · ${h.address}` : ' · Area Dalam Alun-Alun'}`,
         detail: h.summary,
         distance: h.distance_m,
         coords,
@@ -768,6 +784,19 @@ export default function MapView() {
           >
             Rute Bomero (210m)
           </button>
+          <button
+            type="button"
+            onClick={() => {
+              const dekranasdaMarker = ALL_MARKERS.find((m) => m.id === 'ICN-17');
+              if (dekranasdaMarker) {
+                handleSelectSearchResult(dekranasdaMarker);
+              }
+            }}
+            className="shrink-0 min-h-8 px-3 rounded-full text-xs font-semibold border transition-all active:scale-95 bg-amber-50 text-amber-900 border-amber-300 hover:bg-amber-100 flex items-center gap-1 shadow-2xs"
+          >
+            <span>🏛️</span>
+            <span>Dekranasda (50m)</span>
+          </button>
         </div>
       </div>
 
@@ -843,12 +872,16 @@ export default function MapView() {
 
           {visible.map((m) => {
             const isSelected = sheet?.id === m.id;
+            const isDekranasda = m.id === 'ICN-17';
+            const iconToUse = isDekranasda
+              ? (isSelected ? activeDekranasdaIcon : defaultDekranasdaIcon)
+              : (isSelected ? activeIcons[m.category] : defaultIcons[m.category]);
             return (
               <Marker
                 key={m.id}
                 position={m.coords}
-                icon={isSelected ? activeIcons[m.category] : defaultIcons[m.category]}
-                zIndexOffset={isSelected ? 500 : 0}
+                icon={iconToUse}
+                zIndexOffset={isSelected ? 500 : isDekranasda ? 160 : 0}
                 eventHandlers={{
                   click: () => {
                     setSheet(m.sheet);
@@ -857,7 +890,9 @@ export default function MapView() {
                 }}
               >
                 <Tooltip direction="top" offset={[0, -14]} opacity={0.95}>
-                  <span className="text-xs font-semibold">{m.sheet.name}</span>
+                  <span className="text-xs font-semibold">
+                    {isDekranasda ? '🏛️ ' + m.sheet.name : m.sheet.name}
+                  </span>
                 </Tooltip>
               </Marker>
             );

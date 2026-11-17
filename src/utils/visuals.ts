@@ -31,13 +31,13 @@ function pickTheme(id: string, title: string, category?: string): SceneTheme {
   if (t.includes('menara')) return 'tower';
   if (t.includes('rumput') || t.includes('bermain')) return 'grass';
   if (t.includes('lonceng')) return 'bell';
-  if (t.includes('pendopo') || t.includes('bumi ageung')) return 'pendopo';
+  if (t.includes('pendopo') || t.includes('bumi ageung') || t.includes('dekranasda')) return 'pendopo';
   if (t.includes('stasiun') || t.includes('kereta')) return 'station';
   if (t.includes('bomero') || t.includes('bojong meron')) return 'bomero';
   if (t.includes('kantor pos') || t.includes('vihara') || t.includes('tugu')) return 'colonial';
   if (t.includes('toilet')) return 'toilet';
   if (t.includes('event') || t.includes('night') || t.includes('pentas') || t.includes('malam minggu')) return 'event';
-  if (!t.includes('rogan') && (t.includes('oleh') || t.includes('tauco') || t.includes('roti') || t.includes('manisan') || t.includes('souvenir')))
+  if (!t.includes('rogan') && (t.includes('oleh') || t.includes('tauco') || t.includes('roti') || t.includes('manisan') || t.includes('souvenir') || t.includes('mochi')))
     return 'souvenir';
   if (t.includes('htl-') || t.includes('hotel') || t.includes('guest') || t.includes('suites'))
     return 'hotel';
