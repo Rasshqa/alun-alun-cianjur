@@ -129,7 +129,7 @@ export default function CulinaryView() {
 
       {/* REKOMENDASI UTAMA MITRA KULINER & OLEH-OLEH SADAYA */}
       {!search && typeFilter === 'ALL' && (
-        <div className="bg-gradient-to-br from-earth-900 via-earth-800 to-sundanese-dark text-white rounded-2xl p-4 sm:p-5 border border-gold-500/40 shadow-md space-y-3 animate-view-enter">
+        <div className="bg-sundanese-dark text-white rounded-2xl p-4 sm:p-5 border border-gold-500/40 shadow-md space-y-3 animate-view-enter">
           <div className="flex items-center justify-between gap-2 flex-wrap">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-gold-400 animate-pulse" />

@@ -242,7 +242,7 @@ export default function GuideView() {
       {(section === 'all' || section === 'mitra') && (
         <section className="space-y-4 animate-view-enter">
           {/* Main Sponsor Header Banner */}
-          <div className="bg-gradient-to-r from-sundanese-dark via-earth-900 to-islam-900 text-white rounded-2xl border border-gold-500/40 p-4 sm:p-5 shadow-md space-y-2">
+          <div className="bg-sundanese-dark text-white rounded-2xl border border-gold-500/40 p-4 sm:p-5 shadow-md space-y-2">
             <div className="flex items-center justify-between gap-2 flex-wrap">
               <div className="flex items-center gap-2">
                 <span className="inline-block bg-gold-500 text-earth-900 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
